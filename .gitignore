@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.oop/
+coverage/
+
+# Local smoke-test sample (has its own git repo)
+test/kotlin-racingcar/
+
