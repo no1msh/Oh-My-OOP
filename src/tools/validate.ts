@@ -9,9 +9,10 @@ export function registerValidate(server: McpServer): void {
   server.registerTool(
     "oop_design_validate",
     {
-      title: "Validate the current design (always advisory)",
+      title: "Validate current OOP design (책임/결합도/테스터빌리티 권고)",
       description:
-        "현재 설계를 책임 적절성/결합도/테스터빌리티 등의 룰로 검사합니다. 모든 finding은 ≥2개의 대안 remedies를 포함합니다. 결과는 항상 권고이며 차단하지 않습니다.",
+        "[USE WHEN] 사용자가 객체지향 설계를 '리뷰'/'검토'/'평가'해달라거나, '이거 좋은 설계인가', 'god object 같지 않아?', '결합도/응집도 어때', '테스트하기 어렵지 않을까', 'Tell-Don't-Ask 위배 아냐?'를 물을 때. " +
+        "현재 .oop/ 설계를 10개 룰(god-object, mixed-stereotype, low-cohesion, too-many-collaborators, feature-envy, non-newable, side-effect-in-holder, mocking-pressure, cycle, orphan-class)로 검사. 모든 finding은 항상 ≥2개의 대안 remedies를 포함. 결과는 권고일 뿐 차단하지 않음 — 코드 통제권은 개발자에게.",
       inputSchema: {
         rules: z.array(z.enum(ALL_RULE_IDS)).optional(),
         severity_min: z.enum(["info", "warn", "error"]).default("info"),
