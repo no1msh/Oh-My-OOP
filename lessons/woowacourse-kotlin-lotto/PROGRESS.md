@@ -19,6 +19,12 @@
 - **코드 스니펫 포함**: 안티패턴이 명확한 경우 `diff_hunk` 또는 인용 코드를 함께 기록해 가독성 향상.
 - **lotto 도메인 특화 어휘**: 당첨 등수 (Rank/Winning), 금액 계산 (Money/Profit), 통계 집계 (Statistics), 로또 번호 검증 (LottoNumber) 등.
 
+## ✅ 완료
+
+**141 PRs / 71 reviewees 완료** — 2026-05-22
+
+`SUMMARY.md` + `README.md` 작성 완료.
+
 ## 진행 상태
 
 **0 PRs 완료 / 0 reviewees 완료** (시작)

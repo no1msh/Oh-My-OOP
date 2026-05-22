@@ -307,6 +307,108 @@ export function registerAllResources(server: McpServer): void {
     },
   );
 
+  // ─────────────────────────────────────────────────────────────────────
+  // Lessons resources — woowacourse/kotlin-lotto 141 PR 리뷰 분석.
+  // 코드 스니펫 포함 (diff_hunk 인용).
+  // ─────────────────────────────────────────────────────────────────────
+  server.registerResource(
+    "lessons-lotto-summary",
+    "oop://lessons/lotto/summary",
+    {
+      title: "Kotlin Lotto 141 PR OOP 교훈 — TOP 10 + 명언 + racingcar 비교",
+      description:
+        "우아한테크코스 kotlin-lotto 미션의 141개 closed PR 리뷰에서 추출한 OOP 설계 교훈 총정리. 자주 하는 실수 TOP 10, 리뷰어 명언, 조영호 강의 토픽 매핑, 단계별 학습 곡선, racingcar vs lotto 도메인 비교.",
+      mimeType: "text/markdown",
+    },
+    async (uri) => {
+      const file = path.join(packageLessonsDir(), "woowacourse-kotlin-lotto", "SUMMARY.md");
+      const exists = await fs
+        .access(file)
+        .then(() => true)
+        .catch(() => false);
+      const text = exists ? await fs.readFile(file, "utf8") : "# (lessons not bundled)";
+      return { contents: [{ uri: uri.href, mimeType: "text/markdown", text }] };
+    },
+  );
+
+  server.registerResource(
+    "lessons-lotto-readme",
+    "oop://lessons/lotto/readme",
+    {
+      title: "Kotlin Lotto lessons — 입구 문서",
+      description: "lessons/woowacourse-kotlin-lotto/README.md — 구조와 사용법.",
+      mimeType: "text/markdown",
+    },
+    async (uri) => {
+      const file = path.join(packageLessonsDir(), "woowacourse-kotlin-lotto", "README.md");
+      const exists = await fs
+        .access(file)
+        .then(() => true)
+        .catch(() => false);
+      const text = exists ? await fs.readFile(file, "utf8") : "# (lessons not bundled)";
+      return { contents: [{ uri: uri.href, mimeType: "text/markdown", text }] };
+    },
+  );
+
+  server.registerResource(
+    "lessons-lotto-pr",
+    new ResourceTemplate("oop://lessons/lotto/{reviewee}/{file}", {
+      list: async () => {
+        const dir = path.join(packageLessonsDir(), "woowacourse-kotlin-lotto");
+        const exists = await fs
+          .access(dir)
+          .then(() => true)
+          .catch(() => false);
+        if (!exists) return { resources: [] };
+        const entries = await fs.readdir(dir, { withFileTypes: true });
+        const resources: Array<{
+          uri: string;
+          name: string;
+          mimeType: string;
+          description: string;
+        }> = [];
+        for (const ent of entries) {
+          if (!ent.isDirectory()) continue;
+          const subDir = path.join(dir, ent.name);
+          const files = await fs.readdir(subDir);
+          for (const f of files) {
+            if (!f.endsWith(".md")) continue;
+            resources.push({
+              uri: `oop://lessons/lotto/${ent.name}/${encodeURIComponent(f)}`,
+              name: `${ent.name}/${f}`,
+              mimeType: "text/markdown",
+              description: `Lotto PR 리뷰 분석: ${ent.name} — ${f} (코드 스니펫 포함)`,
+            });
+          }
+        }
+        return { resources };
+      },
+    }),
+    {
+      title: "Kotlin Lotto PR 리뷰 분석 (개별 PR, 코드 스니펫 포함)",
+      description: "특정 reviewee의 특정 PR 분석. 잘한 점/못한 점/리뷰어 인용/얻은 교훈 + 안티패턴 코드 인용.",
+      mimeType: "text/markdown",
+    },
+    async (uri, variables) => {
+      const reviewee = String(variables.reviewee);
+      const file = decodeURIComponent(String(variables.file));
+      const filePath = path.join(
+        packageLessonsDir(),
+        "woowacourse-kotlin-lotto",
+        reviewee,
+        file,
+      );
+      const exists = await fs
+        .access(filePath)
+        .then(() => true)
+        .catch(() => false);
+      const text = exists
+        ? await fs.readFile(filePath, "utf8")
+        : `# (lesson ${reviewee}/${file} not found)`;
+      return { contents: [{ uri: uri.href, mimeType: "text/markdown", text }] };
+    },
+  );
+
   server.registerResource(
     "style-guide",
     "oop://lessons/style-guide",

@@ -8,7 +8,9 @@
 - 저장소: 사용자 프로젝트 루트의 `.oop/*.md` (Markdown + YAML frontmatter + Mermaid)
 - 변경 시각화: Before/After Mermaid `classDiagram` 세로 스택 + 색상 강조
 - 검증: 책임 적절성 / 결합도 / 테스터빌리티 (모두 권고. 어떤 변경도 차단하지 않음)
-- 📚 **참고 자료:** [lessons/woowacourse-racingcar](lessons/woowacourse-racingcar/) — `woowacourse/kotlin-racingcar` 133개 PR 리뷰에서 추출한 OOP 설계 교훈 모음 ([SUMMARY](lessons/woowacourse-racingcar/SUMMARY.md))
+- 📚 **참고 자료:**
+  - [lessons/woowacourse-racingcar](lessons/woowacourse-racingcar/) — `woowacourse/kotlin-racingcar` 133개 PR 리뷰 ([SUMMARY](lessons/woowacourse-racingcar/SUMMARY.md))
+  - [lessons/woowacourse-kotlin-lotto](lessons/woowacourse-kotlin-lotto/) — `woowacourse/kotlin-lotto` 141개 PR 리뷰 (코드 스니펫 포함) ([SUMMARY](lessons/woowacourse-kotlin-lotto/SUMMARY.md))
 
 ---
 
