@@ -16,6 +16,14 @@
 
 ## 진행 상태
 
+**✅ 완료: 133 PRs / 77 reviewees** — 2026-05-22
+
+`SUMMARY.md` + `README.md` 작성 완료. 메인 README 링크 추가 완료.
+
+---
+
+이전 진행 로그:
+
 **76 PRs 완료 / 40+ reviewees 완료**
 
 완료된 reviewees (코멘트 많은 순):
