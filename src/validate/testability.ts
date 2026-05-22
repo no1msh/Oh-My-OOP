@@ -69,21 +69,34 @@ export function checkNonNewable(design: Design): Finding[] {
   return out;
 }
 
+// UI 표현 문자열이 도메인 데이터에 박혀 있는지 검출. PR #78 (s9hn): DriverDecision.distance="-"
+// UI 변경이 도메인 변경으로 번지는 안티패턴.
+const UI_LITERAL_RE = /["'`]\s*[-|│:\\n→←↑↓\s]+\s*["'`]|["'`]\s*[-=*]{2,}\s*["'`]/;
+
 export function checkSideEffectInHolder(design: Design): Finding[] {
   const out: Finding[] = [];
   for (const card of design.classes) {
     if (card.stereotype !== "InformationHolder") continue;
     const offenders = card.responsibilities.doing.filter((d) => SIDE_EFFECT_VERBS.test(d));
-    if (offenders.length === 0) continue;
+    const uiLiterals = card.responsibilities.knowing.filter((k) => UI_LITERAL_RE.test(k));
+    if (offenders.length === 0 && uiLiterals.length === 0) continue;
+
+    const reasons: string[] = [];
+    if (offenders.length > 0)
+      reasons.push(`사이드이펙트성 동사(저장/전송/기록 등) doing 책임 (${offenders.join(", ")})`);
+    if (uiLiterals.length > 0)
+      reasons.push(
+        `UI 표현 문자열을 knowing에 보유 (${uiLiterals.join(", ")}). ` +
+          `UI 변경이 도메인 변경으로 번질 위험이 있습니다.`,
+      );
 
     out.push(
       assertHasMultipleRemedies({
         rule_id: "side-effect-in-holder",
         severity: "warn",
         target: { kind: "class", id: card.id },
-        message:
-          `${card.name}은 InformationHolder인데 사이드이펙트성 동사(저장/전송/기록 등)가 포함된 doing 책임을 가집니다.`,
-        evidence: { offenders },
+        message: `${card.name}은(는) InformationHolder인데 ${reasons.join(" · ")}.`,
+        evidence: { offenders, ui_literals: uiLiterals },
         remedies: [
           {
             label: "Stereotype을 ServiceProvider로 재분류",

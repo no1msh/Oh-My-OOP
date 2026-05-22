@@ -67,6 +67,7 @@ export interface DesignIndex {
     cohesion_min_overlap: number;
     too_many_collaborators: number;
     mocking_pressure_max: number;
+    data_duplication_overlap: number;
   }>;
   notes?: string;
 }

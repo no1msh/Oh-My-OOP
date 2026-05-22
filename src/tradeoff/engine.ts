@@ -28,6 +28,15 @@ export interface AlternativeSeed {
   design_delta: DesignDelta;
   tradeoffs: { pros: string[]; cons: string[] };
   cho_younghos_lens: ChoYounghosLens;
+  /**
+   * 우아한테크코스 racingcar 133 PR에서 추출된 두 가지 보편 질문.
+   * 모든 대안 카드에 강제로 첨부되어, 사용자가 *분리의 정당화*와 *확장 시 부담*을
+   * 동시에 가늠할 수 있게 한다.
+   */
+  reflection_questions?: {
+    testability_justification: string;
+    expansion_pressure: string;
+  };
 }
 
 export interface AlternativesResult {
@@ -69,9 +78,28 @@ export function generateAlternatives(
       break;
   }
   const capped = seeds.slice(0, Math.max(2, Math.min(n, seeds.length)));
+  const enriched = capped.map(attachReflectionQuestions);
   return {
-    alternatives: capped,
+    alternatives: enriched,
     expansion_prompt: expansionPromptAlternatives(question, context.description),
+  };
+}
+
+/**
+ * @ghojeong (PR #128): "분리해도 테스트가 더 명확해지지 않으면 분리할 이유 없음."
+ * @Gyuil-Hwnag (PR #142): "KoreanCar/EnglishCar로 늘어나도 이 구조가 견디는가?"
+ */
+function attachReflectionQuestions(seed: AlternativeSeed): AlternativeSeed {
+  return {
+    ...seed,
+    reflection_questions: {
+      testability_justification:
+        `이 대안(${seed.label})을 적용하면 단위 테스트가 *더 명확*해지는가? ` +
+        `아니라면 분리/변경의 정당화가 약합니다. (조영호 렌즈: testability 평가 = ${seed.cho_younghos_lens.testability})`,
+      expansion_pressure:
+        `이 대안(${seed.label})이 도메인이 N배(예: 1종 → 10종)로 늘어났을 때도 견디는가? ` +
+        `늘면 god-object/god-folder로 무너진다면 지금 대안을 다시 보세요.`,
+    },
   };
 }
 

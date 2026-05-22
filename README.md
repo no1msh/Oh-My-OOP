@@ -33,7 +33,7 @@ npm run build
 npm test
 ```
 
-- `npm test`가 30개 테스트 모두 통과해야 정상입니다.
+- `npm test`가 38개 테스트 모두 통과해야 정상입니다.
 - 빌드 산출물은 `dist/index.js`입니다. **이후 모든 설정에서 이 파일의 절대 경로**를 사용합니다.
 
 설치 후 절대 경로를 얻으려면:
@@ -196,9 +196,16 @@ claude mcp add --scope user oh-my-oop -e OOP_PROJECT_ROOT=<ABSOLUTE_PATH_TO_USER
 
 ---
 
-## 검증 룰 (10개, 모두 remedies ≥ 2 보장)
+## 검증 룰 (15개, 모두 remedies ≥ 2 보장)
 
-`god-object`, `mixed-stereotype`, `low-cohesion`, `too-many-collaborators`, `feature-envy`, `non-newable`, `side-effect-in-holder`, `mocking-pressure`, `cycle`, `orphan-class`.
+**기본 10개:** `god-object`, `mixed-stereotype`, `low-cohesion`, `too-many-collaborators`, `feature-envy`, `non-newable`, `side-effect-in-holder`, `mocking-pressure`, `cycle`, `orphan-class`.
+
+**5개 추가** (우아한테크코스 racingcar 133 PR 분석으로 추출):
+- `vague-class-name` — Manager/Helper/Util/Validator 같은 모호한 일반 어휘 검출
+- `validation-misplacement` — UI/Coordinator/Domain 사이의 검증 책임 분산
+- `dependency-direction` — Domain→Interfacer 역방향 의존 (Coordinator만 허용)
+- `data-source-duplication` — 두 카드가 같은 도메인 정보를 양쪽에서 knowing (진실의 출처 분산)
+- `function-not-object` — 멤버 없이 행위 1개만 있는 클래스는 사실상 함수
 
 임계값은 `.oop/design.md` frontmatter의 `thresholds`로 오버라이드 가능:
 
@@ -209,7 +216,10 @@ thresholds:
   cohesion_min_overlap: 0.2
   too_many_collaborators: 4
   mocking_pressure_max: 2
+  data_duplication_overlap: 0.5
 ```
+
+자세한 설계 원칙은 [lessons/STYLE_GUIDE.md](lessons/STYLE_GUIDE.md) 참고.
 
 ---
 

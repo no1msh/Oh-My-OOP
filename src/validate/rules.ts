@@ -14,6 +14,11 @@ import {
   checkMockingPressure,
 } from "./testability.js";
 import { checkCycles } from "./cycle.js";
+import { checkVagueClassName } from "./vagueName.js";
+import { checkValidationLocation } from "./validationLocation.js";
+import { checkDependencyDirection } from "./dependencyDirection.js";
+import { checkDataSourceDuplication } from "./dataDuplication.js";
+import { checkFunctionNotObject } from "./functionNotObject.js";
 
 export interface RuleThresholds {
   god_object_responsibilities: number;
@@ -21,6 +26,7 @@ export interface RuleThresholds {
   cohesion_min_overlap: number;
   too_many_collaborators: number;
   mocking_pressure_max: number;
+  data_duplication_overlap: number;
 }
 
 export const DEFAULT_THRESHOLDS: RuleThresholds = {
@@ -29,6 +35,7 @@ export const DEFAULT_THRESHOLDS: RuleThresholds = {
   cohesion_min_overlap: 0.2,
   too_many_collaborators: 4,
   mocking_pressure_max: 2,
+  data_duplication_overlap: 0.5,
 };
 
 export const ALL_RULE_IDS = [
@@ -42,6 +49,11 @@ export const ALL_RULE_IDS = [
   "mixed-stereotype",
   "feature-envy",
   "orphan-class",
+  "vague-class-name",
+  "validation-misplacement",
+  "dependency-direction",
+  "data-source-duplication",
+  "function-not-object",
 ] as const;
 
 export type RuleId = (typeof ALL_RULE_IDS)[number];
@@ -221,6 +233,17 @@ export function validateDesign(design: Design, opts: ValidateOptions = {}): Find
   if (enabled.has("mixed-stereotype")) findings.push(...checkMixedStereotype(design));
   if (enabled.has("feature-envy")) findings.push(...checkFeatureEnvy(design));
   if (enabled.has("orphan-class")) findings.push(...checkOrphan(design));
+  if (enabled.has("vague-class-name")) findings.push(...checkVagueClassName(design));
+  if (enabled.has("validation-misplacement"))
+    findings.push(...checkValidationLocation(design));
+  if (enabled.has("dependency-direction"))
+    findings.push(...checkDependencyDirection(design));
+  if (enabled.has("data-source-duplication"))
+    findings.push(
+      ...checkDataSourceDuplication(design, thresholds.data_duplication_overlap),
+    );
+  if (enabled.has("function-not-object"))
+    findings.push(...checkFunctionNotObject(design));
 
   const sevMin = opts.severityMin ?? "info";
   return findings.filter((f) => severityAtLeast(f.severity, sevMin));

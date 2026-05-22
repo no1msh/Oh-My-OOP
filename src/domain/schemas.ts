@@ -64,6 +64,7 @@ export const DesignIndexSchema = z.object({
       cohesion_min_overlap: z.number().min(0).max(1).optional(),
       too_many_collaborators: z.number().int().positive().optional(),
       mocking_pressure_max: z.number().int().nonnegative().optional(),
+      data_duplication_overlap: z.number().min(0).max(1).optional(),
     })
     .partial()
     .optional(),
