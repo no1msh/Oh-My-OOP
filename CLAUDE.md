@@ -71,6 +71,10 @@
    - `null-assertion-misuse`
    - `runCatching-on-non-input`
 
+6. **`oop_propose_responsibilities` 보강 — by-metaphor heuristic 추가**: 현재 by-noun/by-verb/by-stereotype/single-class 4가지 시드가 있음. 5번째로 *"현실에서 누가 이 일을 하는가"* 메타포 기반 시드 추가 가능. lotto PR #31 (말리빈) *"발급기 그 자체에게는 돈이 필요하지 않다"* 같은 *현실 메타포 정합 체크*를 책임 분배 단계에 끌어옴. **보류 이유**: 기존 by-noun이 이미 도메인 명사를 추출하므로 by-metaphor와 일부 중첩. 증분 가치가 by-stereotype보다 작아 보임 — 작업 전 *겹치는 영역*과 *진짜 차별점*을 먼저 정리할 것.
+
+7. **`oop_diagram_generate` 시각 신호 강화**: Mermaid classDiagram에 god-object/단순 위임/양방향 의존을 *시각적 색상·테두리*로 표시. 작업 단위 작음 (render/mermaid.ts 단일 파일). **보류 이유**: 시각 변경은 *정량 평가가 어렵고* MCP 응답이 클라이언트마다 렌더링이 달라 일관성 보장이 약함. Mermaid `classDef` 스타일링이 모든 뷰어에서 지원되는지 사전 검증 필요.
+
 ---
 
 **최근 완료 (2026-05-23, 세션 1-2):**
