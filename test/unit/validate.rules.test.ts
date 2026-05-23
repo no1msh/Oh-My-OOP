@@ -394,6 +394,71 @@ describe("validation contract: every finding has >= 2 remedies", () => {
     expect(findings.length).toBe(0);
   });
 
+  it("collection-wrapper-without-behavior fires on Structurer with single collection knowing + only pass-through doing", () => {
+    const d = design({
+      classes: [
+        {
+          id: "lottos",
+          name: "Lottos",
+          stereotype: "Structurer",
+          responsibilities: {
+            knowing: ["List<Lotto>"],
+            doing: ["toString 출력", "size 반환"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["collection-wrapper-without-behavior"],
+    });
+    expect(findings.length).toBe(1);
+    expect(findings[0]!.severity).toBe("info");
+    expect(findings[0]!.remedies.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("collection-wrapper-without-behavior suppressed when Structurer has domain behavior", () => {
+    const d = design({
+      classes: [
+        {
+          id: "lottos",
+          name: "Lottos",
+          stereotype: "Structurer",
+          responsibilities: {
+            knowing: ["로또들 list"],
+            doing: ["당첨 등수를 계산한다", "총 수익률을 계산한다"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["collection-wrapper-without-behavior"],
+    });
+    expect(findings.length).toBe(0);
+  });
+
+  it("collection-wrapper-without-behavior skips non-Structurer stereotypes", () => {
+    const d = design({
+      classes: [
+        {
+          id: "x",
+          name: "X",
+          stereotype: "InformationHolder",
+          responsibilities: { knowing: ["items list"], doing: [] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["collection-wrapper-without-behavior"],
+    });
+    expect(findings.length).toBe(0);
+  });
+
   it("all rules pass the >=2 remedies contract when triggered", () => {
     const d = design({
       classes: [

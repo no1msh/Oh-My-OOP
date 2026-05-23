@@ -20,6 +20,7 @@ import { checkDependencyDirection } from "./dependencyDirection.js";
 import { checkDataSourceDuplication } from "./dataDuplication.js";
 import { checkFunctionNotObject } from "./functionNotObject.js";
 import { checkEmptyObjectFill } from "./emptyObjectFill.js";
+import { checkCollectionWrapperWithoutBehavior } from "./collectionWrapper.js";
 
 export interface RuleThresholds {
   god_object_responsibilities: number;
@@ -56,6 +57,7 @@ export const ALL_RULE_IDS = [
   "data-source-duplication",
   "function-not-object",
   "empty-object-external-fill",
+  "collection-wrapper-without-behavior",
 ] as const;
 
 export type RuleId = (typeof ALL_RULE_IDS)[number];
@@ -248,6 +250,8 @@ export function validateDesign(design: Design, opts: ValidateOptions = {}): Find
     findings.push(...checkFunctionNotObject(design));
   if (enabled.has("empty-object-external-fill"))
     findings.push(...checkEmptyObjectFill(design));
+  if (enabled.has("collection-wrapper-without-behavior"))
+    findings.push(...checkCollectionWrapperWithoutBehavior(design));
 
   const sevMin = opts.severityMin ?? "info";
   return findings.filter((f) => severityAtLeast(f.severity, sevMin));
