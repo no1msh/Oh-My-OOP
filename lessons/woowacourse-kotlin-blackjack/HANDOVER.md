@@ -1,195 +1,152 @@
-# 다음 세션 인계 — kotlin-blackjack OOP 분석 시작 가이드
+# kotlin-blackjack OOP 분석 — 인계 (≥30 심각 그룹 거의 완료 시점)
 
-> **현재 상태:** 정찰 완료, 데이터 캐시 일부 확보, 분석 미시작.
-> **목표:** lotto/racingcar와 동일 패턴으로 blackjack 미션 PR을 분석해 lessons 코퍼스를 만들고, 도출된 안티패턴을 MCP validate 룰로 코드화한다.
+> **현재 상태 (2026-05-23 세션 N+1 기준):** 심각 그룹 (≥30 스레드) **32개 중 30개 완료**. 남은 2개(PR #124, #108) 처리 후 ≥10~29 중간 그룹(94개) 진입.
 
 ---
 
-## 1. 데이터셋 정보
+## 1. 진행 현황
 
-- **출처:** https://github.com/woowacourse/kotlin-blackjack
-- **총 closed PR:** 154 (lotto 141, racingcar 133과 유사 규모)
-- **PR 번호 범위:** #1 ~ #154
-- **고유 reviewee (≥5 thread 필터):** 71명
-- **1단계 / 2단계 분포 (≥5):** 71 / 69 (1·2단계가 거의 1:1)
+### 완료 (≥30 심각 그룹 30/32)
 
-### 분석 대상 필터 (lotto/racingcar 동일)
+`git log --oneline` 으로 6 배치 commit 확인:
 
-| 필터 | PR 수 | 비고 |
+| Batch | Commit | PR 목록 |
 |---|---|---|
-| 리뷰 스레드 ≥5 | **140 PR** | 최종 분석 대상 |
-| ≥10 | 126 |
-| ≥20 | 73 |
-| ≥30 | 32 | 심각 그룹 (가장 풍부한 가르침) |
+| 1 | `99a62c6` | #78, #63, #65, #123, #125 |
+| 2 | `149b639` | #112, #28, #79, #128, #135 |
+| 3 | `00f0c06` | #114, #92, #29, #24, #116 |
+| 4 | `47531b2` | #10, #33, #119, #17, #81 |
+| 5 | `bba52ec` | #34, #25, #111, #8, #61 |
+| 6 | `5bcd8a2` | #20, #120, #64, #110, #51 |
 
-> ⚠️ "리뷰 스레드 수" 는 GraphQL `reviewThreads.totalCount`. lotto의 `comments` API와 다른 단위이지만 *대략* 1 스레드 = 1 라인 위치. *정확한 라인 코멘트 수*가 필요하면 PR별로 `gh api repos/woowacourse/kotlin-blackjack/pulls/<N>/comments --jq 'length'` 로 재카운트.
+reviewee 디렉토리 27개 + HANDOVER. (ijh1298·jinuemong·re4rk·tmdgh1592는 1단계+2단계 둘 다.)
 
----
+### 남은 작업
 
-## 2. 캐시 위치
-
-`/tmp/oop-lessons-cache-blackjack/`:
-
-- `prs.json` — REST API로 받은 closed PR 메타 (154개)
-- `gql1.json`, `gql2.json` — GraphQL 페이지별 응답 (총 154 노드)
-- `all_prs.json` — 두 페이지 합친 PR 노드 배열
-- `counts.tsv` — `PR#\treviewee\tthreadCount\ttitle` (정렬 안 됨, 154행)
-- `nums.txt` — PR 번호 목록 (1-154)
-
-**⚠️ `/tmp`는 재부팅 시 사라짐.** 다음 세션 시작 시 캐시 확인 → 없으면 §6 절차로 재생성.
-
----
-
-## 3. 심각 그룹 (≥30 스레드, 32개) — 가장 먼저 작성 권장
-
-```
-PR #78  | dpcks0509       | 58 | 1단계
-PR #63  | jinuemong       | 53 | 1단계
-PR #65  | kmkim2689       | 50 | 1단계
-PR #123 | chanho0908      | 48 | 1단계
-PR #125 | jerry8282       | 46 | 1단계
-PR #112 | etama123        | 45 | 1단계
-PR #28  | inseonyun       | 44 | 1단계
-PR #79  | ii2001          | 42 | 1단계
-PR #128 | ijh1298         | 41 | 1단계
-PR #135 | ijh1298         | 40 | 2단계
-PR #114 | moondev03       | 40 | 1단계
-PR #92  | jinuemong       | 37 | 2단계
-PR #29  | tmdgh1592       | 36 | 1단계
-PR #24  | otter66         | 36 | 1단계
-PR #116 | donghyun81      | 36 | 1단계
-PR #10  | s9hn            | 36 | 1단계
-PR #33  | 2chang5         | 35 | 1단계
-PR #119 | HamBeomJoon     | 35 | 1단계
-PR #17  | rhkrwngud445    | 34 | 1단계
-PR #81  | hxeyexn         | 33 | 1단계
-PR #34  | re4rk           | 33 | 2단계
-PR #25  | whk06061        | 33 | 1단계
-PR #111 | oungsi2000      | 33 | 1단계
-PR #8   | re4rk           | 32 | 1단계
-PR #61  | junjange        | 32 | 1단계
-PR #20  | pingu244        | 32 | 1단계
-PR #120 | yrsel           | 32 | 1단계
-PR #64  | aprilgom        | 31 | 1단계
-PR #110 | hwannow         | 31 | 1단계
-PR #51  | tmdgh1592       | 30 | 2단계
-PR #124 | wondroid-world  | 30 | 1단계
-PR #108 | Leeyerin0210    | 30 | 1단계
-```
-
-전체 목록은 `counts.tsv` 정렬해서 확인.
-
----
-
-## 4. 분석 파일 작성 규칙
-
-`lessons/woowacourse-kotlin-blackjack/<reviewee>/<PR>-<단계>-블랙잭.md` 명명 (lotto와 동일).
-
-### 필수 섹션 (lotto/racingcar 패턴)
-
-1. **메타 헤더** — reviewee, PR URL, 단계, 리뷰어, 라인 코멘트 수
-2. **잘한 점 (설계 관점)** — 3~7 항목. 설계 통찰 위주, 단순 칭찬 X
-3. **못한 점 (설계 관점)** — 안티패턴별 섹션. *코드 스니펫(diff_hunk 또는 본문 인용) 포함 필수*
-4. **리뷰어 의견 요지** — 7~10 항목, 짧게
-5. **대표 인용** — 3~5 인용. 형식: `> "..." — @reviewer on src/...`
-6. **얻은 교훈** — 7~12 항목, 일반화된 설계 원칙
-
-### 금지 사항 (lotto 사족 정리에서 도출)
-
-- ❌ 학생 반성 어휘 (`안타까웠다`, `부끄러웠다`, `🥹/🥲/😅`)
-- ❌ 강사 스타일 메타 분석 (`라면 비유 코칭 스타일`, `메타-질문 패턴`)
-- ❌ PR 간 학생/강사 진화 비교 (`PR #X 같은 학생 1→2단계 진화`)
-- ❌ 우테코 문화 관찰 (`우테코 리뷰어 공통`, `심리적 안전`)
-- ❌ 평가성 도입 (`이 PR은 *교과서급* 리뷰`)
-- ❌ 메타 라벨 (`(*인용 가치 매우 높음*)`, `(메타-질문 반사)`)
-
-### 유지 대상
-
-- ✅ 객체지향 원칙 (Tell-Don't-Ask, SRP, OCP, Liskov, DIP)
-- ✅ 설계 (책임 분배, 도메인 모델링, 패턴: Strategy/Factory/NullObject/Flyweight/State)
-- ✅ 테스터빌리티 (Random 외부 주입, given/when/then, fake fixture)
-- ✅ Kotlin OOP 어휘 (value class, sealed class, fun interface, operator)
-- ✅ MVC, 일급 컬렉션, 원시값 포장, invariant
-- ✅ 안티패턴 코드 스니펫 + 리뷰어 설계 통찰 인용
-
-### 스타일 참고
-
-- `lessons/STYLE_GUIDE.md` — racingcar에서 추출한 보편 원칙
-- `lessons/woowacourse-kotlin-lotto/SUMMARY.md` — lotto 패턴 인용 형식
-- `lessons/woowacourse-kotlin-lotto/<reviewee>/*.md` — 정상 깊이 사례 (예: `parkjiminnnn/146-2단계-로또.md`)
-
----
-
-## 5. blackjack 도메인 특수 패턴 (lotto에 없음)
-
-분석하면서 다음 도메인 패턴이 새 안티/좋은 패턴을 만들지 주목:
-
-| 패턴 | 설명 | 가능한 안티/MCP 룰 후보 |
+| 그룹 | PR 수 | 다음 작업 |
 |---|---|---|
-| **State machine** | 플레이어 상태 전이 (Hit → Stand → Bust → Blackjack) | sealed class로 표현하지 않으면 if/when 분기 폭증 |
-| **Ace 양가성** | Ace는 1 또는 11 (핸드 합산 시 동적 결정) | enum + state 결합 / 별도 ValueCalculator 분리 |
-| **Player vs Dealer 비대칭** | Dealer는 16 이하면 무조건 Hit (다른 정책) | 상속? 인터페이스? sealed class? |
-| **Bet/Profit 계산** | 2단계: 베팅 → 승부 → 수익률 (블랙잭은 1.5배 등) | Money 도메인 분리, 정밀도 (Double vs BigDecimal) |
-| **Card 도메인** | Suit (4종) × Rank (13종) → 52장 (Flyweight 후보) | lotto의 LottoNumber Flyweight 패턴 재등장 가능 |
+| ≥30 스레드 | **2개** (#124 wondroid-world, #108 Leeyerin0210) | 첫 배치로 마무리 |
+| ≥10~29 | 94개 | 후속 세션들 (대량) |
+| 5~9 | 14개 | 짧은 분석 적정 |
 
-→ 분석 종료 후 §7 **MCP 룰화 검토 단계**에서 위 패턴별 신규 룰 후보 도출.
+> ⚠ **`/tmp/oop-lessons-cache-blackjack/`은 휘발성**. 다음 세션 시작 시 `ls /tmp/oop-lessons-cache-blackjack/` 확인. 캐시 없으면 §6 절차 (HANDOVER 원본) 재실행. 단 *각 PR 코멘트는 `/tmp/pr<N>_full.txt`에 즉시 dump* 가능 (gh CLI).
 
 ---
 
-## 6. 작업 순서 권장
+## 2. 누적 안티패턴 강도 (MCP 룰화 후보)
 
-### 세션 N (분석 진입)
+세션 N에서 30 PR 분석 후 *반복 등장 횟수 ≥5*인 패턴:
 
-1. `cat HANDOVER.md` 정독.
-2. `lessons/STYLE_GUIDE.md` 정독.
-3. `lessons/woowacourse-kotlin-lotto/parkjiminnnn/146-2단계-로또.md` 같은 정상 깊이 사례 1-2개 정독해 *스타일 감 잡기*.
-4. 캐시 확인:
-   ```bash
-   ls /tmp/oop-lessons-cache-blackjack/ 2>&1
-   # 없으면 재생성:
-   #   mkdir -p /tmp/oop-lessons-cache-blackjack
-   #   gh api graphql 또는 gh api ... pulls 로 prs/counts 재구축
-   ```
-5. **심각 그룹 32개부터 작성** (배치 5개씩, 매 배치마다 commit + npm test 영향 없으니 push는 안 함).
-6. 코멘트 dump 방법 (lotto에서 검증됨):
-   ```bash
-   gh api repos/woowacourse/kotlin-blackjack/pulls/<N>/comments \
-     | jq -r '.[] | "=== \(.path) ===\nUSER: \(.user.login)\nBODY:\n\(.body)\nDIFF:\n\(.diff_hunk)\n---"' \
-     > /tmp/pr<N>_full.txt
-   ```
-   읽고 분석 (압축 X — *모든* 코멘트 읽기).
+| 패턴 | 등장 PR 수 | MCP 룰 후보 우선순위 |
+|---|---|---|
+| **enum의 UI value (`koreanText`/`description`/`word`/`value`/`displayName`)** | **17+** | ⭐⭐⭐ 최강 |
+| **승부 = 참가자 메시지 (정적 `judge(dealer, player)` 회피)** | **18+** | ⭐⭐⭐ |
+| **Singleton Deck (`object`) = 테스터빌리티 ↓ + 2판 이상 불가** | **11+** | ⭐⭐ |
+| **외부 `MutableList<Card>` 참조 누수 (lotto `empty-object-external-fill` 변형)** | **12+** | ⭐⭐ (기존 룰 변형) |
+| **Ace 11 기본 + while/차감 보정 < Ace 1 기본 + 단일 +10 룰** | **11+** | ⭐⭐ |
+| **블랙잭 룰 오해 (Ace+10 두 장만 진짜 블랙잭 / Bust 양측 / 21 ≠ 블랙잭 / 16이하 반복)** | **10+** | ⭐⭐ (도메인 특수) |
+| **Controller god-object + 절차적 명령 (`game.data → loop → game.method`)** | **11+** | ⭐⭐ |
+| **점수 계산이 Player에 = Hand/Card 책임 누수** | **9+** | ⭐⭐ |
+| **만능 명사 (`Manager`/`Information`/`Rule`/`Value`/`Wallet`/`Base*`/`UserInfo`)** | **8+** | ⭐⭐ (기존 `vague-class-name` 룰 확장) |
+| **`lateinit var callback` + setter (호출 순서 invariant 부재)** | **7+** | ⭐ |
+| **`apply`/`with`/DSL Builder의 의도 위반 = 수업 적용 욕구** | **6+** | ⭐ |
+| **`open class Player` + `Dealer : Player` < `abstract Participant`** | **5+** | ⭐ |
+| **형식 규칙(3변수 제한)이 만든 인공 객체 (`Wallet`/`PlayerBetInfo`/`UserInformation`)** | **3** | ⭐ (도메인 특수) |
+| **State 패턴의 *전이 누락* (Hit→Stay/BlackJack/Bust)** | **3+** | ⭐ (State 도입 PR 한정) |
+| **잘못된 함수명 (`isACE`/`JUMP`/`takeCard`/`deepCopy`/`showCard`/`runPhase`)** | **6+** | ⭐ |
 
-### 세션 N+1, N+2 (계속)
+### 신규 도메인 특수 (lotto에 없음)
 
-- 중간 그룹 (≥10~29 스레드, 약 94개) 일괄.
-- 저-댓글 그룹 (5~9 스레드, 14개) — 짧은 분석이 적정.
-
-### 최종 세션 (마무리)
-
-1. **PROGRESS.md / SUMMARY.md / README.md** 작성 (lotto 패턴).
-2. **MCP 룰화 후보 도출** — §5의 도메인 특수 패턴 + 일반 안티패턴을 lotto 룰 5개 추가했던 방식대로 신규 룰 1-3개 작성.
-3. `MCP_STRUCTURE.md` §5에 새 후보 추가.
-4. `CLAUDE.md` "알려진 추가 작업"에 blackjack 완료 + 신규 룰 후보 명시.
+1. **`State` sealed interface** — Running(Hit) / Finished(Stay/Bust/BlackJack). 신규 룰 `state-machine-without-sealed`?
+2. **`Ace` 1↔11 양가성** — 8개+ PR 동일한 *while + 차감* 안티패턴.
+3. **"카드 배부 진행자가 누구?"** — Dealer? Blackjack? Game? `dealer-vs-progressor-conflation` 룰 후보.
+4. **`Deck` 자료구조** — Set/재귀 / Singleton / `ArrayDeque`/`MutableList` 선택.
+5. **블랙잭 룰 정확성** — *Ace+10 두 장*, *Bust 개별 판정*, *딜러 자동 hit ≤16* — `blackjack-rule-fidelity` 후보.
 
 ---
 
-## 7. 분석 끝나면 MCP 룰화 검토
+## 3. 학생/리뷰어 패턴 (사족 X, 분석에 도움되는 메타 정보)
 
-lotto 분석 후 5개 신규 룰을 만든 패턴 (`src/validate/<rule>.ts` + `rules.ts` 등록 + `test/unit/validate.rules.test.ts` 케이스 추가).
+### 학생 자가 토론이 풍부한 PR (학습 가시화 모범)
 
-blackjack 분석에서 **반복적으로 나오는 안티패턴 3개 이상**이라면 룰 후보. 1-2번만 나오면 *코퍼스에만 기록*하고 룰화는 보류.
+PR #128/#135 (ijh1298), #111 (oungsi2000), #110 (hwannow), #120 (yrsel), #29 (tmdgh1592), #63 (jinuemong) — *PR 본문/코멘트에 자가 의문 + 자가 답변 명시*.
 
-기존 룰과 충돌/중복 검토 필수 (`MCP_STRUCTURE.md` §4 참조).
+→ 학생이 *자가 의문 → 리뷰어 메타 질문 → 자가 답변*으로 정답 도달하는 패턴. *분석 시 인용 가치 ↑*.
+
+### 같은 코드 / 다른 리뷰어 케이스
+
+- PR #78 (dpcks0509, reviewer Gyuil-Hwnag) vs PR #79 (ii2001, reviewer laco-dev) — *동일 코드 다른 리뷰어 = 안티패턴이 코드 자체의 문제임을 증명* (룰화 신뢰도 ↑).
+- PR #24 (otter66, reviewer laco-dev) vs PR #25 (whk06061, reviewer namjackson) — 거의 동일 코드. 리뷰 토론 결은 다름.
+- PR #111 (oungsi2000) vs PR #112 (etama123) — 코드 구조 매우 유사.
+
+### 페어 / 동일 학생 1단계+2단계
+
+| 학생 | 1단계 | 2단계 |
+|---|---|---|
+| ijh1298 | #128 | #135 |
+| jinuemong | #63 | #92 |
+| re4rk | #8 | #34 |
+| tmdgh1592 | #29 | #51 |
+
+→ *진화 비교는 사족 금지* (HANDOVER §4). 다만 *2단계 신규 기능*(베팅, 수익률, 블랙잭 1.5배)은 *별도 패턴*으로 기록.
 
 ---
 
-## 8. 알려진 위험
+## 4. 분석 파일 작성 규칙 (변동 없음 + 신규 권고)
 
-- **분석 분량이 크다** (140 PR). lotto는 4세션 이상 걸렸음. 한 세션에 모두 끝낼 수 없다고 가정하고 *심각 그룹부터*.
-- **`/tmp` 캐시 휘발성.** 세션 시작 시 항상 캐시 검증.
-- **사족 누적 위험.** lotto에서 *후반부에 메타 분석이 늘어나* 사족 정리에 별도 세션이 들었음. *첫 PR부터 §4 금지 사항을 엄수*하면 사족 정리 세션 불필요.
-- **`reviewThreads` ≠ `comments`** — 카운트 정확성 필요한 경우 PR별로 `comments` API 재카운트.
+기본 §4 규칙 + 세션 N에서 굳어진 추가:
+
+### 작성 길이 휴리스틱
+
+- 학생 자가 토론 풍부 → **1000~1500줄** (예: PR #128·#135·#111·#120)
+- 표준 리뷰 → **800~1100줄** (예: PR #20·#64)
+- PR #24 같은 *공통 코드 다른 PR* → **400~600줄** ("PR #N과 공통 + 추가 패턴만")
+
+### 신규 권고
+
+1. **누적 패턴 ≥5인 안티패턴은 *§N에서 결*로 간략 인용** — 본 분석에서 *반복 텍스트 작성 방지*. 예: "PR #28·#78·#112·#125와 같은 결".
+2. **블랙잭 룰 오해 발견 시 *명시*** — 학생/리뷰어/코드 어디서 룰이 어긋났는지.
+3. **학생 자가 답변이 *정답 도달*하면 *대표 인용*에 학생 코멘트 직접 인용** — 학습 모범 사례 기록.
 
 ---
 
-**다음 세션 진입 메시지:** 별도로 작성 예정 (이 HANDOVER.md를 정독시키고 §6 작업 순서 시작 지시).
+## 5. 다음 세션 진입 순서
+
+### 권장 첫 단계
+
+1. `cat HANDOVER.md` (이 문서) 정독.
+2. `ls /tmp/oop-lessons-cache-blackjack/` — 캐시 확인.
+3. **이미 작성된 PR 1개 정독** (가벼운 거 권장 — `chanho0908/123-1단계-블랙잭.md` 또는 `donghyun81/116-1단계-블랙잭.md`) → 스타일 감 회복.
+4. **남은 ≥30 그룹 2개부터 마무리** — `#124 wondroid-world`, `#108 Leeyerin0210`.
+5. 그 뒤 ≥10~29 그룹 진입 (배치 5개씩, 각 배치마다 commit).
+
+### 진행 방식 자가 점검
+
+- *배치 5개씩* + *5 PR 끝나면 commit + push 안 함* 유지.
+- *공통 안티패턴은 짧게 인용으로*, *PR 특이 패턴은 길게*.
+- *학생 자가 의문/답변* 발견 시 *대표 인용*에 넣고 *얻은 교훈*에 학습 패턴 명시.
+
+---
+
+## 6. 최종 정리 단계 (모든 분석 끝난 후)
+
+다음을 수행:
+
+1. **`PROGRESS.md` 작성** — lotto 패턴. 모든 PR 목록 + 짧은 한 줄 요약.
+2. **`SUMMARY.md` 작성** — 룰 ↔ 대표 PR 매핑 (lotto 인덱스 패턴).
+3. **`README.md`** — 코퍼스 사용 가이드.
+4. **MCP 룰화 검토** — §2의 ⭐⭐⭐ 패턴 3-5개를 *validate 룰*로 (`src/validate/<rule>.ts` + `rules.ts` 등록 + 테스트 케이스).
+5. **`MCP_STRUCTURE.md` §5에 신규 후보 추가** — 도메인 특수 패턴 (State 패턴, Ace, 블랙잭 룰 정확성, Dealer 진행자 vs 참여자).
+6. **`CLAUDE.md` "알려진 추가 작업"에 blackjack 완료 명시 + 신규 룰 후보 정리**.
+
+---
+
+## 7. 위험 / 메모
+
+- ***/tmp 캐시 휘발성*** — 매 세션 첫 작업이 캐시 확인.
+- ***컨텍스트 관리*** — 본 세션 N에서 *6 배치 = 30 PR 분석*에 *800k 토큰*. *한 세션에 6 배치가 적정 한계*. 더 진행하려면 `/compact` 또는 세션 종료.
+- ***PR #124, #108은 실제 라인 코멘트 수는 30 미달 가능성*** — `reviewThreads` vs `comments` 단위 차이.
+
+---
+
+**최근 commit (세션 N 6 배치):** `99a62c6` ~ `5bcd8a2`. `git push`는 안 함 (HANDOVER 원본 정책 유지).
