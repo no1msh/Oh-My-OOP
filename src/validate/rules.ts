@@ -22,6 +22,7 @@ import { checkFunctionNotObject } from "./functionNotObject.js";
 import { checkEmptyObjectFill } from "./emptyObjectFill.js";
 import { checkCollectionWrapperWithoutBehavior } from "./collectionWrapper.js";
 import { checkPrimitiveWrapperWithoutInvariant } from "./primitiveWrapper.js";
+import { checkStrategyAsymmetry } from "./strategyAsymmetry.js";
 
 export interface RuleThresholds {
   god_object_responsibilities: number;
@@ -60,6 +61,7 @@ export const ALL_RULE_IDS = [
   "empty-object-external-fill",
   "collection-wrapper-without-behavior",
   "primitive-wrapper-without-invariant",
+  "strategy-default-param-pollution",
 ] as const;
 
 export type RuleId = (typeof ALL_RULE_IDS)[number];
@@ -256,6 +258,8 @@ export function validateDesign(design: Design, opts: ValidateOptions = {}): Find
     findings.push(...checkCollectionWrapperWithoutBehavior(design));
   if (enabled.has("primitive-wrapper-without-invariant"))
     findings.push(...checkPrimitiveWrapperWithoutInvariant(design));
+  if (enabled.has("strategy-default-param-pollution"))
+    findings.push(...checkStrategyAsymmetry(design));
 
   const sevMin = opts.severityMin ?? "info";
   return findings.filter((f) => severityAtLeast(f.severity, sevMin));

@@ -543,6 +543,84 @@ describe("validation contract: every finding has >= 2 remedies", () => {
     expect(findings.length).toBe(0);
   });
 
+  it("strategy-default-param-pollution fires on Manual/Automatic Machine group with asymmetric knowing", () => {
+    const d = design({
+      classes: [
+        {
+          id: "amm",
+          name: "AutomaticLottoMachine",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: [], doing: ["로또를 생성한다"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        {
+          id: "mlm",
+          name: "ManualLottoMachine",
+          stereotype: "ServiceProvider",
+          responsibilities: {
+            knowing: ["수동 입력 번호들 List<List<Int>>"],
+            doing: ["로또를 생성한다"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["strategy-default-param-pollution"],
+    });
+    expect(findings.length).toBe(1);
+    expect(findings[0]!.severity).toBe("warn");
+    expect(findings[0]!.remedies.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("strategy-default-param-pollution suppressed when knowing is symmetric", () => {
+    const d = design({
+      classes: [
+        {
+          id: "a",
+          name: "FastGenerator",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: ["seed: Long"], doing: ["빠르게 생성"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        {
+          id: "b",
+          name: "SlowGenerator",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: ["delay: Long"], doing: ["느리게 생성"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["strategy-default-param-pollution"],
+    });
+    expect(findings.length).toBe(0);
+  });
+
+  it("strategy-default-param-pollution skips when only one strategy variant exists", () => {
+    const d = design({
+      classes: [
+        {
+          id: "a",
+          name: "SoloMachine",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: [], doing: ["뭔가 한다"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["strategy-default-param-pollution"],
+    });
+    expect(findings.length).toBe(0);
+  });
+
   it("all rules pass the >=2 remedies contract when triggered", () => {
     const d = design({
       classes: [
