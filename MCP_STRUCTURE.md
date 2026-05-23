@@ -132,7 +132,7 @@ return errorResult((e as Error).message);
    - `validateDesign()`의 if 체인에 호출 추가
    - 임계치 필요하면 `DEFAULT_THRESHOLDS`에 추가
 4. 모든 finding에 `assertHasMultipleRemedies()` 감싸기 (≥2 remedies 강제)
-5. `test/unit/validate/<ruleName>.test.ts` 작성
+5. `test/unit/validate.rules.test.ts`에 테스트 케이스 *추가* (모듈당 1 파일, 평면 구조 — 디렉토리 분리 X). 케이스 패턴: positive 1개 + suppression(skip) negative 2~3개. 마지막 `all rules pass the >=2 remedies contract` 케이스가 신규 룰도 자동 검증.
 
 ---
 
