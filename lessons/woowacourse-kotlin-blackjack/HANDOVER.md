@@ -25,8 +25,9 @@
 | 11 | `91671c3` | #146, #147, #148, #151 | 중간 (동일 리뷰이 2단계 마지막) |
 | 12 | `64b00c9` | #75, #74, #70, #32, #67 | 새 1단계 reviewees (sh1mj1, songpink, chaehyuns, krrong, s6m1n) + 신규 reviewer (vagabond95, KwonDae) |
 | 13 | `8afa82d` | #98, #95, #99, #23, #26 | batch 12 reviewees (chaehyuns/songpink/s6m1n) 2단계 양 단계 완성 + 2023년 3월 코호트 진입 (rhthrhrl0, chws0508) |
+| 14 | `a0fbf02` | #39, #43, #46, #16, #77 | batch 13 reviewees (rhthrhrl0/chws0508) 2단계 + krrong 2단계 완성 (양 단계 28명) + 새 1단계 reviewees (SeongHoonC, murjune) + 신규 reviewer BeokBeok |
 
-reviewee 디렉토리 36개 (양 단계 완성 21명 + 1단계만 15명) + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
+reviewee 디렉토리 38개 (양 단계 완성 28명 + 1단계만 10명) + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
 
 **reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95 (racingcar 인용 reviewer), @KwonDae — *총 8 reviewer*.
 
@@ -196,6 +197,51 @@ batch 10·11 (#41, #49, #53, #58, #137, #146, #147, #148, #151) 에서 새로 �
 - @lee-ji-hoon (지훈) [신규]: #137 (미플) — *원시값 포장 + onXX 콜백 + 어휘 양방향 학습*
 - @krrong (크롱) [신규]: #148 (타마), #151 (제리) — *역할 vs 상태 + 추상화 확장 (참가자 vs 참가자) + 반란군 비유*
 
+## 14. batch 14 신규 안티패턴 + 메타 어휘 (누적)
+
+batch 14 (#39, #43, #46, #16, #77) 에서 새로 발견된 패턴:
+
+| 패턴 | 등장 PR 수 | MCP 룰 후보 |
+|---|---|---|
+| **`first-class-collection-without-behavior`** (`PlayersNameAndBet` 행동 없는 일급화) | 1 (#39) | ⭐⭐ — lotto `collection-wrapper-without-behavior` 변형 |
+| **`and-conjunction-name`** (`NameAndBet`, `HandAndWallet`) | 1 (#39) | ⭐⭐ |
+| **`immutable-recompute-on-call`** (불변 + 매 호출 계산 함수) | 1 (#39) | ⭐⭐ |
+| **`factory-vs-constructor-inconsistency`** (생성 방식 일관성 부재) | 1 (#39) | ⭐ |
+| **`deepCopy 명명 vs 실제 (얕은 복사)` 명명 정확성** | 1 (#39) | ⭐ |
+| **`class-without-state`** (행동만 가진 클래스 = static helper 차이 X) | 2 (#16·#46) | ⭐⭐ |
+| **`primitive-with-domain-logic`** (Int 점수 + 도메인 로직 = Score 포장) | 2 (#16·#39) | ⭐⭐ |
+| **`package-cohesion`** (constants 패키지 + 로직 객체 = 응집 위반) | 1 (#16) | ⭐ |
+| **`abstract-without-abstract-method` 강화** | 1 (#16) | ⭐⭐⭐ (누적 4 PR #74·#95·#147·#16) |
+| **`dataclass-private-constructor-copy-leak`** (PR #58 결 강화) | 1 (#46) | ⭐⭐ |
+| **`value-object-arithmetic-invariant-leak`** (BettingMoney ≥ 1 + 수익률 음수) | 1 (#46) | ⭐⭐ |
+| **`procedural-method-name`** (`냄비에물을500미리붓고...` vs `라면끓이기`) | 1 (#46) | ⭐ |
+| **`delegate-vs-firstclass-collection`** (`by` 키워드 + 일급 컬렉션 양가성) | 2 (#77·#74) | ⭐⭐ |
+| **`lambda-injection-locus`** (람다 인자 vs 생성자 주입) | 1 (#77) | ⭐⭐ |
+| **`judge-symmetry-violation`** (참가자 vs 참가자 일반화 + 비대칭 룰 충돌) | 1 (#77) | ⭐⭐ |
+| **`premature-strategy-extraction`** (PointCalculator 분리 YAGNI 위반) | 1 (#77) | ⭐ |
+| **`unnecessary-member-variable`** (initialCards 멤버 X) | 1 (#46) | ⭐ |
+| **`when-pattern-vs-condition` Kotlin 어휘 갭** | 1 (#43) | ⭐ |
+| **Phase 추상화 (학생 창의적 발상)** | 1 (#39) | (도메인 특수) |
+
+### batch 14 메타 어휘 (MCP `oh-my-oop` 핵심 가치와 일치)
+
+- ***극단 사례 (reductio ad absurdum)*** — *"1만 개의 메서드"* (#46), *"100개의 메서드"* (#46) — **변경 시 비용 메타 어휘**.
+- **`라면 비유`** (말리빈 #46) — *추상화 수준 시각화*. PR #151 (크롱 *반란군 비유*) / PR #146 (두루 *YAGNI 비유*) 결.
+- **`반영커밋 URL 첨부` 패턴** (krrong #46, 14회 중 11회) — *학생 자가 학습 가시화 강화*.
+- **`외부 채널 권유 (Slack DM)`** (말리빈 #46, KwonDae #99·#77) — *PR 코멘트 외부 토론 채널 인정*.
+- **`공동 학습 권유`** ("같이 고민해봐도 좋을 것 같습니다" — KwonDae #77) / **`reviewer 자가 사과 + 자가 부연`** (KwonDae #77, BeokBeok #16, 말리빈 #46).
+- **`요구사항 인용`** (BeokBeok #16, *"프로그래밍 요구사항은 아래와 같은"*) — *블랙잭 미션 명시 요구사항을 reviewer 가 그대로 인용*.
+- **`객체지향 원칙 약어 (SRP/LSP/DIP)` 명시** (BeokBeok #16, KwonDae #77 *DIP*) — **MCP `oh-my-oop` 룰의 *guideline* 필드와 일치**.
+
+### batch 14 신규 reviewer
+
+- @BeokBeok (벅벅) — PR #16. *2023년 3월 코호트 3번째 reviewer* (말리빈/잭슨/벅벅). 요구사항 인용 + SRP/LSP 원칙 명시.
+
+### batch 14 학생/reviewer 메타 케이스
+
+- **krrong 1 년 학생 → reviewer 진화** — *2023년 3월 학생 시기 (PR #32, #46) 의 학습 패턴 (자가 토론 + 양방향 + 반영커밋 URL) → 2024년 3월 reviewer 시기 (PR #148·#151) 의 학생 권유*. **MCP `oh-my-oop` *학습 = 시간 두고 반복* 어휘와 일치**.
+- **`Test Fixture 학습 전파` 케이스** — *PR #99 (KwonDae *Test Fixture 품질* 권고) → PR #77 (KwonDae *Test Fixture 잘 활용* 칭찬)* — **reviewer 의 학습 시드가 다른 학생에게 이어지는 *reviewer 매개 학습 전파*** 케이스.
+
 ## 13. batch 13 신규 안티패턴 + 메타 어휘 (누적)
 
 batch 13 (#98, #95, #99, #23, #26) 에서 새로 발견된 패턴:
@@ -265,6 +311,18 @@ batch 13 (#98, #95, #99, #23, #26) 에서 새로 발견된 패턴:
 - **양 단계 완성 우선**: rhthrhrl0 #39 (2단계, 23) + chws0508 #43 (2단계, 10) + krrong #46 (2단계, 29) — 3개
 - **신규 1단계**: #16 SeongHoonC (21) + #33 2chang5 (35) 또는 #77 murjune (24) — 2개
 - 총 5개
+
+### batch 15 후보 (다음 세션)
+
+- ⚠ *주의: §12 "이미 분석된 PR" 표가 부정확 — #33 2chang5 1단계는 batch 4 에서 이미 분석됨 (`2chang5/33-1단계-블랙잭.md` 존재)*. counts.tsv vs 디렉토리 ls 로 교차 확인 필수.
+- **양 단계 완성 우선**: 
+  - SeongHoonC #44 (베르 2단계, 10) — 적음 스킵 가능, #54 (10) 도 마찬가지
+  - murjune #91 (오둥이 2단계, 13) — 양 단계 완성
+  - 1단계만 분석된 5명 모두 *2단계가 적은 thread* → 양 단계 완성 가치 작음
+- **신규 1단계** (≥10 thread, 미분석):
+  - 2023년 3월 코호트: #9 Choisehyeon (23), #11 ki960213 (19), #13 hyunji1203 (19), #14 DYGames (16), #18 boogi-woogi (16), #19 briandr97 (14), #21 hyemdooly (15), #22 RightHennessy (16), #31 no1msh (19)
+  - 2024년 코호트: #66 JoYehyun99 (18), #71 Hogu59 (10), #72 kimhm0728 (17), #73 jaeyeongjo (17), #76 Yunseok-Nam (18), #80 Junyoung-WON (19), #82 Hevton (19), #106 giovannijunseokim (19), #107 junseo511 (25)
+- **권장 batch 15**: murjune #91 (2단계 완성) + 새 1단계 4개 (예: #9 Choisehyeon + #31 no1msh + #66 JoYehyun99 + #107 junseo511) — 다양성 강화. 또는 *5~9 그룹 짧은 분석* 진입.
 
 ## 8. 중간 그룹 신규 안티패턴 (batch 8·9 누적)
 
