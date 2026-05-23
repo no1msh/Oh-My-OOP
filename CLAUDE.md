@@ -60,9 +60,13 @@
 
 1. **lessons/ 미보강 17개 파일**: 댓글 6-14개의 저-댓글 PR. 적정 길이로 판단되어 보류.
 
-2. **blackjack 미션**: 디렉토리 없음. 향후 분석 가능성만 존재.
+2. **blackjack 미션 분석**: 디렉토리 없음. lotto/racingcar 다음 후보 — sealed class (Hit/Stand/Bust), state machine, 핸드 합산 룰 등 lotto에 없는 패턴 가능.
 
-3. **Priority 3 룰** (코드 AST 필요해 Design 모델만으론 감지 어려움 — 보류):
+3. **lessons 인덱스 런타임 도구**: validate finding을 반환할 때 evidence에 해당 안티패턴의 유사 PR 1-2개 링크를 자동 첨부하는 도구. `lessons/woowacourse-kotlin-lotto/SUMMARY.md` 의 룰 ↔ PR 매핑을 인덱스로 빌드해 룰 ID로 조회.
+
+4. **`oop_review_principles` 도구**: 현재 설계를 조영호 원칙(책임-역할-협력, Tell-Don't-Ask, 일급 컬렉션 등) 별로 점검. 다만 기존 validate 룰의 `guideline` 필드와 중복 위험 — *원칙 메타데이터*로만 그룹핑할지, 별도 inspector로 만들지 검토 필요.
+
+5. **Priority 3 룰** (코드 AST 필요해 Design 모델만으론 감지 어려움 — 보류):
    - `enum-ordinal-dependency`
    - `null-assertion-misuse`
    - `runCatching-on-non-input`

@@ -92,6 +92,22 @@
 
 전체 141 PR 분석 자료 정상 깊이로 정리 완료. 남은 17개 짧은 파일은 모두 댓글 6-14개의 저-댓글 PR로 적정 길이.
 
+## MCP에 반영된 lotto 안티패턴 (2026-05-23)
+
+이 코퍼스에서 도출한 안티패턴 중 5개가 oh-my-oop MCP 서버의 validate 룰로 코드화됨. 룰의 evidence/remedy에는 아래 PR의 *대표 인용*이 발췌되어 들어가 있다.
+
+| 신규 룰 ID | 인용 PR | 핵심 통찰 |
+|---|---|---|
+| `empty-object-external-fill` | [#14](Choisehyeon/14-1단계-로또.md) @malibinYun | "빈 껍데기를 만들어서 외부에서 값을 채우지 말 것." 도메인 객체는 생성 시점에 invariant 충족. |
+| `collection-wrapper-without-behavior` | [#144](jiyuneel/144-2단계-로또.md) @krrong | 일급 컬렉션이 *행동* 없이 `toString` 오버라이드 용도면 만들지 않는 것도 좋은 답. |
+| `primitive-wrapper-without-invariant` | [#58](junjange/58-1단계-로또.md) @junjange, [#77](hxeyexn/77-1단계-로또.md) @hxeyexn | `init`은 자기 invariant, factory는 입력 변환 + 생성 결정. invariant 없는 wrapper는 원시값과 동일. |
+| `strategy-default-param-pollution` | [#144](jiyuneel/144-2단계-로또.md) @krrong | 공통 인터페이스 = 공통 시그니처. 분기 인자(`manualNumbers`)는 생성자로 끌어올려야 호출 컨텍스트가 분리됨. |
+| `function-decomposition-excess` | lotto 일반 (@krrong 류 코멘트 다수) | 함수를 *분리*하는 것이지 *분해*하는 것이 아니다. 1-2줄짜리 private 헬퍼 남발은 가독성 저하. |
+
+룰을 추가하면서 함께 도입된 트레이드오프 heuristic 4종: `value_object_shape`, `strategy_or_policy`, `error_handling`, `collection_shape` (총 8개 typed heuristic + `free_form`).
+
+상세 룰 ↔ 안티패턴 매핑은 `../../MCP_STRUCTURE.md` §3 참조.
+
 ## 캐시 위치
 
 `/tmp/oop-lessons-cache-lotto/`:

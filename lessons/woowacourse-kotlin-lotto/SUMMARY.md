@@ -346,3 +346,24 @@ lotto PR: [#85](kkosang/85-2단계-로또.md), [#118](wondroid-world/118-1단계
 - **수치 비교:** racingcar (133 PR, 77 reviewees) → lotto (141 PR, 71 reviewees). 도메인 깊이 +.
 
 이 코퍼스는 lotto 도메인 (금융 + 통계 + 등수)에서의 OOP 학습 곡선을 담는다. racingcar에서 배운 패턴을 lotto에서 *어떻게 재적용*하는지, *새 도메인 (Money, Rank)*에서 어떻게 *원시 강박을 탈출*하는지, *2단계 수동 로또*에서 *Strategy 패턴이 어떻게 자연스럽게 등장*하는지의 흐름이 보인다.
+
+---
+
+## oh-my-oop MCP 룰로 코드화된 lotto 안티패턴 (2026-05-23)
+
+이 코퍼스에서 도출한 안티패턴 중 5개를 MCP validate 룰로 추가, 함께 트레이드오프 heuristic 4종을 도입.
+
+**신규 validate 룰 5개** (총 16개):
+- `empty-object-external-fill` — PR [#14](Choisehyeon/14-1단계-로또.md) @malibinYun
+- `collection-wrapper-without-behavior` — PR [#144](jiyuneel/144-2단계-로또.md) @krrong
+- `primitive-wrapper-without-invariant` — PR [#58](junjange/58-1단계-로또.md) @junjange, [#77](hxeyexn/77-1단계-로또.md) @hxeyexn
+- `strategy-default-param-pollution` — PR [#144](jiyuneel/144-2단계-로또.md) @krrong
+- `function-decomposition-excess` — lotto 일반 (@krrong 류 코멘트)
+
+**신규 트레이드오프 heuristic 4종** (typed 8개 + `free_form` = 총 9종):
+- `value_object_shape` — value class vs data class vs class
+- `strategy_or_policy` — Strategy 인터페이스 vs Policy/Lambda
+- `error_handling` — exception vs Result/sealed class
+- `collection_shape` — 일급 컬렉션 vs `Map<K,V>` 노출 vs DTO
+
+룰 evidence/remedy에는 위 PR의 *대표 인용*이 발췌되어 있어, MCP가 사용자 설계를 검증할 때 lotto 코퍼스의 학습 결과가 직접 작동한다. 상세 매핑은 `../../MCP_STRUCTURE.md` §3, `PROGRESS.md` "MCP에 반영된 lotto 안티패턴" 섹션 참조.
