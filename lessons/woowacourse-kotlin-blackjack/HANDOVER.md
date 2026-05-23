@@ -1,33 +1,37 @@
-# kotlin-blackjack OOP 분석 — 인계 (≥30 심각 그룹 거의 완료 시점)
+# kotlin-blackjack OOP 분석 — 인계 (중간 그룹 진입 후 batch 9 완료 시점)
 
-> **현재 상태 (2026-05-23 세션 N+1 기준):** 심각 그룹 (≥30 스레드) **32개 중 30개 완료**. 남은 2개(PR #124, #108) 처리 후 ≥10~29 중간 그룹(94개) 진입.
+> **현재 상태 (2026-05-23 세션 N+2 기준):** ≥30 심각 그룹 **32/32 완료** + ≥10~29 중간 그룹 진입 + **batch 9 까지 완료 (10개 PR)**. 동일 리뷰이 1단계→2단계 순차 처리 원칙으로 *10개 reviewees의 양 단계 모두 분석*.
 
 ---
 
 ## 1. 진행 현황
 
-### 완료 (≥30 심각 그룹 30/32)
+### 완료 (≥30 심각 그룹 32/32 + 중간 그룹 batch 8·9)
 
-`git log --oneline` 으로 6 배치 commit 확인:
+`git log --oneline` 으로 9 배치 + 2 commit 확인:
 
-| Batch | Commit | PR 목록 |
-|---|---|---|
-| 1 | `99a62c6` | #78, #63, #65, #123, #125 |
-| 2 | `149b639` | #112, #28, #79, #128, #135 |
-| 3 | `00f0c06` | #114, #92, #29, #24, #116 |
-| 4 | `47531b2` | #10, #33, #119, #17, #81 |
-| 5 | `bba52ec` | #34, #25, #111, #8, #61 |
-| 6 | `5bcd8a2` | #20, #120, #64, #110, #51 |
+| Batch | Commit | PR 목록 | 그룹 |
+|---|---|---|---|
+| 1 | `99a62c6` | #78, #63, #65, #123, #125 | ≥30 |
+| 2 | `149b639` | #112, #28, #79, #128, #135 | ≥30 |
+| 3 | `00f0c06` | #114, #92, #29, #24, #116 | ≥30 |
+| 4 | `47531b2` | #10, #33, #119, #17, #81 | ≥30 |
+| 5 | `bba52ec` | #34, #25, #111, #8, #61 | ≥30 |
+| 6 | `5bcd8a2` | #20, #120, #64, #110, #51 | ≥30 |
+| 7 | `ae98945` | #124, #108 | ≥30 마무리 |
+| 8 | `3bcea6d` | #152, #133, #131, #132, #136 | 중간 (≥10~29, 동일 리뷰이 1→2단계) |
+| 9 | `108c118` | #88, #85, #90, #93, #103 | 중간 (동일 리뷰이 2단계) |
 
-reviewee 디렉토리 27개 + HANDOVER. (ijh1298·jinuemong·re4rk·tmdgh1592는 1단계+2단계 둘 다.)
+reviewee 디렉토리 32개 + HANDOVER. **양 단계 모두 분석된 reviewees (10명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn (총 14명).
 
 ### 남은 작업
 
 | 그룹 | PR 수 | 다음 작업 |
 |---|---|---|
-| ≥30 스레드 | **2개** (#124 wondroid-world, #108 Leeyerin0210) | 첫 배치로 마무리 |
-| ≥10~29 | 94개 | 후속 세션들 (대량) |
-| 5~9 | 14개 | 짧은 분석 적정 |
+| ≥30 스레드 | **0개** | 완료 ✓ |
+| ≥10~29 — 동일 리뷰이 2단계 미분석 | **9개** | 다음 배치 우선 (#41 pingu244, #49 inseonyun, #53 whk06061, #58 otter66, #137 HamBeomJoon, #146 yrsel, #147 donghyun81, #148 etama123, #151 jerry8282) |
+| ≥10~29 — 새 1단계/2단계 reviewees | ~75개 | 후속 |
+| 5~9 | 14개 | 짧은 분석 |
 
 > ⚠ **`/tmp/oop-lessons-cache-blackjack/`은 휘발성**. 다음 세션 시작 시 `ls /tmp/oop-lessons-cache-blackjack/` 확인. 캐시 없으면 §6 절차 (HANDOVER 원본) 재실행. 단 *각 PR 코멘트는 `/tmp/pr<N>_full.txt`에 즉시 dump* 가능 (gh CLI).
 
@@ -149,4 +153,46 @@ PR #128/#135 (ijh1298), #111 (oungsi2000), #110 (hwannow), #120 (yrsel), #29 (tm
 
 ---
 
-**최근 commit (세션 N 6 배치):** `99a62c6` ~ `5bcd8a2`. `git push`는 안 함 (HANDOVER 원본 정책 유지).
+**최근 commit (세션 N+2 batch 7~9, 12 PR 추가):** `ae98945` (≥30 마무리), `3bcea6d` (중간 batch 8 — 동일 리뷰이 1→2단계), `108c118` (중간 batch 9 — 동일 리뷰이 2단계). `git push` 는 안 함 (HANDOVER 원본 정책 유지).
+
+## 8. 중간 그룹 신규 안티패턴 (batch 8·9 누적)
+
+≥10~29 그룹의 *2단계 특수 패턴* (베팅/수익률/블랙잭 1.5배):
+
+| 패턴 | 등장 PR 수 (batch 8·9) | MCP 룰 후보 |
+|---|---|---|
+| **`Money 가변 + operator plus Unit 반환`** = 가변 + 연산자 오버로딩 상성 | 3+ (#133·#132·#90) | ⭐⭐ — Kotlin 어휘 |
+| **3 변수 제약 부산물 인공 객체** (Items / GameInformation / BetStatus / BlackJackPair / UserInfo) | 5+ (#133·#88·#132·#136·#93) | ⭐⭐ |
+| **수익률 계산 책임 위치 토론** (Player/Participant vs Result 객체) | 모든 2단계 PR | (트레이드오프 — 룰화 어려움) |
+| **`-0.0` Double IEEE 754 함정 우회** | 1 (#131) | ⭐ — 도메인 특수 |
+| **`Bust.earningRate` Dead code** (sealed 추상 메서드 통일 부작용) | 1+ (#93) | ⭐ |
+| **`sealed without differentiation`** (멤버 별 데이터 차이 없는 sealed) | 1 (#93) | ⭐⭐ — Kotlin 어휘 |
+| **`view-as-raw-input-converter`** (Controller에서 raw String → ActionType 변환) | 2 (#132·#90) | ⭐⭐ |
+| **`view-by-stage-split`** (View 를 단계별 분리: SettingView/ProgressView) | 2 (#88·#131) | ⭐ |
+| **`bidirectional-dependency`** (부모-자식 양방향 의존) | 1 (#93) | ⭐ |
+| **`let-run-elvis-pitfall`** (Kotlin scope function null 함정) | 1 (#93) | ⭐ — Kotlin 한정 |
+| **State 패턴 정공 vs interface vs enum 트레이드오프** | 모든 2단계 PR | (도메인 정합 룰) |
+| **`action-and-state-enum-conflation`** (HIT/STAND enum 에 Bust 흡수) | 1 (#90) | ⭐ |
+
+### 신규 도메인 특수 (batch 8·9)
+
+1. **블랙잭 1.5배 분기**: `BlackjackWin` 별도 결과 멤버 vs *Win + isBlackjack 분기* — 트레이드오프.
+2. **딜러 ≠ 플레이어 도메인 차이** = *Dealer 베팅 안 함*. 명시적 멤버 차이로 표현.
+3. **`Card private constructor + named factory`** (PR #133, #93, #136 정공) vs *invoke 함정* (PR #108 1단계).
+4. **State 객체 = `compareTo(other: State): GameResult`** 다형성 (PR #93·#136·#152) vs *Judge 정적 헬퍼 + difference 변환* (PR #90).
+
+## 9. 다음 세션 진입 순서
+
+1. `ls /tmp/oop-lessons-cache-blackjack/` — 캐시 확인.
+2. 동일 리뷰이 2단계 미분석 9개 우선 (위 §1 표). 배치 5개씩:
+   - **batch 10**: #41 pingu244, #49 inseonyun, #53 whk06061, #58 otter66, #137 HamBeomJoon
+   - **batch 11**: #146 yrsel, #147 donghyun81, #148 etama123, #151 jerry8282 + 1단계 미분석 reviewee 1개
+3. 그 뒤 새 1단계/2단계 reviewees (~75개) 진입.
+4. *각 배치마다 commit, push 안 함*.
+
+### 분량 휴리스틱 (batch 8·9 데이터)
+
+- 학생 자가 토론 풍부 + State 패턴: **1100~1400줄** (#152, #133, #93, #132, #136)
+- 학생 자가 답변 + value class 등 Kotlin 어휘 풍부: **1100~1300줄** (#90)
+- 표준 + 깊은 토론: **800~1000줄** (#85, #131)
+- 칭찬 위주 + 학생 100% 후속 반영: **400~600줄** (#88, #103)
