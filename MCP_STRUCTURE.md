@@ -158,36 +158,16 @@ return errorResult((e as Error).message);
 
 ## 5. 추가 룰 후보 (lotto에서 새로 발견)
 
-다음 룰들은 **현재 존재하지 않으며**, lotto 데이터에서 빈번하게 본 안티패턴:
+### ✅ 추가 완료 (2026-05-23, 세션 2)
+1. **`empty-object-external-fill`** — InformationHolder + knowing 0 + doing이 모두 mutation 동사 (PR #14 @malibinYun)
+2. **`collection-wrapper-without-behavior`** — Structurer + 단일 컬렉션 knowing + pass-through doing (PR #144 @krrong)
+3. **`primitive-wrapper-without-invariant`** — 값 wrapper 명명 + 단일 원시 knowing + invariant 의도 없음 (PR #58 @junjange, #77 @hxeyexn)
+4. **`strategy-default-param-pollution`** — 같은 전략 suffix 그룹의 knowing 비대칭 (PR #144 @krrong)
+5. **`function-decomposition-excess`** — doing ≥4개 모두 짧은 동사 + 도메인 명사 부재 (lotto 일반 가르침)
 
-### Priority 1 (즉시 추가 권장)
-1. **`empty-object-external-fill`**
-   - 패턴: `val x = WinningResult(); lottos.forEach { x.add(rank) }`
-   - 감지: knowing 책임은 없는데 doing 책임이 *add/append/set* 류로만 구성
-   - remedy: "완성 객체 반환 (init에서 일괄 채우기)" / "Builder로 명시화" / "현 상태 유지"
+→ 총 16개 룰 (기존 15 + 신규 1) + 5개 더 = **20개**.
 
-2. **`collection-wrapper-without-behavior`**
-   - 패턴: `class Lottos(val list: List<Lotto>)` 만 있고 메서드 없음
-   - 감지: knowing이 1개 컬렉션 + doing이 0~1개 (toString만)
-   - remedy: "도메인 행위 부여" / "List<T> 직접 사용 + 일급 컬렉션 폐기" / "단순 위임만 노출"
-
-3. **`primitive-wrapper-without-invariant`**
-   - 패턴: `class LottoNumber(val n: Int)` init 검증 없음
-   - 감지: 클래스명에 *Number/Money/Count/Amount/Price* + knowing 1개 원시 + init 검증 의도 없음
-   - remedy: "init require 추가" / "value class로 전환" / "wrapper 제거"
-
-### Priority 2 (검토 후 추가)
-4. **`strategy-default-param-pollution`**
-   - 패턴: `interface LottoGenerator { fun generate(count: Int, manual: List<List<Int>> = emptyList()) }`
-   - 감지: 인터페이스 메서드의 default param이 일부 구현체에만 유효 — 구조 분석 필요
-   - lotto PR #131, #144 동일 안티
-
-5. **`function-decomposition-excess`** (vs `function-not-object`와 다름)
-   - 패턴: 한 가지 일(`WinningDiscriminator` 초기화)을 6+ 함수로 쪼개기
-   - 감지: doing 책임이 *모두 short verb*로 구성 + 도메인 명사 부재
-   - krrong 명언: "함수를 *분리*하는 것이지 *분해*하는 것이 아닙니다"
-
-### Priority 3 (코드 분석 필요해 룰화 어려움)
+### Priority 3 (코드 분석 필요해 룰화 어려움 — 보류)
 - `enum-ordinal-dependency` — Design 모델만으로는 감지 어려움 (코드 AST 필요)
 - `null-assertion-misuse` — 동일
 - `runCatching-on-non-input` — 동일
@@ -196,15 +176,19 @@ return errorResult((e as Error).message);
 
 ## 6. 추가 트레이드오프 케이스 (`tradeoff/heuristics/`)
 
-lotto 데이터에서 자주 나오는 결정 지점 — 새 heuristic 파일로 추가 가능:
-
-| 케이스 | 위치 권장 | 기반 PR |
+### ✅ 추가 완료 (2026-05-23, 세션 2) — `TradeoffQuestion` 9종
+| 케이스 | 위치 | question type |
 |---|---|---|
-| `data class vs value class` | `heuristics/valueObjectShape.ts` | #8, #40, #49, #64, #75, #87, #131 |
-| `Strategy interface vs enum policy` | `heuristics/strategyOrPolicy.ts` | #131, #144, #147 |
-| `runCatching vs null+while` | `heuristics/errorHandling.ts` | #5, #36, #50, #90 |
-| `검증 위치 (View + Domain 모두 vs 단일)` | 이미 `validationLocation.ts` 룰에 있음 | #87, #21 |
-| `일급 컬렉션 채택 여부` | `heuristics/collectionShape.ts` | #80, #144, #119 |
+| `data class vs value class` | `heuristics/valueObjectShape.ts` | `value_object_shape` |
+| `Strategy interface vs enum policy` | `heuristics/strategyOrPolicy.ts` | `strategy_or_policy` |
+| `runCatching vs null+while` | `heuristics/errorHandling.ts` | `error_handling` |
+| `일급 컬렉션 채택 여부` | `heuristics/collectionShape.ts` | `collection_shape` |
+
+각 4개 대안 + 도메인 어휘 pros/cons + 조영호 렌즈 (cohesion/coupling/testability) 첨부.
+
+기존 5종은 그대로: `responsibility_split`, `class_split`, `collaboration_shape`, `stereotype_choice`, `free_form`.
+
+`검증 위치 (View + Domain 모두 vs 단일)`은 이미 `validationLocation.ts` 룰로 다룸.
 
 ---
 

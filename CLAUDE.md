@@ -9,10 +9,11 @@
 ### MCP 소스 구조가 궁금하면
 **→ `MCP_STRUCTURE.md` 먼저 읽기.**
 - 디렉토리 구조 (src/tools, src/validate, src/tradeoff 등)
-- 기존 15개 룰 ↔ lotto 안티패턴 매핑
+- 현재 20개 룰 ↔ lotto 안티패턴 매핑
 - 신규 룰 추가 체크리스트
-- 추가 룰 후보 (Priority 1/2/3)
+- 추가 룰 후보 (Priority 3 — 코드 AST 필요해 보류)
 - 핵심 계약 (`assertHasMultipleRemedies` 등)
+- 트레이드오프 9종 (`TradeoffQuestion`)
 
 소스를 처음부터 정찰하지 말고 이 문서를 정독한 뒤 필요한 파일만 부분 읽기.
 
@@ -57,23 +58,18 @@
 
 ## 알려진 추가 작업 (대기 중)
 
-1. **신규 룰 후보 4개** (MCP_STRUCTURE.md §5):
-   - `empty-object-external-fill` (Priority 1)
-   - `collection-wrapper-without-behavior` (Priority 1)
-   - `primitive-wrapper-without-invariant` (Priority 1)
-   - `strategy-default-param-pollution` (Priority 2)
-   - `function-decomposition-excess` (Priority 2)
+1. **lessons/ 미보강 17개 파일**: 댓글 6-14개의 저-댓글 PR. 적정 길이로 판단되어 보류.
 
-2. **트레이드오프 케이스 라이브러리 확장** (MCP_STRUCTURE.md §6):
-   - data class vs value class
-   - Strategy interface vs enum policy
-   - runCatching vs null+while
-   - 일급 컬렉션 채택 여부
+2. **blackjack 미션**: 디렉토리 없음. 향후 분석 가능성만 존재.
 
-3. **lessons/ 미보강 17개 파일**: 댓글 6-14개의 저-댓글 PR. 적정 길이로 판단되어 보류.
-
-4. **blackjack 미션**: 디렉토리 없음. 향후 분석 가능성만 존재.
+3. **Priority 3 룰** (코드 AST 필요해 Design 모델만으론 감지 어려움 — 보류):
+   - `enum-ordinal-dependency`
+   - `null-assertion-misuse`
+   - `runCatching-on-non-input`
 
 ---
 
-**우선순위 추천:** §3 신규 룰 1개를 PR-ready 수준까지 구현 (테스트 포함) → 패턴 확립 후 나머지.
+**최근 완료 (2026-05-23, 세션 1-2):**
+- 신규 validate 룰 5개 — `empty-object-external-fill`, `collection-wrapper-without-behavior`, `primitive-wrapper-without-invariant`, `strategy-default-param-pollution`, `function-decomposition-excess`
+- 신규 tradeoff heuristic 4개 — `value_object_shape`, `strategy_or_policy`, `error_handling`, `collection_shape`
+- 룰 16개 + 트레이드오프 9종.
