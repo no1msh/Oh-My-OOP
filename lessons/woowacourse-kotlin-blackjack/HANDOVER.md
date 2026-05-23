@@ -28,8 +28,9 @@
 | 14 | `a0fbf02` | #39, #43, #46, #16, #77 | batch 13 reviewees (rhthrhrl0/chws0508) 2단계 + krrong 2단계 완성 (양 단계 28명) + 새 1단계 reviewees (SeongHoonC, murjune) + 신규 reviewer BeokBeok |
 | 15 | `aa9776e` | #91, #9, #31, #66, #107 | murjune 2단계 완성 (양 단계 29명) + 새 1단계 reviewees 4명 (Choisehyeon/no1msh/JoYehyun99/junseo511). **메타 케이스: no1msh = MCP `oh-my-oop` 저자 (반달) 학생 시기 PR** |
 | 16 | `6dd65c5` | #145, #11, #13, #76, #82 | junseo511 2단계 완성 (양 단계 30명) + 새 1단계 reviewees 4명 (ki960213/hyunji1203/Yunseok-Nam/Hevton). **2023년 3월 코호트 6 PR + 2024 코호트 풍부** |
+| 17 | `cce33fd` | #86, #100, #22, #72, #80 | Yunseok-Nam + Hevton 2단계 완성 (양 단계 32명) + 새 1단계 reviewees 3명 (RightHennessy/kimhm0728/Junyoung-WON). **신규 reviewer 2명 (galcyurio, ghojeong) → 누적 11명** |
 
-reviewee 디렉토리 46개 (양 단계 완성 30명 + 1단계만 16명) + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
+reviewee 디렉토리 49개 (양 단계 완성 32명 + 1단계만 17명) + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
 
 **reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95 (racingcar 인용 reviewer), @KwonDae — *총 8 reviewer*.
 
@@ -198,6 +199,61 @@ batch 10·11 (#41, #49, #53, #58, #137, #146, #147, #148, #151) 에서 새로 �
 - @namjackson (잭슨): #41 (핑구), #53 (베리) — *학생 자가 학습 메타 질문 + 트레이드오프 명시*
 - @lee-ji-hoon (지훈) [신규]: #137 (미플) — *원시값 포장 + onXX 콜백 + 어휘 양방향 학습*
 - @krrong (크롱) [신규]: #148 (타마), #151 (제리) — *역할 vs 상태 + 추상화 확장 (참가자 vs 참가자) + 반란군 비유*
+
+## 17. batch 17 신규 안티패턴 + 메타 어휘 (누적)
+
+batch 17 (#86, #100, #22, #72, #80) 에서 새로 발견된 패턴:
+
+| 패턴 | 등장 PR 수 | MCP 룰 후보 |
+|---|---|---|
+| **`redundant-validation-on-type-constraint`** (enum 제약 + 추가 검증 = 중복) | 1 (#86) | ⭐⭐ |
+| **`redundant-factory-with-strategy-parameter`** (Card.from(provider) = 중복) | 1 (#86) | ⭐ |
+| **`companion-object-method-locus`** (팩토리 + 도우미만, 모든 메서드 강제 X) | 1 (#86) | ⭐ |
+| **`personal-metaphor-without-shared-vocabulary`** (지갑 안 신분증) | 1 (#100) | ⭐⭐ |
+| **`mutable-state-open-violation`** (open var + OCP 위반) | 1 (#100) | ⭐⭐ |
+| **`pseudo-domain-controller-layer`** (Game = 통신 매개체) | 1 (#100) | ⭐⭐ |
+| **`external-naming-search-tool`** (grep.app 활용) | 1 (#100) | ⭐ |
+| **`dependency-direction-clarification`** (UI→Domain OK / Domain→UI 문제) | 1 (#22) | ⭐⭐⭐ |
+| **`static-mutable-collection-unsafe`** (ALL_CARDS = 전역 + remove/add) | 1 (#22) | ⭐⭐ |
+| **`test-3-properties-clarity-completeness-conciseness`** (Google Testing Blog) | 1 (#22) | ⭐⭐ |
+| **`data-structure-tool-knowledge`** (LinkedList pop = Kotlin 자료구조) | 1 (#22) | ⭐ |
+| **`kotlin-vocabulary-misconception`** (enum 내 companion object 가능) | 1 (#22) | ⭐ |
+| **`constant-shared-vs-local`** (한 곳 = private / 여러 곳 = public) | 1 (#22) | ⭐ |
+| **`controller-classification-criteria`** (view 의존 + 테스트 가능 2 기준) | 1 (#72) | ⭐⭐⭐ |
+| **`caching-decision-by-data-scale`** (수천 = 캐싱 / 수백 = 최신값) | 1 (#72) | ⭐⭐ |
+| **`jvm-type-erase-firstclass-key`** (`Map<List<Card>, Int>` Key 일급 컬렉션) | 1 (#72) | ⭐⭐ |
+| **`cache-key-smaller-than-value`** (Key < Value 크기 원칙) | 1 (#72) | ⭐ |
+| **`forward-compatible-delegation`** (로직 없는 위임 = 향후 유지보수 가치) | 1 (#72) | ⭐⭐ |
+| **`value-vs-behavior-class-distinction`** (data class vs 일반 class) | 1 (#72) | ⭐⭐ |
+| **`package-entry-point-classification`** (각 패키지 대표 객체) | 1 (#72) | ⭐⭐ |
+| **`dto-vs-model-classification`** (DTO = 데이터 전달 + 테스트 X) | 1 (#72) | ⭐⭐ |
+| **`domain-vocabulary-vs-general-noun`** (HandCards 도메인 vs Cards 일반) | 1 (#72) | ⭐⭐ |
+| **`fold-with-label-return`** (Kotlin fold + return@label) | 1 (#72) | ⭐ |
+| **`team-convention-documentation`** (팀 컨벤션 + 문서화 강조) | 1 (#72) | ⭐ |
+| **`foreach-repeat-as-side-effect-signal`** (Unit 반환 + 변경) | 1 (#72) | ⭐⭐ |
+| **`awkward-feeling-signal`** (어색함 = 코드 시그널) | 1 (#72) | ⭐ |
+| **`callback-naming-view-coupling`** (printX/showX = View 동사) | 1 (#80) | ⭐⭐⭐ |
+| **`unnecessary-abstraction-without-polymorphism`** (다형성 X = 추상화 X) | 1 (#80) | ⭐⭐ |
+| **`util-package-definition`** (전역 + 비즈니스 X + 문자열/랜덤/날짜) | 1 (#80) | ⭐⭐ |
+| **`multi-source-learning-integration`** (수업 + reviewer + 자가 학습 통합) | 다수 (#80·#82·#145·#107·#46·#91·#100) | ⭐⭐ |
+
+### batch 17 메타 어휘 (MCP `oh-my-oop` 핵심 가치와 일치)
+
+- **`11 reviewer 메타 어휘 완전 확인`** — galcyurio (#22) *"개방 폐쇄 원칙을 잘 지켰다고 생각해요 :+1:"* / *"domain에서 ui를 의존하는 반대의 경우는 문제"* + ghojeong (#72) *"결국 정답은 없습니다"* / *"개발팀마다 모두 다릅니다. 중요한 것은 팀 전체가 납득할 수 있는 컨벤션을 만들고 문서화하는 일입니다"* — **새 reviewer 2명 모두 *MCP 핵심 가치 어휘* 사용**.
+- **`사람 시뮬레이션 비유` (ghojeong #72)** — *"해당 역할을 컴퓨터가 아니라 사람에게 시키려고 했을 때, 사람이 한명 더 필요한가 아니면 같은 사람에게 시킬 수 있을까"* — **MCP `oh-my-oop` *역할-책임-협력 (RDD)* 어휘 강화**.
+- **`Controller 판단 기준 2 가지`** (ghojeong #72) — *view 의존 + 테스트 가능*.
+- **`데이터 규모별 캐싱 결정`** (ghojeong #72) — *수천/수만 = 캐싱 / 수백 = 최신값*.
+- **`팀 컨벤션 + 문서화 강조`** (ghojeong #72) — *팀 다양성 + 컨벤션 문서*.
+- **`학생 자가 *코드 누적 부채* 자가 인정`** (Hevton #100) — *"이미 시작에서부터 너무 많은 설계가 연쇄"*.
+- **`학생 자가 *그저 좋다 생각만* 자가 인정 강화`** (data class private constructor #86, BaseHuman 추상화 #80, Wallet 지갑 #100, Manager 폭증 #145, 팩토리 메서드 #76, 일급 컬렉션 과적용 #39).
+- **`다음 미션 학습 자가 적용`** (Hevton #100 오목 미션 *고차함수 자가 활용*) — **MCP `oh-my-oop` 학습 = 시간 두고 반복 어휘**.
+
+### batch 17 신규 reviewer (2명)
+
+- **@galcyurio** (PR #22 RightHennessy) — 2023년 3월 코호트 4번째. *OCP/OOP 원칙 명시 + Google Testing Blog 외부 자료 + UI/Domain 의존 방향 메타*.
+- **@ghojeong (파이로)** (PR #72 kimhm0728) — 2024 코호트 신규. *Controller 판단 기준 2가지 + 사람 시뮬레이션 비유 + 데이터 규모별 캐싱 + 팀 컨벤션 문서화 + 디미터 법칙 ACM 논문 인용*.
+
+**누적 reviewer 11명**: 말리빈/잭슨/두루/페로로/지훈/크롱/vagabond95/BeokBeok/KwonDae/galcyurio/ghojeong.
 
 ## 16. batch 16 신규 안티패턴 + 메타 어휘 (누적)
 
@@ -455,6 +511,35 @@ batch 13 (#98, #95, #99, #23, #26) 에서 새로 발견된 패턴:
   - 2024년 코호트: #71 Hogu59 (10), #72 kimhm0728 (17), #73 jaeyeongjo (17), #80 Junyoung-WON (19), #106 giovannijunseokim (19)
 - **권장 batch 17**: Yunseok-Nam #86 + Hevton #100 (2단계 완성 2개) + 새 1단계 3개 (예: #22 RightHennessy + #72 kimhm0728 + #80 Junyoung-WON)
 - **또는 최종 정리 진입** — *batch 16 까지 양 단계 30명 + 1단계 16명 = 76 PR 분석 완료 시점으로 *코퍼스 매우 충분***. *최종 정리 (PROGRESS.md/SUMMARY.md/README.md) + MCP 룰화* 우선 검토.
+
+### batch 18 후보 (다음 세션)
+
+- **양 단계 완성 우선** — 1단계만 분석 reviewees 의 2단계 PR 후보:
+  - kimhm0728 #97 (올리브 2단계, 8 thread) — 적음
+  - Junyoung-WON #101 (호두 2단계, 9 thread) — 적음
+  - RightHennessy #48 (링링 2단계, 13 thread) — 가치 있음
+- **신규 1단계** (≥10 thread, 미분석):
+  - 2023년 3월 코호트: #14 DYGames (16), #18 boogi-woogi (16), #19 briandr97 (14), #21 hyemdooly (15)
+  - 2024년 코호트: #71 Hogu59 (10), #73 jaeyeongjo (17), #106 giovannijunseokim (19)
+- **권장 batch 18**: RightHennessy #48 (2단계 완성, 13) + 새 1단계 4개 (예: #14 DYGames + #18 boogi-woogi + #73 jaeyeongjo + #106 giovannijunseokim)
+- **또는 최종 정리 진입** — *batch 17 까지 양 단계 32명 + 1단계 17명 = **81 PR 분석 완료** 시점으로 *코퍼스 매우 충분***. *최종 정리 + MCP 룰화* 우선순위 강화.
+
+### 누적 MCP 룰 후보 100+종 (batch 7-17)
+
+batch 7-17 합계 MCP 룰 후보가 100종을 넘어섰다. ⭐⭐⭐ 강한 후보:
+
+- **`pattern-applied-without-need`** (다수 PR: BaseHuman 추상화 #80, Manager 폭증 #145, Wallet 지갑 #100, 팩토리 메서드 #76, 일급 컬렉션 과적용 #39, Builder 패턴 #31)
+- **`controller-classification-criteria`** (view 의존 + 테스트 가능 2 기준)
+- **`callback-naming-view-coupling`** (printX/showX = View 동사)
+- **`dependency-direction-clarification`** (UI→Domain OK / Domain→UI 문제)
+- **`maintainer-perspective-locator`** (기획자 요구사항 + 동료 개발자 위치)
+- **`manager-class-proliferation`** (Manager 폭증)
+- **`kotlin-function-locus-criteria`** (top-level / object / 내부 함수 기준)
+- **`sealed-class-when-exhaustive`** (누적 8 PR)
+- **`abstract-without-abstract-method`** (누적 5 PR)
+- **`blackjack-rule-fidelity`** (누적 7 PR)
+- **`enum-with-ui-value`** (누적 15+ PR)
+- **`controller-domain-coupling-depth`**
 
 ## 8. 중간 그룹 신규 안티패턴 (batch 8·9 누적)
 
