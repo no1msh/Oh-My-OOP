@@ -76,6 +76,10 @@ export const TradeoffQuestionSchema = z.enum([
   "class_split",
   "collaboration_shape",
   "stereotype_choice",
+  "value_object_shape",
+  "strategy_or_policy",
+  "error_handling",
+  "collection_shape",
   "free_form",
 ]);
 

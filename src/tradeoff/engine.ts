@@ -4,6 +4,10 @@ import type { TradeoffQuestion } from "../domain/schemas.js";
 import { classSplitSeeds } from "./heuristics/classSplit.js";
 import { collaborationShapeSeeds } from "./heuristics/collaborationShape.js";
 import { stereotypeChoiceSeeds } from "./heuristics/stereotypeChoice.js";
+import { valueObjectShapeSeeds } from "./heuristics/valueObjectShape.js";
+import { strategyOrPolicySeeds } from "./heuristics/strategyOrPolicy.js";
+import { errorHandlingSeeds } from "./heuristics/errorHandling.js";
+import { collectionShapeSeeds } from "./heuristics/collectionShape.js";
 import { expansionPromptAlternatives } from "./templates.js";
 
 export interface DesignDelta {
@@ -72,6 +76,26 @@ export function generateAlternatives(
       break;
     case "responsibility_split":
       seeds = classSplitSeeds(findClass(design, context.class_id));
+      break;
+    case "value_object_shape":
+      seeds = valueObjectShapeSeeds(
+        findClass(design, context.class_id)?.name ?? "Value",
+      );
+      break;
+    case "strategy_or_policy":
+      seeds = strategyOrPolicySeeds(
+        findClass(design, context.class_id)?.name ?? "Decision",
+      );
+      break;
+    case "error_handling":
+      seeds = errorHandlingSeeds(
+        findClass(design, context.class_id)?.name ?? "Input",
+      );
+      break;
+    case "collection_shape":
+      seeds = collectionShapeSeeds(
+        findClass(design, context.class_id)?.name ?? "Items",
+      );
       break;
     case "free_form":
       seeds = freeFormSeeds(context);

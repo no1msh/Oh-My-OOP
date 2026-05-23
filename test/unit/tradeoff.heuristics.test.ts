@@ -83,4 +83,59 @@ describe("generateAlternatives engine", () => {
     );
     expect(res.alternatives.length).toBe(5);
   });
+
+  it("value_object_shape returns value class / data class / class+init / primitive options", () => {
+    const res = generateAlternatives(
+      "value_object_shape",
+      { description: "Money를 어떻게 모델링할까" },
+      EMPTY_DESIGN,
+      4,
+    );
+    expect(res.alternatives.length).toBe(4);
+    const labels = res.alternatives.map((a) => a.label);
+    expect(labels).toContain("value class");
+    expect(labels).toContain("data class");
+    for (const a of res.alternatives) {
+      expect(a.tradeoffs.pros.length).toBeGreaterThan(0);
+      expect(a.tradeoffs.cons.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("strategy_or_policy contrasts interface vs enum vs sealed vs functional", () => {
+    const res = generateAlternatives(
+      "strategy_or_policy",
+      { description: "Rank을 어떻게 표현할까" },
+      EMPTY_DESIGN,
+      4,
+    );
+    const labels = res.alternatives.map((a) => a.label);
+    expect(labels.some((l) => l.includes("interface"))).toBe(true);
+    expect(labels.some((l) => l.includes("enum"))).toBe(true);
+  });
+
+  it("error_handling offers runCatching, null+while, Result type, coordinator policy", () => {
+    const res = generateAlternatives(
+      "error_handling",
+      { description: "재입력 흐름을 어떻게 다룰까" },
+      EMPTY_DESIGN,
+      4,
+    );
+    expect(res.alternatives.length).toBe(4);
+    const summaries = res.alternatives.map((a) => a.summary).join("|");
+    expect(summaries).toContain("runCatching");
+    expect(summaries).toContain("while");
+  });
+
+  it("collection_shape contrasts first-class collection vs raw List vs typealias", () => {
+    const res = generateAlternatives(
+      "collection_shape",
+      { description: "List<Lotto>를 그대로 쓸까 Lottos로 감쌀까" },
+      EMPTY_DESIGN,
+      4,
+    );
+    expect(res.alternatives.length).toBe(4);
+    const labels = res.alternatives.map((a) => a.label);
+    expect(labels.some((l) => l.includes("일급 컬렉션"))).toBe(true);
+    expect(labels.some((l) => l.includes("List<T>"))).toBe(true);
+  });
 });
