@@ -23,10 +23,13 @@
 | 9 | `108c118` | #88, #85, #90, #93, #103 | 중간 (동일 리뷰이 2단계) |
 | 10 | `a721ab4` | #41, #49, #53, #58, #137 | 중간 (동일 리뷰이 2단계) |
 | 11 | `91671c3` | #146, #147, #148, #151 | 중간 (동일 리뷰이 2단계 마지막) |
+| 12 | `64b00c9` | #75, #74, #70, #32, #67 | 새 1단계 reviewees (sh1mj1, songpink, chaehyuns, krrong, s6m1n) + 신규 reviewer (vagabond95, KwonDae) |
 
-reviewee 디렉토리 36개 + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
+reviewee 디렉토리 41개 + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
 
-**reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱) — *총 6 reviewer*.
+**reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95 (racingcar 인용 reviewer), @KwonDae — *총 8 reviewer*.
+
+**메타 학습 케이스:** 학생 krrong (PR #32) = PR #148·#151 의 reviewer 본인 — 학생/reviewer 동시 등장.
 
 ### 남은 작업
 
