@@ -621,6 +621,98 @@ describe("validation contract: every finding has >= 2 remedies", () => {
     expect(findings.length).toBe(0);
   });
 
+  it("function-decomposition-excess fires on 4+ short verb-only doings without domain nouns", () => {
+    const d = design({
+      classes: [
+        {
+          id: "wd",
+          name: "WinningDiscriminator",
+          stereotype: "ServiceProvider",
+          responsibilities: {
+            knowing: ["당첨 정보"],
+            doing: ["추출", "조립", "검증", "포맷", "정리"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["function-decomposition-excess"],
+    });
+    expect(findings.length).toBe(1);
+    expect(findings[0]!.severity).toBe("info");
+    expect(findings[0]!.remedies.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("function-decomposition-excess suppressed when doings carry domain nouns", () => {
+    const d = design({
+      classes: [
+        {
+          id: "wd",
+          name: "WinningDiscriminator",
+          stereotype: "ServiceProvider",
+          responsibilities: {
+            knowing: ["당첨 정보"],
+            doing: [
+              "당첨 등수를 계산한다",
+              "보너스 일치 여부를 판정한다",
+              "총 수익률을 계산한다",
+              "결과 요약을 만든다",
+            ],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["function-decomposition-excess"],
+    });
+    expect(findings.length).toBe(0);
+  });
+
+  it("function-decomposition-excess skips Interfacer (adapters legitimately have many short methods)", () => {
+    const d = design({
+      classes: [
+        {
+          id: "ov",
+          name: "OutputView",
+          stereotype: "Interfacer",
+          responsibilities: {
+            knowing: [],
+            doing: ["출력", "표시", "포맷", "줄바꿈", "헤더"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["function-decomposition-excess"],
+    });
+    expect(findings.length).toBe(0);
+  });
+
+  it("function-decomposition-excess skips classes with <4 doings", () => {
+    const d = design({
+      classes: [
+        {
+          id: "a",
+          name: "Tiny",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: [], doing: ["추출", "조립", "검증"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["function-decomposition-excess"],
+    });
+    expect(findings.length).toBe(0);
+  });
+
   it("all rules pass the >=2 remedies contract when triggered", () => {
     const d = design({
       classes: [

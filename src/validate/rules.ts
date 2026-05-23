@@ -23,6 +23,7 @@ import { checkEmptyObjectFill } from "./emptyObjectFill.js";
 import { checkCollectionWrapperWithoutBehavior } from "./collectionWrapper.js";
 import { checkPrimitiveWrapperWithoutInvariant } from "./primitiveWrapper.js";
 import { checkStrategyAsymmetry } from "./strategyAsymmetry.js";
+import { checkFunctionDecompositionExcess } from "./functionDecompositionExcess.js";
 
 export interface RuleThresholds {
   god_object_responsibilities: number;
@@ -62,6 +63,7 @@ export const ALL_RULE_IDS = [
   "collection-wrapper-without-behavior",
   "primitive-wrapper-without-invariant",
   "strategy-default-param-pollution",
+  "function-decomposition-excess",
 ] as const;
 
 export type RuleId = (typeof ALL_RULE_IDS)[number];
@@ -260,6 +262,8 @@ export function validateDesign(design: Design, opts: ValidateOptions = {}): Find
     findings.push(...checkPrimitiveWrapperWithoutInvariant(design));
   if (enabled.has("strategy-default-param-pollution"))
     findings.push(...checkStrategyAsymmetry(design));
+  if (enabled.has("function-decomposition-excess"))
+    findings.push(...checkFunctionDecompositionExcess(design));
 
   const sevMin = opts.severityMin ?? "info";
   return findings.filter((f) => severityAtLeast(f.severity, sevMin));
