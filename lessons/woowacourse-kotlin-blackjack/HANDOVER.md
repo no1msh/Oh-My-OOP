@@ -1,6 +1,6 @@
-# kotlin-blackjack OOP 분석 — 인계 (중간 그룹 진입 후 batch 9 완료 시점)
+# kotlin-blackjack OOP 분석 — 인계 (동일 리뷰이 2단계 완료 시점, batch 11)
 
-> **현재 상태 (2026-05-23 세션 N+2 기준):** ≥30 심각 그룹 **32/32 완료** + ≥10~29 중간 그룹 진입 + **batch 9 까지 완료 (10개 PR)**. 동일 리뷰이 1단계→2단계 순차 처리 원칙으로 *10개 reviewees의 양 단계 모두 분석*.
+> **현재 상태 (2026-05-23 세션 N+3 기준):** ≥30 심각 그룹 **32/32 완료** + ≥10~29 중간 그룹 *동일 리뷰이 1단계+2단계 완성 (총 23 PR 추가)*. **양 단계 모두 분석된 reviewees 18명**. 다음 = 새 reviewees 진입.
 
 ---
 
@@ -21,16 +21,21 @@
 | 7 | `ae98945` | #124, #108 | ≥30 마무리 |
 | 8 | `3bcea6d` | #152, #133, #131, #132, #136 | 중간 (≥10~29, 동일 리뷰이 1→2단계) |
 | 9 | `108c118` | #88, #85, #90, #93, #103 | 중간 (동일 리뷰이 2단계) |
+| 10 | `a721ab4` | #41, #49, #53, #58, #137 | 중간 (동일 리뷰이 2단계) |
+| 11 | `91671c3` | #146, #147, #148, #151 | 중간 (동일 리뷰이 2단계 마지막) |
 
-reviewee 디렉토리 32개 + HANDOVER. **양 단계 모두 분석된 reviewees (10명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn (총 14명).
+reviewee 디렉토리 36개 + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
+
+**reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱) — *총 6 reviewer*.
 
 ### 남은 작업
 
 | 그룹 | PR 수 | 다음 작업 |
 |---|---|---|
 | ≥30 스레드 | **0개** | 완료 ✓ |
-| ≥10~29 — 동일 리뷰이 2단계 미분석 | **9개** | 다음 배치 우선 (#41 pingu244, #49 inseonyun, #53 whk06061, #58 otter66, #137 HamBeomJoon, #146 yrsel, #147 donghyun81, #148 etama123, #151 jerry8282) |
-| ≥10~29 — 새 1단계/2단계 reviewees | ~75개 | 후속 |
+| 동일 리뷰이 2단계 미분석 | **0개** | 완료 ✓ |
+| 새 1단계 reviewees (≥10~29) | ~10-15개 | 다음 우선 (jiyuneel, parkjiminnnn, rosemin928, m6z1, doabletuple, gahyunkim, junseo511, medAndro, cucumber99, tobae-time, devfeijoa 등 — 1단계 미분석 reviewees) |
+| 새 2단계 reviewees | ~60-65개 | 후속 |
 | 5~9 | 14개 | 짧은 분석 |
 
 > ⚠ **`/tmp/oop-lessons-cache-blackjack/`은 휘발성**. 다음 세션 시작 시 `ls /tmp/oop-lessons-cache-blackjack/` 확인. 캐시 없으면 §6 절차 (HANDOVER 원본) 재실행. 단 *각 PR 코멘트는 `/tmp/pr<N>_full.txt`에 즉시 dump* 가능 (gh CLI).
@@ -153,7 +158,56 @@ PR #128/#135 (ijh1298), #111 (oungsi2000), #110 (hwannow), #120 (yrsel), #29 (tm
 
 ---
 
-**최근 commit (세션 N+2 batch 7~9, 12 PR 추가):** `ae98945` (≥30 마무리), `3bcea6d` (중간 batch 8 — 동일 리뷰이 1→2단계), `108c118` (중간 batch 9 — 동일 리뷰이 2단계). `git push` 는 안 함 (HANDOVER 원본 정책 유지).
+**최근 commit (세션 N+3 batch 10·11, 9 PR 추가):** `a721ab4` (batch 10 동일 리뷰이 2단계 5개), `91671c3` (batch 11 동일 리뷰이 2단계 마지막 4개). *전체 batch 7~11 누계: 23 PR 추가 + 2 HANDOVER update*. `git push` 는 안 함 (HANDOVER 원본 정책 유지).
+
+## 10. batch 10·11 신규 안티패턴 (누적)
+
+batch 10·11 (#41, #49, #53, #58, #137, #146, #147, #148, #151) 에서 새로 발견된 패턴:
+
+| 패턴 | 등장 PR 수 | MCP 룰 후보 |
+|---|---|---|
+| **상태 × 참가자 N×M 클래스 폭증** (Initial/Playing/Finished × Dealer/Player) | 1 (#147) | ⭐⭐ — `state-times-actor-class-explosion` |
+| **`Hit + 주체` (DealerHit/PlayerHit/DoubleHit) 폭증** | 1 (#147) | ⭐ |
+| **`Finished is-a Initial` 상속 모순** | 1 (#147) | ⭐ |
+| **`ProfitPlayer / MatchResultProfitPlayerWithXXX` 기능 + 명사 이어붙이기 폭증** | 1 (#147) | ⭐⭐ — `feature-class-naming-explosion` |
+| **typealias vs 클래스 트레이드오프 (3+ 멤버 = 클래스 권고)** | 1 (#146) | ⭐ — `typealias-vs-class` |
+| **방어적 복사 강박 자가 학습 (불변 객체 deepCopy 비용)** | 2 (#137·#148) | ⭐⭐ — `defensive-copy-on-immutable` |
+| **`canHit` vs `isBust` 부울 의미 일관 (True 방향 통일)** | 1 (#151) | ⭐ |
+| **View vs 도메인 검증 학생 자가 토론 깊이 (Multi-platform 함정)** | 2 (#41·#151) | ⭐⭐ — `view-only-validation-cross-ui-fragility` |
+| **역할 vs 상태 자가 학습 (Player=역할, GameResult=상태)** | 1 (#148) | ⭐⭐ — `role-state-conflation` |
+| **참가자 vs 참가자 일반화 (플레이어 vs 플레이어, 딜러 vs 딜러)** | 4 (#148·#151·#49·#132) | ⭐⭐⭐ 메이저 |
+| **`Listener` vs 고차함수 콜백 트레이드오프** | 1 (#148) | ⭐ |
+| **Controller stateless 재사용 vs in-place 변경** | 1 (#151) | ⭐ |
+| **`Map<X, X>` 자료구조 우회 인스턴스 변수 제약** | 1 (#151) | ⭐ |
+| **카지노 6덱 메타포 vs 요구사항 트레이드오프** | 1 (#58) | ⭐ |
+| **`data class + private constructor copy 우회 함정`** | 1 (#58) | ⭐ |
+| **`println` 도메인 X (간접 lambda 도 결합)** | 1 (#137) | ⭐ |
+| **enum + when exhaustive 활용 (else 불필요)** | 다수 (#137·#148·#90 외) | ⭐⭐ |
+| **`onXX` 콜백 어휘 (Inversion of Control)** | 2 (#137·#132) | ⭐⭐ |
+| **반란군 비유 (요구사항 vs 좋은 설계 자유 인정)** | 1 (#151) | (reviewer 어휘) |
+
+### batch 10·11 신규 reviewer
+
+- @namjackson (잭슨): #41 (핑구), #53 (베리) — *학생 자가 학습 메타 질문 + 트레이드오프 명시*
+- @lee-ji-hoon (지훈) [신규]: #137 (미플) — *원시값 포장 + onXX 콜백 + 어휘 양방향 학습*
+- @krrong (크롱) [신규]: #148 (타마), #151 (제리) — *역할 vs 상태 + 추상화 확장 (참가자 vs 참가자) + 반란군 비유*
+
+## 11. 학생 자가 학습 + 메타 토론 모범 패턴 (전체 누적)
+
+- **자가 의문 → reviewer 메타 답변 → 자가 후퇴/결정 명시 + 커밋 SHA 첨부** — *PR #124·#128·#135·#108·#133·#136·#137·#148·#151·#146·#147·#88 등 다수*.
+- **외부 자료 인용 + 코드 적용** — *Effective Kotlin Item 4/14 (#108), 엘레강트 오브젝트 4.2/2.2 (#136), 객체 지향 생활 체조 원칙 (#151), YAGNI 인용 (#146), Racing Car 피드백 (#148), 디미터의 법칙 (#93·#133·#146), Clean Code (#93)*.
+- **양방향 reviewer/학생 토론** — *PR #137 (지훈 자가 인정 어휘 혼란), #151 (크롱 자가 인정 확장성 한계), #133 (말리빈 다각도 시점), #146 (두루 typealias 자가 사용 의견), #147 (페로로 다형성 학습 진행 인정)*.
+
+## 12. 다음 세션 진입 순서 (업데이트)
+
+1. `ls /tmp/oop-lessons-cache-blackjack/` — 캐시 확인.
+2. **새 reviewees 1단계 진입** — *PR 번호 < 108* 중 *threads ≥10 + 1단계* 미분석 PR 추출:
+   - 이미 분석된 PR 번호: #8, #10, #17, #20, #24, #25, #28, #29, #33, #34, #51, #61, #63, #64, #65, #78, #79, #81, #92, #110, #111, #112, #114, #116, #119, #120, #123, #124, #125, #128, #135, #108
+   - 미분석 후보 = #11~#16, #18~#23, #26~#27, #30~#32, #35~#60 (제외: 위), #62, #66~#77, #80, #82~#84, #86~#89 (제외: 위), #91, #93~#107 (제외: 위), #109, #113, #115, #117~#118, #121~#122, #126~#127, #129~#134, #138~#150 (제외: 위), #153~#154 등 (counts.tsv 확인 필요)
+   - 배치 5개씩, 매 배치 commit
+3. **새 2단계 PR** — 1단계 분석 후 자연스럽게 같은 reviewee 의 2단계 진입
+4. **5~9 그룹** — 짧은 분석 (400-600줄) + 다른 배치 와 함께
+5. *최종 정리* — PROGRESS.md, SUMMARY.md, README.md 작성 + MCP 룰화 검토
 
 ## 8. 중간 그룹 신규 안티패턴 (batch 8·9 누적)
 
