@@ -26,8 +26,9 @@
 | 12 | `64b00c9` | #75, #74, #70, #32, #67 | 새 1단계 reviewees (sh1mj1, songpink, chaehyuns, krrong, s6m1n) + 신규 reviewer (vagabond95, KwonDae) |
 | 13 | `8afa82d` | #98, #95, #99, #23, #26 | batch 12 reviewees (chaehyuns/songpink/s6m1n) 2단계 양 단계 완성 + 2023년 3월 코호트 진입 (rhthrhrl0, chws0508) |
 | 14 | `a0fbf02` | #39, #43, #46, #16, #77 | batch 13 reviewees (rhthrhrl0/chws0508) 2단계 + krrong 2단계 완성 (양 단계 28명) + 새 1단계 reviewees (SeongHoonC, murjune) + 신규 reviewer BeokBeok |
+| 15 | `aa9776e` | #91, #9, #31, #66, #107 | murjune 2단계 완성 (양 단계 29명) + 새 1단계 reviewees 4명 (Choisehyeon/no1msh/JoYehyun99/junseo511). **메타 케이스: no1msh = MCP `oh-my-oop` 저자 (반달) 학생 시기 PR** |
 
-reviewee 디렉토리 38개 (양 단계 완성 28명 + 1단계만 10명) + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
+reviewee 디렉토리 42개 (양 단계 완성 29명 + 1단계만 13명) + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
 
 **reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95 (racingcar 인용 reviewer), @KwonDae — *총 8 reviewer*.
 
@@ -197,6 +198,55 @@ batch 10·11 (#41, #49, #53, #58, #137, #146, #147, #148, #151) 에서 새로 �
 - @lee-ji-hoon (지훈) [신규]: #137 (미플) — *원시값 포장 + onXX 콜백 + 어휘 양방향 학습*
 - @krrong (크롱) [신규]: #148 (타마), #151 (제리) — *역할 vs 상태 + 추상화 확장 (참가자 vs 참가자) + 반란군 비유*
 
+## 15. batch 15 신규 안티패턴 + 메타 어휘 (누적)
+
+batch 15 (#91, #9, #31, #66, #107) 에서 새로 발견된 패턴:
+
+| 패턴 | 등장 PR 수 | MCP 룰 후보 |
+|---|---|---|
+| **`uimodel-passive-vs-active-tension`** (UiModel 자립적 vs 데이터 운반자 양가성) | 1 (#91) | ⭐⭐ |
+| **`sealed-class-when-exhaustive`** (학생 자가 정리 강화) | 1 (#91) | ⭐⭐⭐ (누적 #98·#137·#148·#90·#146·#16·#91) |
+| **`runcatching-locus`** (View 입력 + Result 반환 위치) | 1 (#91) | ⭐⭐ |
+| **`error-classification-locus`** (논리적 오류 vs 입력 오류) | 1 (#91) | ⭐⭐ |
+| **`extension-function-domain-misuse`** (확장 함수 외부 발견 어려움) | 1 (#9) | ⭐⭐ |
+| **`builder-call-order-dependency`** (Builder 호출 순서 의존) | 2 (#9·#31) | ⭐⭐ |
+| **`dto-conversion-locus`** (Domain 이 DTO 반환 = 테스트 어려움) | 1 (#31) | ⭐⭐ |
+| **`dealer-extends-player-lsp-violation`** (Dealer is-a Player 의미적 위반) | 2 (#31·#95) | ⭐⭐ |
+| **`unnecessary-builder-pattern`** (YAGNI 위반 + 책임 모호) | 1 (#31) | ⭐ |
+| **`domain-state-duplication`** (동일 상태 다중 객체 보유) | 1 (#31) | ⭐⭐ |
+| **`controller-domain-coupling-depth`** (Controller 도메인 침투 깊이) | 다수 (#31·#46·#77·#91·#107) | ⭐⭐⭐ |
+| **`string-constant-locus`** (에러 메시지 상수화 양가성) | 1 (#31) | ⭐ |
+| **`initial-method-public-leak`** (initial~ public + 최초 1회 기대) | 1 (#66) | ⭐ |
+| **`view-passive-vs-active`** (MVP/MVVM 어휘) | 1 (#107) | ⭐⭐ |
+| **`maintenance-perspective-evaluation`** (유지보수 관점 메타 어휘) | 1 (#107) | ⭐⭐ |
+| **`magic-default-conversion`** (View 가 기본값 → 도메인 어휘 매직 변환) | 1 (#107) | ⭐⭐ |
+| **`concrete-abstract-method-override-impossible`** (abstract 기본 구현 + override X) | 1 (#107) | ⭐ |
+| **`test-name-business-perspective`** (테스트 명 = 비즈니스 의도) | 1 (#107) | ⭐ |
+| **`vagueName 강화 (4 회 동일 PR)`** (setUp/init/sum/calculateSum) | 1 (#66) | ⭐⭐ |
+| **`enum-with-ui-value 반대 시점`** (View 가 enum 변환 자가 결정) | 1 (#9) | (양가성 보강) |
+| **`procedural-method-name` (라면 비유 결)** | 1 (#9) | ⭐ |
+| **`class-without-state` 강화** | 1 (#9) | ⭐⭐ |
+| **`primitive-with-domain-logic` 강화** | 1 (#107) | ⭐⭐ |
+| **`magic-number-in-view`** (`2` 매직 넘버) | 1 (#66) | ⭐ |
+| **`은닉 사라진 자가 인정` (private constructor 망각)** | 1 (#107) | ⭐ |
+
+### batch 15 메타 어휘 (MCP `oh-my-oop` 핵심 가치와 일치)
+
+- **`개인 의견 메타 어휘` 9 reviewer 완전 합류** — KwonDae #91 *"제 개인적인 생각으로는"* — 말리빈/잭슨/두루/페로로/지훈/크롱/vagabond95/BeokBeok/KwonDae **9 reviewer 모두 사용**. **MCP `oh-my-oop` 핵심 가치 일치 강도 최고**.
+- **`유지보수 관점 메타 어휘`** (lee-ji-hoon #107) — *"누군가 유지보수 한다고 생각을 해볼까요?"* — *시간 두고 관점*.
+- **`강의 인용 reviewer 패턴`** (lee-ji-hoon #107) — *"오늘 강의 시간 때 이야기 했던 내용"* — *실시간 학습 연결*.
+- **`reviewer 자가 사과 + 친밀한 어조` 다수** — lee-ji-hoon (학생 이름 *"동전"* 실수 + 밥 약속), KwonDae #91 (*"혼란을 드린거 같아 죄송합니다 🥲"*), KwonDae #77, 말리빈 #46/#23, BeokBeok #16.
+- **`5 단계 핑퐁 토론 + 학생 자가 결정 변경`** (#107 junseo511) — *학생 의도 → reviewer 질문 → 학생 정당화 → reviewer 유지보수 관점 → 자가 후퇴 + 결정 변경*.
+
+### batch 15 신규 reviewer
+
+- 없음 (vagabond95/KwonDae/BeokBeok/lee-ji-hoon 모두 기존). 누적 reviewer 9 명 안정.
+
+### batch 15 학생/reviewer 메타 케이스 강화
+
+- **no1msh = MCP `oh-my-oop` 저자 (반달)** — 2023년 3월 학생 시기 PR #31 분석 = *학생 시기 자가 의문 (DTO 위치 + 상수화) → 1 년 후 MCP 저자 시기 *N 안 + 트레이드오프* 어휘 진화*. **`학생 → 도구 저자` 변형** — PR #46 (krrong *학생 → reviewer*) 결의 *학생 → 도구화* 변형.
+- **`junseo511 학습 가시화 최강 사례`** (#107) — PR 본문 자가 의문 2 + 스크린샷 + 25 thread 중 22 응답 + 5 단계 핑퐁 + 자가 도입 3종 (UserCommand/GameManager/ResultManager). **모든 학습 가시화 매개체 활용**.
+
 ## 14. batch 14 신규 안티패턴 + 메타 어휘 (누적)
 
 batch 14 (#39, #43, #46, #16, #77) 에서 새로 발견된 패턴:
@@ -323,6 +373,16 @@ batch 13 (#98, #95, #99, #23, #26) 에서 새로 발견된 패턴:
   - 2023년 3월 코호트: #9 Choisehyeon (23), #11 ki960213 (19), #13 hyunji1203 (19), #14 DYGames (16), #18 boogi-woogi (16), #19 briandr97 (14), #21 hyemdooly (15), #22 RightHennessy (16), #31 no1msh (19)
   - 2024년 코호트: #66 JoYehyun99 (18), #71 Hogu59 (10), #72 kimhm0728 (17), #73 jaeyeongjo (17), #76 Yunseok-Nam (18), #80 Junyoung-WON (19), #82 Hevton (19), #106 giovannijunseokim (19), #107 junseo511 (25)
 - **권장 batch 15**: murjune #91 (2단계 완성) + 새 1단계 4개 (예: #9 Choisehyeon + #31 no1msh + #66 JoYehyun99 + #107 junseo511) — 다양성 강화. 또는 *5~9 그룹 짧은 분석* 진입.
+
+### batch 16 후보 (다음 세션)
+
+- 양 단계 완성 reviewees 29명 + 1단계만 13명 (Choisehyeon, no1msh, JoYehyun99, junseo511 추가). 1단계만 분석된 reviewees 의 2단계 PR 후보:
+  - Choisehyeon #52 (로피 2단계, 6 thread) — 적음
+  - no1msh #55 (반달 2단계, 5 thread) — 적음
+  - JoYehyun99 #83 (예니 2단계, 5 thread) — 적음
+  - junseo511 #145 (공백 2단계, 17 thread) — 가치 있음
+- **권장 batch 16**: junseo511 #145 (2단계 완성, 17) + 새 1단계 4개 (예: #11 ki960213, #13 hyunji1203, #22 RightHennessy, #76 Yunseok-Nam 또는 #80 Junyoung-WON, #82 Hevton)
+- **또는 5~9 그룹 짧은 분석 진입** — 13 + 14 = 27 PR 분석 완료 시점으로 *코퍼스 충분* — *최종 정리 (PROGRESS.md/SUMMARY.md/README.md) + MCP 룰화* 진입 검토.
 
 ## 8. 중간 그룹 신규 안티패턴 (batch 8·9 누적)
 
