@@ -312,6 +312,88 @@ describe("validation contract: every finding has >= 2 remedies", () => {
     expect((findings[0]!.evidence as { ui_literals: string[] }).ui_literals.length).toBe(1);
   });
 
+  it("empty-object-external-fill fires on Holder with empty knowing + mutation-only doing", () => {
+    const d = design({
+      classes: [
+        {
+          id: "wr",
+          name: "WinningResult",
+          stereotype: "InformationHolder",
+          responsibilities: {
+            knowing: [],
+            doing: ["당첨 등수를 추가한다", "보너스 결과를 누적한다"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, { rules: ["empty-object-external-fill"] });
+    expect(findings.length).toBe(1);
+    expect(findings[0]!.severity).toBe("warn");
+    expect(findings[0]!.remedies.length).toBeGreaterThanOrEqual(2);
+    const ev = findings[0]!.evidence as { mutation_verbs_matched: string[] };
+    expect(ev.mutation_verbs_matched).toContain("추가");
+    expect(ev.mutation_verbs_matched).toContain("누적");
+  });
+
+  it("empty-object-external-fill suppressed when Holder has knowing", () => {
+    const d = design({
+      classes: [
+        {
+          id: "wr",
+          name: "WinningResult",
+          stereotype: "InformationHolder",
+          responsibilities: {
+            knowing: ["등수별 당첨 개수"],
+            doing: ["당첨 등수를 추가한다"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, { rules: ["empty-object-external-fill"] });
+    expect(findings.length).toBe(0);
+  });
+
+  it("empty-object-external-fill suppressed when doing has non-mutation verb", () => {
+    const d = design({
+      classes: [
+        {
+          id: "wr",
+          name: "WinningResult",
+          stereotype: "InformationHolder",
+          responsibilities: {
+            knowing: [],
+            doing: ["당첨 등수를 추가한다", "총 상금을 계산한다"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, { rules: ["empty-object-external-fill"] });
+    expect(findings.length).toBe(0);
+  });
+
+  it("empty-object-external-fill skips non-Holder stereotypes", () => {
+    const d = design({
+      classes: [
+        {
+          id: "c",
+          name: "Coord",
+          stereotype: "Coordinator",
+          responsibilities: { knowing: [], doing: ["작업을 추가한다"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, { rules: ["empty-object-external-fill"] });
+    expect(findings.length).toBe(0);
+  });
+
   it("all rules pass the >=2 remedies contract when triggered", () => {
     const d = design({
       classes: [

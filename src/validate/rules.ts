@@ -19,6 +19,7 @@ import { checkValidationLocation } from "./validationLocation.js";
 import { checkDependencyDirection } from "./dependencyDirection.js";
 import { checkDataSourceDuplication } from "./dataDuplication.js";
 import { checkFunctionNotObject } from "./functionNotObject.js";
+import { checkEmptyObjectFill } from "./emptyObjectFill.js";
 
 export interface RuleThresholds {
   god_object_responsibilities: number;
@@ -54,6 +55,7 @@ export const ALL_RULE_IDS = [
   "dependency-direction",
   "data-source-duplication",
   "function-not-object",
+  "empty-object-external-fill",
 ] as const;
 
 export type RuleId = (typeof ALL_RULE_IDS)[number];
@@ -244,6 +246,8 @@ export function validateDesign(design: Design, opts: ValidateOptions = {}): Find
     );
   if (enabled.has("function-not-object"))
     findings.push(...checkFunctionNotObject(design));
+  if (enabled.has("empty-object-external-fill"))
+    findings.push(...checkEmptyObjectFill(design));
 
   const sevMin = opts.severityMin ?? "info";
   return findings.filter((f) => severityAtLeast(f.severity, sevMin));
