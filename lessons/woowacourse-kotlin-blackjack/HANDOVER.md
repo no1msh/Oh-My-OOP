@@ -29,8 +29,9 @@
 | 15 | `aa9776e` | #91, #9, #31, #66, #107 | murjune 2단계 완성 (양 단계 29명) + 새 1단계 reviewees 4명 (Choisehyeon/no1msh/JoYehyun99/junseo511). **메타 케이스: no1msh = MCP `oh-my-oop` 저자 (반달) 학생 시기 PR** |
 | 16 | `6dd65c5` | #145, #11, #13, #76, #82 | junseo511 2단계 완성 (양 단계 30명) + 새 1단계 reviewees 4명 (ki960213/hyunji1203/Yunseok-Nam/Hevton). **2023년 3월 코호트 6 PR + 2024 코호트 풍부** |
 | 17 | `cce33fd` | #86, #100, #22, #72, #80 | Yunseok-Nam + Hevton 2단계 완성 (양 단계 32명) + 새 1단계 reviewees 3명 (RightHennessy/kimhm0728/Junyoung-WON). **신규 reviewer 2명 (galcyurio, ghojeong) → 누적 11명** |
+| 18 | `93758d1` | #48, #14, #18, #73, #106 | RightHennessy 2단계 완성 (양 단계 33명) + 새 1단계 reviewees 4명 (DYGames/boogi-woogi/jaeyeongjo/giovannijunseokim). **신규 reviewer 1명 (woowahan-leah) → 누적 12명** |
 
-reviewee 디렉토리 49개 (양 단계 완성 32명 + 1단계만 17명) + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
+reviewee 디렉토리 53개 (양 단계 완성 33명 + 1단계만 20명) + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
 
 **reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95 (racingcar 인용 reviewer), @KwonDae — *총 8 reviewer*.
 
@@ -199,6 +200,52 @@ batch 10·11 (#41, #49, #53, #58, #137, #146, #147, #148, #151) 에서 새로 �
 - @namjackson (잭슨): #41 (핑구), #53 (베리) — *학생 자가 학습 메타 질문 + 트레이드오프 명시*
 - @lee-ji-hoon (지훈) [신규]: #137 (미플) — *원시값 포장 + onXX 콜백 + 어휘 양방향 학습*
 - @krrong (크롱) [신규]: #148 (타마), #151 (제리) — *역할 vs 상태 + 추상화 확장 (참가자 vs 참가자) + 반란군 비유*
+
+## 18. batch 18 신규 안티패턴 + 메타 어휘 (누적)
+
+batch 18 (#48, #14, #18, #73, #106) 에서 새로 발견된 패턴:
+
+| 패턴 | 등장 PR 수 | MCP 룰 후보 |
+|---|---|---|
+| **`controller-to-domain-test-enablement`** (god-object 이전 = 테스트 가능성) | 1 (#48) | ⭐⭐ |
+| **`domain-isolation-refactoring-steps`** (UI 분리/private 최소/public 테스트) | 1 (#48) | ⭐⭐⭐ |
+| **`test-only-public-exposure-anti-pattern`** | 1 (#48) | ⭐⭐ |
+| **`cli-vs-gui-assumption-test`** (y/n CLI 한정 → Boolean) | 1 (#14) | ⭐⭐ |
+| **`test-fake-self-test-anti-pattern`** (Fake 자체 테스트 X) | 1 (#14) | ⭐⭐ |
+| **`test-static-import-convention`** (프로덕션과 다른 컨벤션) | 1 (#14) | ⭐ |
+| **`enum-companion-init-order`** (enum 인스턴스 vs companion 시점) | 1 (#18) | ⭐⭐ |
+| **`student-honest-no-deep-thought`** (학생 자가 *깊은 생각 없었음* 솔직 인정) | 1 (#18) | ⭐ |
+| **`offline-code-review-suggestion`** | 1 (#18) | ⭐ |
+| **`time-boxed-self-learning`** (*오늘까지만 한번 더*) | 1 (#18) | ⭐ |
+| **`is-operator-polymorphism-avoidance`** (is = 절차지향 시그널) | 1 (#73) | ⭐⭐⭐ |
+| **`design-pattern-without-effect`** (패턴 도입 후 의도 효과 X) | 1 (#73) | ⭐⭐ |
+| **`reviewer-emphasis-rationale-meta`** (자가 강조 이유 명시) | 1 (#73) | ⭐⭐ |
+| **`reviewer-don't-be-swayed`** (휘둘리지 마세요) | 1 (#73) | ⭐⭐⭐ |
+| **`consecutive-if-as-else-violation`** (연속 if = else 위반) | 1 (#73) | ⭐⭐ |
+| **`reviewer-power-restraint-meta`** (논리로 찍어 누를 수 있으나) | 1 (#106) | ⭐⭐⭐ |
+| **`professional-vs-learning-acceptance-criteria`** (동료 99% / 학습 자가) | 1 (#106) | ⭐⭐ |
+| **`student-perspective-shift-self-question`** (언제 관점 깨는가?) | 1 (#106) | ⭐⭐ |
+| **`student-stubbornness-self-question`** (고집인가?) | 1 (#106) | ⭐ |
+| **`having-vs-knowing-conflation`** (멤버 vs 의존) | 1 (#106) | ⭐⭐ |
+| **`rank-vs-score-separation`** (Rank 게임 무관 / 점수 외부) | 1 (#106) | ⭐⭐ |
+| **`bust-as-error-not-state`** (Bust = 상태 / 오류 X) | 1 (#106) | ⭐⭐ |
+| **`android-onx-vs-domain-callback-confusion`** | 1 (#106) | ⭐⭐ |
+| **`stdlib-name-conflict`** (Character vs Number) | 1 (#106) | ⭐ |
+
+### batch 18 메타 어휘 (MCP `oh-my-oop` 핵심 가치 정점)
+
+- **`reviewer 정답 강요 회피 메타`** (말리빈 #106) — *"제가 생각하는 지점을 알려드리는 것으로 수렴하는 느낌이 드네요. (...) 정답으로 받아들일 수 있기에 (...) 좋아하지 않아요"*.
+- **`reviewer 권력 자제 메타`** (말리빈 #106) — *"언제든지 논리로 찍어 누를 수 있으나, 그렇게 하지 않는 이유는 그것이 정답으로 받아들여질 것이 필연적이기 때문이에요"*.
+- **`실무 vs 학습 미션 수용 기준 차이`** (말리빈 #106) — *"동료분들은 프로라고 생각해요. 그렇기에 그들이 하는 말을 99% 반영해요"*.
+- **`학생 자가 *언제 관점 깨는가?* 메타 의문`** (giovannijunseokim #106) — **MCP 핵심 가치 학생 측 메타 어휘**.
+- **`reviewer "휘둘리지 마세요"`** (ghojeong #73) — *"제 피드백에 휘둘리지 마시고, '객체 지향 생활 체조 원칙' 에 집중하시면 좋을 것 같습니다"*.
+- **`수업 시간 인용 reviewer 합류`** (woowahan-leah #18) — *"수업 시간에 배운 backing property 활용 👍"*. PR #107·#80 결의 *강의 인용 패턴*.
+
+### batch 18 신규 reviewer (1명)
+
+- **@woowahan-leah** (PR #18 boogi-woogi) — 2023년 3월 코호트. *enum + companion object 깊은 어휘 + 상속 vs 조합 외부 글 + 오프라인 코드 리뷰 권유 + 수업 시간 인용*.
+
+**누적 reviewer 12명**: 말리빈/잭슨/두루/페로로/지훈/크롱/vagabond95/BeokBeok/KwonDae/galcyurio/ghojeong/woowahan-leah.
 
 ## 17. batch 17 신규 안티패턴 + 메타 어휘 (누적)
 
@@ -523,6 +570,19 @@ batch 13 (#98, #95, #99, #23, #26) 에서 새로 발견된 패턴:
   - 2024년 코호트: #71 Hogu59 (10), #73 jaeyeongjo (17), #106 giovannijunseokim (19)
 - **권장 batch 18**: RightHennessy #48 (2단계 완성, 13) + 새 1단계 4개 (예: #14 DYGames + #18 boogi-woogi + #73 jaeyeongjo + #106 giovannijunseokim)
 - **또는 최종 정리 진입** — *batch 17 까지 양 단계 32명 + 1단계 17명 = **81 PR 분석 완료** 시점으로 *코퍼스 매우 충분***. *최종 정리 + MCP 룰화* 우선순위 강화.
+
+### batch 19 후보 (다음 세션)
+
+- **양 단계 완성 우선** — 1단계만 분석 reviewees 의 2단계 PR 후보 (≥10 thread):
+  - DYGames #37 (코건 2단계, 9 thread) — 적음
+  - boogi-woogi #36 (우기 2단계, 24 thread) — **가치 있음**
+  - jaeyeongjo #87 (레오 2단계, 22 thread) — **가치 있음**
+  - giovannijunseokim #134 (지오 2단계, 9 thread) — 적음
+- **신규 1단계** (≥10 thread, 미분석):
+  - 2023년 3월 코호트: #19 briandr97 (14), #21 hyemdooly (15)
+  - 2024년 코호트: #71 Hogu59 (10), #126 doabletuple (18), #129 rosemin928 (22), #130 medAndro (25), #117 parkjiminnnn (25), #118 gahyunkim (18), #121 devfeijoa (24), #109 cucumber99 (25), #113 jiyuneel (22)
+- **권장 batch 19**: boogi-woogi #36 + jaeyeongjo #87 (2단계 완성 2개) + 새 1단계 3개 (예: #21 hyemdooly + #117 parkjiminnnn + #129 rosemin928)
+- **최종 정리 진입 시점 강력 권장** — *batch 18 까지 양 단계 33명 + 1단계 20명 = **86 PR + 12 reviewer + 130+ 룰 후보***. *코퍼스 포화 + 메타 어휘 완전*. **PROGRESS.md/SUMMARY.md/README.md + MCP 룰화 우선 진입 권장**.
 
 ### 누적 MCP 룰 후보 100+종 (batch 7-17)
 
