@@ -24,8 +24,9 @@
 | 10 | `a721ab4` | #41, #49, #53, #58, #137 | 중간 (동일 리뷰이 2단계) |
 | 11 | `91671c3` | #146, #147, #148, #151 | 중간 (동일 리뷰이 2단계 마지막) |
 | 12 | `64b00c9` | #75, #74, #70, #32, #67 | 새 1단계 reviewees (sh1mj1, songpink, chaehyuns, krrong, s6m1n) + 신규 reviewer (vagabond95, KwonDae) |
+| 13 | `8afa82d` | #98, #95, #99, #23, #26 | batch 12 reviewees (chaehyuns/songpink/s6m1n) 2단계 양 단계 완성 + 2023년 3월 코호트 진입 (rhthrhrl0, chws0508) |
 
-reviewee 디렉토리 41개 + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
+reviewee 디렉토리 36개 (양 단계 완성 21명 + 1단계만 15명) + HANDOVER. **양 단계 모두 분석된 reviewees (18명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282 (실제 18명).
 
 **reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95 (racingcar 인용 reviewer), @KwonDae — *총 8 reviewer*.
 
@@ -195,6 +196,49 @@ batch 10·11 (#41, #49, #53, #58, #137, #146, #147, #148, #151) 에서 새로 �
 - @lee-ji-hoon (지훈) [신규]: #137 (미플) — *원시값 포장 + onXX 콜백 + 어휘 양방향 학습*
 - @krrong (크롱) [신규]: #148 (타마), #151 (제리) — *역할 vs 상태 + 추상화 확장 (참가자 vs 참가자) + 반란군 비유*
 
+## 13. batch 13 신규 안티패턴 + 메타 어휘 (누적)
+
+batch 13 (#98, #95, #99, #23, #26) 에서 새로 발견된 패턴:
+
+| 패턴 | 등장 PR 수 | MCP 룰 후보 |
+|---|---|---|
+| **`abstract-without-abstract-method` 2단계 재발** (학생 자가 의문 형태) | 1 (#95) | ⭐⭐ — 기존 룰 강화 |
+| **enum 분기 곱집합 = 명명 어색 (WIN/LOSE × 블랙잭/일반)** | 1 (#99) | ⭐⭐ — `enum-product-axes-conflation` |
+| **`Return → GameResult` (vague enum rename)** | 1 (#99) | ⭐ — 기존 `vagueName` 변형 |
+| **테스트 = 명세서 메타 어휘** (test-as-spec) | 1 (#26) | (reviewer 어휘) |
+| **암묵 제약 (implicit invariant) 외부에서 알기 어려움** | 1 (#26) | ⭐⭐ — `implicit-invariant-on-known-rule` 강화 |
+| **`~~~er` 접두사 영어 사전 의미 충돌 (Drawer = 서랍)** | 1 (#23) | ⭐ — `er-suffix-collision` |
+| **자료구조 Set vs List (여러 카드덱)** | 2 (#23·#26) | ⭐⭐ — `set-vs-list-multiset` |
+| **카드 1벌 vs 여러 벌 도메인 룰 분기** (카지노 6덱 메타포 #58 결) | 1 (#26) | ⭐ — 도메인 특수 |
+| **`Test Fixture` 품질 = 프로덕션 동등** (createPlayers/createCards) | 2 (#99·#26) | ⭐⭐ — `test-fixture-quality-parity` |
+| **`onXX` 콜백 어휘 자가 적용** (학생 자가 람다 분리) | 2 (#99·#23) | ⭐⭐ — 기존 룰 강화 |
+| **재구현 권유 (학습 = 시간 두고 반복)** | 3 (#95·#98·#99) | (reviewer 어휘) |
+| **머지 후 후속 코멘트 (학습 종료 X)** | 1 (#23) | (reviewer 어휘) |
+| **공식 의견 + 개인 의견 메타 분리** | 2 (#23·#26) | (reviewer 어휘 — MCP `oop_propose_alternatives` 일치) |
+| **외부 자료 첨부 = Kotlin 공식 문서** | 2 (#23·#26) | (reviewer 어휘) |
+| **블랙잭 룰 정확성 명시 (Bust 양측 + BlackJack 2장 > 3장 21)** | 1 (#26) | ⭐⭐⭐ — `blackjack-rule-fidelity` 강화 (#20·#64·#110·#120·#29·#63·#23·#26) |
+| **suggestion 블록 활용** (given-when-then, expression body) | 1 (#26) | (reviewer 도구 활용) |
+| **`Controller + View 없이 가능?` 메타 질문** (테스터빌리티) | 1 (#99) | ⭐⭐ — `controller-view-domain-coupling` |
+| **PR 본문 자가 의문 + 다이어그램 + 1단계 코멘트 URL 자가 참조** | 1 (#99) | (학생 자가 학습 모범) |
+| **`current 상태 = 분기 책임 위치 이동 ≠ 책임 제거` 자가 의문 (상태 패턴)** | 1 (#98) | ⭐ — 도메인 특수 |
+| ***"옳고 그름 X, 장단점만"* reviewer 메타 어휘** | 1 (#95) | (reviewer 어휘 — MCP 핵심 가치 일치) |
+| **`data object` vs `object` Kotlin 어휘** (sealed + 디버그 친화) | 1 (#98) | ⭐ — Kotlin 어휘 |
+| **`fun interface` vs `interface` 자가 결정** (SAM 한정 vs 확장 여지) | 1 (#98) | ⭐ — Kotlin 어휘 |
+| **점수 책임 위치 (Dealer / Player / Participant 3 후보) + 그림 첨부 의존 관계** | 1 (#23) | ⭐⭐ — `dealer-vs-player-result-locus` |
+| **else 지양 원칙 극단 적용 자가 학습** | 1 (#23) | (학생 자가 학습 — PR #146·#151 결) |
+
+### batch 13 메타 어휘 (MCP `oh-my-oop` 핵심 가치와 일치)
+
+- ***"개발에 옳고 그름은 없고, 장단점만이 있는 세계"*** (말리빈, PR #95) — *조영호 「객체지향의 사실과 오해」 + MCP `oop_propose_alternatives` 어휘*.
+- **공식 의견 + 개인 의견 메타 분리** (말리빈 PR #23, 잭슨 PR #26) — *reviewer 가 *주된 권고 + 개인 의견 + 학생 선택지* 명시*.
+- **다른 크루의 말 *그대로 따라하지 말기*** (말리빈 PR #95) — *권위 인용 ≠ 논리적 설득*.
+- **테스트 = 프로그램 명세서 어휘** (잭슨 PR #26) — *테스트 가 *동작 명세*를 표현*.
+- **머지 시점 회고 권유** (KwonDae PR #99, 두루 PR #98, 말리빈 PR #95) — *"수정사항을 반영하시면서 어떤 장점을 느꼈는지 정리"* / *"처음부터 다시 만들어보는 시간"* — *학생 자가 학습 가시화*.
+
+### batch 13 신규 reviewer
+
+- 없음 (말리빈/잭슨/두루/KwonDae 모두 기존). *2023년 3월 코호트 진입 = 시기적 다른 PR 풀*.
+
 ## 11. 학생 자가 학습 + 메타 토론 모범 패턴 (전체 누적)
 
 - **자가 의문 → reviewer 메타 답변 → 자가 후퇴/결정 명시 + 커밋 SHA 첨부** — *PR #124·#128·#135·#108·#133·#136·#137·#148·#151·#146·#147·#88 등 다수*.
@@ -205,12 +249,22 @@ batch 10·11 (#41, #49, #53, #58, #137, #146, #147, #148, #151) 에서 새로 �
 
 1. `ls /tmp/oop-lessons-cache-blackjack/` — 캐시 확인.
 2. **새 reviewees 1단계 진입** — *PR 번호 < 108* 중 *threads ≥10 + 1단계* 미분석 PR 추출:
-   - 이미 분석된 PR 번호: #8, #10, #17, #20, #24, #25, #28, #29, #33, #34, #51, #61, #63, #64, #65, #78, #79, #81, #92, #110, #111, #112, #114, #116, #119, #120, #123, #124, #125, #128, #135, #108
-   - 미분석 후보 = #11~#16, #18~#23, #26~#27, #30~#32, #35~#60 (제외: 위), #62, #66~#77, #80, #82~#84, #86~#89 (제외: 위), #91, #93~#107 (제외: 위), #109, #113, #115, #117~#118, #121~#122, #126~#127, #129~#134, #138~#150 (제외: 위), #153~#154 등 (counts.tsv 확인 필요)
+   - 이미 분석된 PR 번호 (batch 13 까지): #8, #10, #17, #20, #23, #24, #25, #26, #28, #29, #32, #33(보고: 35 thread 미분석), #34, #51, #61, #63, #64, #65, #67, #70, #74, #75, #78, #79, #81, #92, #95, #98, #99, #108, #110, #111, #112, #114, #116, #119, #120, #123, #124, #125, #128, #135
+   - **양 단계 완성 reviewees (21명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282, **chaehyuns** (#70 + #98), **songpink** (#74 + #95), **s6m1n** (#67 + #99)
+   - **1단계만 분석 reviewees (5명, 2단계 미분석):** sh1mj1 (#75 → #104 thread 3개 너무 적음 스킵 가능), krrong (#32 → #46 thread 29개), rhthrhrl0 (#23 → #39 thread 23개), chws0508 (#26 → #43 thread 10개)
+   - **남은 1단계 미분석 후보 (≥10 thread):**
+     - 2023년 3월 코호트 (PR 번호 ~33): #9 Choisehyeon (23), #11 ki960213 (19), #13 hyunji1203 (19), #14 DYGames (16), #16 SeongHoonC (21), #18 boogi-woogi (16), #19 briandr97 (14), #21 hyemdooly (15), #22 RightHennessy (16), #31 no1msh (19), #33 2chang5 (35)
+     - 2024년 코호트 (#61~107): #66 JoYehyun99 (18), #71 Hogu59 (10), #72 kimhm0728 (17), #73 jaeyeongjo (17), #76 Yunseok-Nam (18), #77 murjune (24), #80 Junyoung-WON (19), #82 Hevton (19), #106 giovannijunseokim (19), #107 junseo511 (25)
    - 배치 5개씩, 매 배치 commit
 3. **새 2단계 PR** — 1단계 분석 후 자연스럽게 같은 reviewee 의 2단계 진입
 4. **5~9 그룹** — 짧은 분석 (400-600줄) + 다른 배치 와 함께
 5. *최종 정리* — PROGRESS.md, SUMMARY.md, README.md 작성 + MCP 룰화 검토
+
+### batch 14 후보 (다음 세션)
+
+- **양 단계 완성 우선**: rhthrhrl0 #39 (2단계, 23) + chws0508 #43 (2단계, 10) + krrong #46 (2단계, 29) — 3개
+- **신규 1단계**: #16 SeongHoonC (21) + #33 2chang5 (35) 또는 #77 murjune (24) — 2개
+- 총 5개
 
 ## 8. 중간 그룹 신규 안티패턴 (batch 8·9 누적)
 
