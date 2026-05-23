@@ -459,6 +459,90 @@ describe("validation contract: every finding has >= 2 remedies", () => {
     expect(findings.length).toBe(0);
   });
 
+  it("primitive-wrapper-without-invariant fires on LottoNumber-shape Holder without invariant", () => {
+    const d = design({
+      classes: [
+        {
+          id: "ln",
+          name: "LottoNumber",
+          stereotype: "InformationHolder",
+          responsibilities: {
+            knowing: ["번호 value: Int"],
+            doing: [],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["primitive-wrapper-without-invariant"],
+    });
+    expect(findings.length).toBe(1);
+    expect(findings[0]!.severity).toBe("warn");
+    expect(findings[0]!.remedies.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("primitive-wrapper-without-invariant suppressed when require/검증 intent is stated", () => {
+    const d = design({
+      classes: [
+        {
+          id: "ln",
+          name: "LottoNumber",
+          stereotype: "InformationHolder",
+          responsibilities: {
+            knowing: ["번호 value: Int"],
+            doing: ["init에서 1..45 범위 검증"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["primitive-wrapper-without-invariant"],
+    });
+    expect(findings.length).toBe(0);
+  });
+
+  it("primitive-wrapper-without-invariant skips names that aren't wrapper-shape", () => {
+    const d = design({
+      classes: [
+        {
+          id: "c",
+          name: "Car",
+          stereotype: "InformationHolder",
+          responsibilities: { knowing: ["name: String", "position: Int"], doing: [] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["primitive-wrapper-without-invariant"],
+    });
+    expect(findings.length).toBe(0);
+  });
+
+  it("primitive-wrapper-without-invariant skips multi-knowing holders", () => {
+    const d = design({
+      classes: [
+        {
+          id: "m",
+          name: "Money",
+          stereotype: "InformationHolder",
+          responsibilities: { knowing: ["value: Int", "currency: String"], doing: [] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["primitive-wrapper-without-invariant"],
+    });
+    expect(findings.length).toBe(0);
+  });
+
   it("all rules pass the >=2 remedies contract when triggered", () => {
     const d = design({
       classes: [

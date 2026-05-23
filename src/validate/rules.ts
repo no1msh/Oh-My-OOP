@@ -21,6 +21,7 @@ import { checkDataSourceDuplication } from "./dataDuplication.js";
 import { checkFunctionNotObject } from "./functionNotObject.js";
 import { checkEmptyObjectFill } from "./emptyObjectFill.js";
 import { checkCollectionWrapperWithoutBehavior } from "./collectionWrapper.js";
+import { checkPrimitiveWrapperWithoutInvariant } from "./primitiveWrapper.js";
 
 export interface RuleThresholds {
   god_object_responsibilities: number;
@@ -58,6 +59,7 @@ export const ALL_RULE_IDS = [
   "function-not-object",
   "empty-object-external-fill",
   "collection-wrapper-without-behavior",
+  "primitive-wrapper-without-invariant",
 ] as const;
 
 export type RuleId = (typeof ALL_RULE_IDS)[number];
@@ -252,6 +254,8 @@ export function validateDesign(design: Design, opts: ValidateOptions = {}): Find
     findings.push(...checkEmptyObjectFill(design));
   if (enabled.has("collection-wrapper-without-behavior"))
     findings.push(...checkCollectionWrapperWithoutBehavior(design));
+  if (enabled.has("primitive-wrapper-without-invariant"))
+    findings.push(...checkPrimitiveWrapperWithoutInvariant(design));
 
   const sevMin = opts.severityMin ?? "info";
   return findings.filter((f) => severityAtLeast(f.severity, sevMin));
