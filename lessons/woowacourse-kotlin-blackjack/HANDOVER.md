@@ -39,13 +39,15 @@
 | 25 | `0cd59b9` | #12, #38, #115, #154, #47 | EmilyCh0 #12+#38 양 단계 동시 (2023 코호트) + tobae-time #115+#154 양 단계 동시 (2025 모바일 안드로이드 7기) + sujin9 #47 2단계 완성 (#15 1단계 batch 24) — 3명 추가, **양 단계 51명**. **메타 케이스 정점**: tobae-time PR #154 본문 *조영호 「객체지향의 사실과 오해」 도서 자가 학습 인용* + *Rule god-object → 상태 패턴 학습 방향 전환* + reviewer laco-dev 양 PR 어휘 진화 (#115 *쎄게 양해* → #154 *성장 격려*) + sujin9 *커버리지 100 강박 자가 자각 + 메서드 참조 함수형 매커니즘 어휘* + EmilyCh0 *Tell-Don't-Ask 메시지 어휘 \"내 X 넘겨줄테니 Y 알려줘\" + 디미터 점(.) 2개 이하 + 입력 검증 재귀 호출 위험* |
 | 26 | `4488d04` | #30, #42, #62, #89, #54 | ippnsj #30+#42 양 단계 동시 (2023 코호트) + haeum808 #62+#89 양 단계 동시 (안드로이드 6기) + SeongHoonC #54 2단계 완성 (#16 1단계 batch 14) — 3명 추가, **양 단계 54명**. **메타 케이스 정점**: ghojeong reviewer 자가 반성 어휘 양 PR 연속 (#62 *forEach 강요 X 자가 수정* → #89 *미션 본 목표 복귀 + 갈아엎기 사과*) + haeum808 PR 본문 *flux 상태 아키텍쳐 자가 학습 + Slack DM 학습* + 함수형 프로그래밍 어휘 정점 (LISP single linked list + Lazy Evaluation + map·filter·reduce 3종 + HOF) + galcyurio *controller = presentation logic 4-layer 분류* + ippnsj *콜백 명명 도메인 입장* + SeongHoonC *프로퍼티 vs 함수 = 상태 vs 행동 + 불필요 위임 = 분석 부담 PR #72 반대 어휘* |
 
-| 27 | (commit pending) | #37, #134, #101, #97, #150 | DYGames #37 + giovannijunseokim #134 + Junyoung-WON #101 + kimhm0728 #97 + chanho0908 #150 2단계 완성 — 5명 양 단계 완성, **양 단계 59명**. **메타 케이스 정점**: ghojeong reviewer 3 PR 어휘 누적 최정점 (#62 함수형 → #89 미션 본 목표 복귀 → #97 유지보수/성능/협력/메시지/판단 기준) + kimhm0728 PR 본문 *처음부터 다시 구현 고려* 학생 자가 의문 + DM 학습 + 학생 자가 *마음에 걸린다* 사전 자각 + chanho0908 학생 자가 *DIP/OCP/SRP 동시 위반 자가 자각 + 로버트 마틴 우발적 중복 인용 + 못난이 코드 자조* 정점 + giovannijunseokim *클라이언트 입장 어휘 + 학생 자가 트레이드오프 도표화* + Junyoung-WON *Tell-Don't-Ask 학생 자가 자각 + 메시지 어휘 narrate* + DYGames *원칙 = 가이드 / 절대 X* |
+| 27 | `fd07c66` | #37, #134, #101, #97, #150 | DYGames #37 + giovannijunseokim #134 + Junyoung-WON #101 + kimhm0728 #97 + chanho0908 #150 2단계 완성 — 5명 양 단계 완성, **양 단계 59명**. **메타 케이스 정점**: ghojeong reviewer 3 PR 어휘 누적 최정점 (#62 함수형 → #89 미션 본 목표 복귀 → #97 유지보수/성능/협력/메시지/판단 기준) + kimhm0728 PR 본문 *처음부터 다시 구현 고려* 학생 자가 의문 + DM 학습 + 학생 자가 *마음에 걸린다* 사전 자각 + chanho0908 학생 자가 *DIP/OCP/SRP 동시 위반 자가 자각 + 로버트 마틴 우발적 중복 인용 + 못난이 코드 자조* 정점 + giovannijunseokim *클라이언트 입장 어휘 + 학생 자가 트레이드오프 도표화* + Junyoung-WON *Tell-Don't-Ask 학생 자가 자각 + 메시지 어휘 narrate* + DYGames *원칙 = 가이드 / 절대 X* |
 
-reviewee 디렉토리 77개 (양 단계 완성 59명 + 1단계만 13명) + HANDOVER. **batch 27 5명 양 단계 완성** (DYGames + giovannijunseokim + Junyoung-WON + kimhm0728 + chanho0908). **batch 26 새 reviewees 2명 (ippnsj, haeum808) + SeongHoonC 양 단계 완성**. **양 단계 모두 분석된 reviewees (45명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282, chaehyuns, songpink, s6m1n, rhthrhrl0, chws0508, krrong, SeongHoonC, murjune, junseo511, Yunseok-Nam, Hevton, RightHennessy, boogi-woogi, jaeyeongjo, hyemdooly, rosemin928, parkjiminnnn, doabletuple, medAndro, jiyuneel, gahyunkim, **EmilyCh0 (batch 25), tobae-time (batch 25), sujin9 (batch 25)**. **2단계만 분석 (Hogu59 = 1단계 적음으로 단독, batch 22 추가)**.
+| 28 | (commit pending) | #50, #105, #59, #52 | rhkrwngud445 #50 + aprilgom #105 + briandr97 #59 + Choisehyeon #52 양 단계 완성 (4명, 5 thread 이하 패스 정책). **양 단계 63명**. **메타 케이스 정점**: rhkrwngud445 *Effective Kotlin Item 4·14 외부 서적 인용 (외부 권위 누적 5 PR)* + aprilgom *PR 본문 strength 도메인 어휘 상세 + 이미지 첨부 + 점수 출력 vs 비교 분리 + laco-dev 시그니처 어휘 `controller-imagination-test`* + briandr97 *MVC 1인 vs 다인 협업 시나리오 학생 자가 사고 + 다른 팀원 설명 가능 기준 + 객체지향 생활체조 else 회피 vs Kotlin lift return trade-off* + Choisehyeon *3 인스턴스 변수 원칙 학생 자가 어려움 어휘* |
+
+reviewee 디렉토리 81개 (양 단계 완성 63명 + 1단계만 9명) + HANDOVER. **batch 28 4명 양 단계 완성** (rhkrwngud445 + aprilgom + briandr97 + Choisehyeon, 5 thread 이하 패스 정책 적용). **batch 27 5명 양 단계 완성** (DYGames + giovannijunseokim + Junyoung-WON + kimhm0728 + chanho0908). **batch 26 새 reviewees 2명 (ippnsj, haeum808) + SeongHoonC 양 단계 완성**. **양 단계 모두 분석된 reviewees (45명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282, chaehyuns, songpink, s6m1n, rhthrhrl0, chws0508, krrong, SeongHoonC, murjune, junseo511, Yunseok-Nam, Hevton, RightHennessy, boogi-woogi, jaeyeongjo, hyemdooly, rosemin928, parkjiminnnn, doabletuple, medAndro, jiyuneel, gahyunkim, **EmilyCh0 (batch 25), tobae-time (batch 25), sujin9 (batch 25)**. **2단계만 분석 (Hogu59 = 1단계 적음으로 단독, batch 22 추가)**.
 
 **reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95, @KwonDae, @BeokBeok, @galcyurio, @ghojeong, @woowahan-leah, @woowahan-dino, **@hyemdooly (둘리, batch 20 신규 = 학생 → reviewer 진화)** — *총 14 reviewer*.
 
-**메타 학습 케이스 (13건, batch 27 누적):**
+**메타 학습 케이스 (14건, batch 28 누적):**
 - 학생 krrong (PR #32) = PR #148·#151 의 reviewer 본인 (2023 → 2024 1년 진화).
 - 학생 hyemdooly (PR #21·#35) = PR #130 의 reviewer 본인 (2023 → 2025 2년 진화).
 - reviewer 다년 활동 1: malibinYun (말리빈) = 2024 PR 들의 reviewer (PR #95 등) + 2025 PR #118·#141 reviewer.
@@ -59,6 +61,7 @@ reviewee 디렉토리 77개 (양 단계 완성 59명 + 1단계만 13명) + HANDO
 - **Junyoung-WON (batch 27, PR #80 → #101)** = 1단계 *콜백 명명 View 동사* → 2단계 *Tell-Don't-Ask 학생 자가 자각 정점 (객체 자유 + 메시지 요청) + 디미터 후 역할/책임 명확화 자가 자각 + 학생 자가 메시지 narrate*. **메시지 어휘 학생 측 자가 자각 정점**.
 - **kimhm0728 (batch 27, PR #72 → #97) 정점** = 1단계 *controller-classification-criteria* + 풍부 메타 → 2단계 PR 본문 *처음부터 다시 구현 고려 학생 자가 의문* + ghojeong reviewer 3 PR 어휘 누적 최정점 (유지보수/성능/협력/메시지/판단 기준) + Slack DM 활발 + 6개 자가 학습 진화 명시 + 학생 자가 *마음에 걸린다* 사전 자각. **학생 자가 *처음부터 다시* + DM 학습 + ghojeong 어휘 최정점 결합**.
 - **chanho0908 (batch 27, PR #123 → #150) 정점** = 2단계 학생 자가 *DIP/OCP/SRP 동시 위반 자가 자각 + 로버트 마틴 우발적 중복 인용 + 못난이 코드 자조* + reviewer 학생 열정 인정 어휘. **학생 자가 SOLID 인용 + 외부 권위 인용 누적 4 PR (조영호·로버트 마틴·객체 지향 생활 체조·엘레강트 오브젝트) 정점**.
+- **briandr97 (batch 28, PR #19 → #59) 정점** = 2단계 PR 본문 *m,v,c 1인 vs 다인 협업 시나리오 학생 자가 사고* + vagabond95 *다른 팀원 설명 가능 기준* 어휘 + 학생 자가 *반대 의견 합당성 인정* + 객체지향 생활체조 else 회피 vs Kotlin lift return trade-off + 수업 시간 템플릿 메서드 패턴 자가 학습 적용. **학생 자가 MVC 협업 시뮬레이션 + 판단 기준 메타**.
 - **2025년 코호트 12 PR 코퍼스 정점** (batch 19-25 누적 + tobae-time #115·#154 추가) = *모바일 안드로이드 7기 9 reviewees* + *셀프 체크리스트 PR 본문 스타일* + *모든 스레드 학생 자가 답변 + 커밋 SHA 첨부 모범*. **3 시기 코호트 합류** (2023년 3월 / 2024 / 2025).
 
 ### 남은 작업
@@ -653,6 +656,84 @@ batch 13 (#98, #95, #99, #23, #26) 에서 새로 발견된 패턴:
 - **5~9 그룹 짧은 분석** (14 PR, 400-600줄/PR):
   - 가장 풍부한 thread 7-9 PR 부터 시도
 - **최종 정리** 또는 **5~9 진입** 결정 시점.
+
+### §28 신규 안티패턴 (batch 28, 4 PR — 5 thread 이하 패스 정책)
+
+batch 28 (#50, #105, #59, #52) 에서 신규/강화 안티패턴:
+
+| 패턴 | 등장 PR 수 | MCP 룰 후보 |
+|---|---|---|
+| **`effective-kotlin-inferred-type-reference`** + **`reviewer-book-chapter-citation`** (Effective Kotlin Item 4·14 챕터 명시) | 1 (#50) | ⭐⭐⭐ 신규 정점 |
+| **외부 서적 인용 누적 5 PR** (조영호·로버트 마틴·LISP·엘레강트 오브젝트·Effective Kotlin) | 5 (#154·#150·#62·#136·#50) | ⭐⭐⭐ MCP 핵심 가치 정점 강화 |
+| **`dealer-constructor-vs-player-runtime-injection`** (불변=생성자/가변=실행 시 주입, 누적 3 PR) | 3 (#50·#38·#154) | ⭐⭐⭐ |
+| **`deck-fill-strategy-via-constructor`** (덱 전략 생성자 주입, 누적 3 PR) | 3 (#50·#30·#154) | ⭐⭐⭐ |
+| **`bjackjack-vs-normal-win-different-responsibility`** (enum 책임 분리 시그널) | 1 (#50) | ⭐⭐⭐ 신규 |
+| **`firstclass-collection-mutable-inner-with-tolist-return`** (일급 컬렉션 + Mutable 내부 + toList) | 1 (#50) | ⭐⭐ |
+| **`student-cross-pr-feedback-continuity`** (1단계 리뷰 링크 + 2단계 연장) | 1 (#50) | ⭐⭐ |
+| **`assertall-vs-sequential-assert-tradeoff`** (assertAll 효율) | 2 (#50·#42) | ⭐⭐ |
+| **`reviewer-deadline-miss-merge-vocabulary`** (기한 초과 머지, 누적 3 PR) | 3 (#50·#134·#97) | ⭐⭐ |
+| **`pr-body-domain-vocabulary-with-screenshot`** (PR 본문 도메인 어휘 + 이미지) | 1 (#105) | ⭐⭐⭐ 신규 정점 |
+| **`score-display-vs-score-compare-separation`** (점수 출력 vs 비교 분리, 누적 3 PR) | 3 (#105·#134·#50) | ⭐⭐⭐ 정점 |
+| **`controller-imagination-test`** (laco-dev 시그니처 양 PR) | 2 (#105·#154) | ⭐⭐⭐ (누적 2 PR) |
+| **`policy-as-int-to-object-with-role`** (Policy 원시값 → 객체 역할) | 1 (#105) | ⭐⭐⭐ 신규 |
+| **`statistics-as-pure-value-vs-responsibility`** (Statistics 단순 값 / 정보 보유자 책임) | 3 (#105·#134·#38) | ⭐⭐⭐ 정점 |
+| **`student-self-question-mark-self-deprecation`** (학생 자가 *물음표 자조* 누적 3 PR) | 3 (#105·#150·#144) | ⭐⭐ |
+| **`test-only-secondary-constructor-anti-pattern`** (테스트용 부 생성자 → Fixture) | 2 (#105·#154) | ⭐⭐ |
+| **`operator-overload-times-domain`** 누적 4 PR | 4 (#37·#47·#150·#105) | ⭐⭐⭐ |
+| **`mvc-collaboration-scenario-vocabulary`** (학생 자가 MVC 1인 vs 다인 협업 시나리오) | 1 (#59) | ⭐⭐⭐ 신규 정점 |
+| **`team-explanation-criteria-test`** (다른 팀원 설명 가능 기준) | 3 (#59·#97·#134) | ⭐⭐⭐ 정점 |
+| **`view-no-loop-collection-decoupling`** (View 컬렉션 루프 = 결합 시그널) | 1 (#59) | ⭐⭐⭐ 신규 |
+| **`interface-no-concrete-dependency`** (인터페이스 = 일반 / 특정 의존성 X, 누적 3 PR) | 3 (#59·#150·#154) | ⭐⭐⭐ |
+| **`return-lift-vs-else-tradeoff`** (객체지향 생활체조 else 회피 vs Kotlin lift return) | 1 (#59) | ⭐⭐⭐ 신규 |
+| **`java-based-principle-kotlin-exception`** (자바 기반 원칙 = Kotlin 예외 학생 자가 정당화) | 1 (#59) | ⭐⭐ |
+| **`template-method-pattern-on-state`** (수업 시간 학습 → 상태 패턴 자가 적용, 누적 3 PR) | 3 (#59·#89·#62) | ⭐⭐ |
+| **`student-self-acknowledgment-of-confusion`** (학생 자가 *혼동 명시*) | 1 (#59) | ⭐⭐ |
+| **`student-self-acknowledgment-opposing-view-validity`** (학생 자가 반대 의견 합당성 인정) | 1 (#59) | ⭐⭐ |
+| **`extension-fn-location-near-parent-class`** (확장함수 = 부모 클래스 계층 정합) | 1 (#59) | ⭐⭐ |
+| **`return-bundling-via-existing-aggregate`** (기존 집합 객체로 묶기) | 1 (#59) | ⭐⭐ |
+| **`reviewer-student-detailed-intent-acknowledgment`** (학생 의도 상세 = reviewer 같이 생각) | 1 (#59) | ⭐⭐ |
+| **`pr-body-three-instance-var-difficulty-vocabulary`** (학생 자가 3 인스턴스 변수 원칙 어려움) | 1 (#52) | ⭐⭐ |
+| **`kotlin-wildcard-import-avoid`** (Kotlin 와일드카드 import + ktlint ref) | 1 (#52) | ⭐ |
+| **`null-guarantee-via-getorelse`** (`getOrElse` null 회피) | 1 (#52) | ⭐⭐ |
+| **원칙 vs 본질 단일 답 거부 누적 5 PR** (#38·#62·#43·#37·#59) | 5 | ⭐⭐⭐ MCP 핵심 가치 정점 |
+
+### batch 28 메타 어휘 (MCP `oh-my-oop` 핵심 가치 정점)
+
+- **`mvc-collaboration-scenario-vocabulary`** (briandr97 #59) — *"m, v, c를 각자 다른 사람이 개발한다고 생각했을 때 도메인 개발자는 프린트 되는 시점을 알 필요가 없고 단순히 필요한 값들만 전달 받으면 된다고 생각했습니다."* — **학생 자가 MVC 협업 시뮬레이션 어휘 정점**.
+- **`team-explanation-criteria-test`** (vagabond95 #59) — *"다른 팀원이 개발을 진행할 때, XxxView 와 XxxOutput 에 어떤 코드를 넣어야할지 명확한 기준을 설명할 수 있을까요?"* — **판단 기준 어휘 정점**.
+- **`return-lift-vs-else-tradeoff`** (briandr97 #59) — *"else를 지양하라는 객체지향 생활체조 원칙 때문에 이렇게 진행하였는데 해당 원칙은 자바를 기반으로 기술되어 코틀린에서는 예외가 있을 수 있다고 생각됩니다!"* — **원칙 vs 본질 학생 자가 정당화 어휘**.
+- **`student-self-acknowledgment-opposing-view-validity`** (briandr97 #59) — *"혼동 될 수 있다고 생각하고 합쳐야한다는 의견 또한 합당하다고 생각됩니다!"* — **학생 자가 반대 의견 합당성 인정 어휘**.
+- **`controller-imagination-test`** (laco-dev #105 + #154) — *"지금 블랙잭 프로그램은, 컨트롤러 없이 게임이 가능할까?"* — **laco-dev 시그니처 어휘 양 PR**.
+- **`effective-kotlin-inferred-type-reference`** (malibinYun #50) — *"Effective Kotlin 서적의 챕터를 참고해서 스스로 생각해본 것과 비교해보아요. Item 4: Inferred Type으로 리턴하지 말라"* — **외부 권위 인용 누적 5 PR 정점**.
+- **`pr-body-domain-vocabulary-with-screenshot`** (aprilgom #105) — PR 본문 strength 족보 어휘 + 이미지 첨부 + 점수 출력 vs 비교 분리 어휘.
+- **`score-display-vs-score-compare-separation`** (aprilgom #105) — *"승패를 비교할 때는 strength를 이용하고, 점수 출력을 할 때에는 손에 있는 카드 점수의 총합을 이용해 출력합니다."* — **도메인 책임 분리 어휘 누적 3 PR**.
+
+### batch 28 누적 정점 안티패턴 (⭐⭐⭐ 강한 신규 후보)
+
+batch 7-28 합계 MCP 룰 후보가 **530종+**을 넘어섰다. ⭐⭐⭐ 강한 후보 (batch 28 강화):
+- 외부 서적 인용 누적 5 PR (조영호·로버트 마틴·LISP·엘레강트 오브젝트·Effective Kotlin)
+- 원칙 vs 본질 단일 답 거부 누적 5 PR
+- `mvc-collaboration-scenario-vocabulary` (MVC 1인 vs 다인 학생 자가 사고)
+- `team-explanation-criteria-test` (판단 기준 누적 3 PR)
+- `controller-imagination-test` (laco-dev 시그니처 누적 2 PR)
+- `score-display-vs-score-compare-separation` (도메인 책임 분리 누적 3 PR)
+- `statistics-as-pure-value-vs-responsibility` (Statistics 책임 누적 3 PR)
+- `interface-no-concrete-dependency` (인터페이스 일반 / 특정 의존성 X 누적 3 PR)
+- `pr-body-domain-vocabulary-with-screenshot` (학생 자가 PR 본문 어휘 + 이미지)
+- `dealer-constructor-vs-player-runtime-injection` (불변/가변 의존 시점 누적 3 PR)
+
+### 최종 정리 진입 시점 — batch 28 완료
+
+| 지표 | batch 27 | batch 28 (현재) |
+|---|---|---|
+| 양 단계 완성 | 59명 | **63명** (+4, 5 thread 이하 패스 정책) |
+| reviewee 디렉토리 | 77 | **81** (+4) |
+| 누적 PR | 131 | **135** (+4) |
+| 메타 학습 케이스 | 13 | **14** (+1: briandr97 MVC 시뮬레이션 + 판단 기준) |
+| 누적 MCP 룰 후보 | 500+ | **530+** |
+| 2025 코호트 PR | 16 | 16 |
+| 누적 reviewer | 14 | 14 (BeokBeok/malibinYun/laco-dev/vagabond95 재등장) |
+| 5 thread 이하 패스 | - | 사용자 명시 정책 (남은 5 thread 4개 + 0 thread 16개 패스) |
 
 ### §27 신규 안티패턴 (batch 27, 5 PR)
 
