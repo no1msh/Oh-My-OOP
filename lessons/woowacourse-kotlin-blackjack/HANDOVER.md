@@ -35,18 +35,23 @@
 | 21 | `0380d00` | #142, #143, #109, #113, #118 | doabletuple #142 + medAndro #143 양 단계 완성 (2명 추가, **양 단계 40명**) + 새 1단계 reviewees 3명 (cucumber99/jiyuneel/gahyunkim). **신규 reviewer 1명 (malibinYun 2024→2025 다년 활동) → 누적 14명 유지 (말리빈 기존)**. **2025년 코호트 10 PR 코퍼스 정점 (7 reviewees)**. **신규 reviewer 메타 케이스: malibinYun = 2024 reviewer (PR #95 등) → 2025 reviewer (PR #118) = 다년 활동** |
 | 22 | `7b104fb` | #140, #141, #96, #121, #19 | jiyuneel #140 + gahyunkim #141 양 단계 완성 (2명 추가, **양 단계 42명**) + Hogu59 #96 2단계 단독 (1단계 #71 적음 = 2단계만, 양 단계 43명) + 새 1단계 reviewees 2명 (devfeijoa/briandr97). **2023 코호트 마지막 ≥10 thread 1단계 (#19 briandr97) 완료**. **reviewer 다년 활동 2번째 (Gyuil-Hwnag 두루 = 2024→2025)** |
 | 23 | `a8d6ba3` | #149, #153, #71, #68, #69 | cucumber99 #149 + devfeijoa #153 + Hogu59 #71 양 단계 완성 (3명 추가, **양 단계 45명**) + 새 1단계 reviewees 2명 (kkosang/gaeun5744 = 2024 코호트). **PR #71 ↔ #96 메타 케이스: 1년 늦은 2단계 학생 자가 학습 시간성** |
-| 24 | (commit pending) | #94, #102, #122, #144, #15 | kkosang #94 + gaeun5744 #102 + m6z1 양 단계 동시 (#122+#144) 완성 (3명 추가, **양 단계 48명**) + 새 1단계 sujin9 #15 (2023 코호트). **학생 자가 *셀프 코드 리뷰* (m6z1 PR #144) + 학생 자가 *컴파일 상수* / *open vs abstract* / *type-safe* 메타 어휘 정점** |
+| 24 | `00ab0b9` | #94, #102, #122, #144, #15 | kkosang #94 + gaeun5744 #102 + m6z1 양 단계 동시 (#122+#144) 완성 (3명 추가, **양 단계 48명**) + 새 1단계 sujin9 #15 (2023 코호트). **학생 자가 *셀프 코드 리뷰* (m6z1 PR #144) + 학생 자가 *컴파일 상수* / *open vs abstract* / *type-safe* 메타 어휘 정점** |
+| 25 | (commit pending) | #12, #38, #115, #154, #47 | EmilyCh0 #12+#38 양 단계 동시 (2023 코호트) + tobae-time #115+#154 양 단계 동시 (2025 모바일 안드로이드 7기) + sujin9 #47 2단계 완성 (#15 1단계 batch 24) — 3명 추가, **양 단계 51명**. **메타 케이스 정점**: tobae-time PR #154 본문 *조영호 「객체지향의 사실과 오해」 도서 자가 학습 인용* + *Rule god-object → 상태 패턴 학습 방향 전환* + reviewer laco-dev 양 PR 어휘 진화 (#115 *쎄게 양해* → #154 *성장 격려*) + sujin9 *커버리지 100 강박 자가 자각 + 메서드 참조 함수형 매커니즘 어휘* + EmilyCh0 *Tell-Don't-Ask 메시지 어휘 \"내 X 넘겨줄테니 Y 알려줘\" + 디미터 점(.) 2개 이하 + 입력 검증 재귀 호출 위험* |
 
-reviewee 디렉토리 68개 (양 단계 완성 48명 + 1단계만 20명) + HANDOVER. **batch 24 새 reviewees 2명 (m6z1, sujin9)**. **양 단계 모두 분석된 reviewees (42명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282, chaehyuns, songpink, s6m1n, rhthrhrl0, chws0508, krrong, SeongHoonC, murjune, junseo511, Yunseok-Nam, Hevton, RightHennessy, boogi-woogi, jaeyeongjo, hyemdooly, rosemin928, parkjiminnnn, doabletuple, medAndro, **jiyuneel (batch 22), gahyunkim (batch 22)**. **2단계만 분석 (Hogu59 = 1단계 적음으로 단독, batch 22 추가)**.
+reviewee 디렉토리 70개 (양 단계 완성 51명 + 1단계만 19명) + HANDOVER. **batch 25 새 reviewees 2명 (EmilyCh0, tobae-time) + sujin9 양 단계 완성**. **양 단계 모두 분석된 reviewees (45명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282, chaehyuns, songpink, s6m1n, rhthrhrl0, chws0508, krrong, SeongHoonC, murjune, junseo511, Yunseok-Nam, Hevton, RightHennessy, boogi-woogi, jaeyeongjo, hyemdooly, rosemin928, parkjiminnnn, doabletuple, medAndro, jiyuneel, gahyunkim, **EmilyCh0 (batch 25), tobae-time (batch 25), sujin9 (batch 25)**. **2단계만 분석 (Hogu59 = 1단계 적음으로 단독, batch 22 추가)**.
 
 **reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95, @KwonDae, @BeokBeok, @galcyurio, @ghojeong, @woowahan-leah, @woowahan-dino, **@hyemdooly (둘리, batch 20 신규 = 학생 → reviewer 진화)** — *총 14 reviewer*.
 
-**메타 학습 케이스 (4건):**
+**메타 학습 케이스 (8건, batch 25 누적):**
 - 학생 krrong (PR #32) = PR #148·#151 의 reviewer 본인 (2023 → 2024 1년 진화).
 - 학생 hyemdooly (PR #21·#35) = PR #130 의 reviewer 본인 (2023 → 2025 2년 진화).
 - reviewer 다년 활동 1: malibinYun (말리빈) = 2024 PR 들의 reviewer (PR #95 등) + 2025 PR #118·#141 reviewer.
-- **reviewer 다년 활동 2 (batch 22 신규): Gyuil-Hwnag (두루) = 2024 PR 들의 reviewer (PR #98 chaehyuns·#146 yrsel 등) + 2025 PR #121 devfeijoa reviewer**.
-- **2025년 코호트 10 PR 코퍼스 정점** (batch 19: parkjiminnnn #117·#139 + rosemin928 #129·#138 + batch 20: doabletuple #126 + medAndro #130 + batch 21: doabletuple #142 + medAndro #143 + cucumber99 #109 + jiyuneel #113 + gahyunkim #118) = *모바일 안드로이드 7기 8 reviewees* + *셀프 체크리스트 PR 본문 스타일* + *모든 스레드 학생 자가 답변 + 커밋 SHA 첨부 모범*. **3 시기 코호트 합류** (2023년 3월 / 2024 / 2025).
+- reviewer 다년 활동 2 (batch 22): Gyuil-Hwnag (두루) = 2024 PR 들의 reviewer (PR #98 chaehyuns·#146 yrsel 등) + 2025 PR #121 devfeijoa reviewer.
+- Hogu59 (batch 23, PR #71 → #96) = 1년 늦은 2단계 학생 자가 학습 시간성.
+- m6z1 (batch 24, PR #144) = 학생 자가 *셀프 코드 리뷰* 코멘트 (가장 풍부한 PR 본문 + 자가 코멘트 8개).
+- **EmilyCh0 (batch 25, PR #12 → #38)** = 1단계 단방향 가이드 (학생 자가 답변 0) → 2단계 학생 자가 답변 9 thread + PR 본문 자가 학습 진화 명시 — **학습 가시화 진화 메타**.
+- **tobae-time (batch 25, PR #115 → #154) 정점** = *Rule god-object 학생 자가 시도* → reviewer 4 thread 반복 비판 + *"쎄게 피드백 양해"* → 학생 자가 **조영호 「객체지향의 사실과 오해」 도서 자가 학습 인용** → 2단계 상태 패턴 도입 (불완전 인정) → reviewer laco-dev 어휘 진화 *"성장 과정 격려 + 어려움 인정"*. **학습 방향 전환 + 도서 자가 학습 + reviewer 어휘 진화 3중 메타** — *MCP `oh-my-oop` 도구 영감 도서 학생 자가 인용으로 도구 가치 검증*.
+- **2025년 코호트 12 PR 코퍼스 정점** (batch 19-25 누적 + tobae-time #115·#154 추가) = *모바일 안드로이드 7기 9 reviewees* + *셀프 체크리스트 PR 본문 스타일* + *모든 스레드 학생 자가 답변 + 커밋 SHA 첨부 모범*. **3 시기 코호트 합류** (2023년 3월 / 2024 / 2025).
 
 ### 남은 작업
 
@@ -640,6 +645,105 @@ batch 13 (#98, #95, #99, #23, #26) 에서 새로 발견된 패턴:
 - **5~9 그룹 짧은 분석** (14 PR, 400-600줄/PR):
   - 가장 풍부한 thread 7-9 PR 부터 시도
 - **최종 정리** 또는 **5~9 진입** 결정 시점.
+
+### §25 신규 안티패턴 (batch 25, 5 PR)
+
+batch 25 (#12, #38, #115, #154, #47) 에서 신규/강화 안티패턴:
+
+| 패턴 | 등장 PR 수 | MCP 룰 후보 |
+|---|---|---|
+| **`rule-as-god-object-anti-pattern`** (`Rule` 클래스에 모든 도메인 행위 모음 = god-object 변형) | 1 (#115) | ⭐⭐⭐ 신규 정점 |
+| **`reviewer-strong-feedback-apology-meta`** (피드백 강도 + 양해 — *"쎄게 피드백 양해"*) | 1 (#115) | ⭐⭐⭐ 신규 |
+| **`reviewer-difficulty-acknowledgment-vocabulary`** (어려움 인정 + 후일 학습 격려 — *"수정 안 해도 됨"*) | 1 (#154) | ⭐⭐⭐ 신규 |
+| **`pr-body-self-learning-book-citation`** (PR 본문 학생 자가 *조영호 「객체지향의 사실과 오해」* 도서 인용) | 1 (#154) | ⭐⭐⭐ 신규 정점 — MCP 도구 영감 도서 학생 자가 인용 |
+| **`pr-body-restart-from-scratch`** (rebase 코드 손실 → 학습 기회로 재해석) | 1 (#154) | ⭐⭐ 신규 |
+| **`pr-self-checklist-doubt-marker`** (셀프 체크리스트 `[x?]` 회의 마커) | 1 (#154) | ⭐⭐ 신규 |
+| **`state-pattern-external-mutation-risk`** (`player.state = Bust()/Hit()/Ready()` 외부 변경 위험) | 1 (#154) | ⭐⭐⭐ 신규 |
+| **`state-pattern-no-if-type-check`** (상태 패턴 + if `is` 타입 검사 = 다형성 무효화) | 1 (#154) | ⭐⭐⭐ 신규 (PR #73 결 누적 2 PR) |
+| **`getter-setter-naming-as-missed-object`** (`getXXX`/`setXXX` 어색 = 분리해야 할 객체 신호 — 학생 자가 자각) | 1 (#154) | ⭐⭐⭐ 신규 정점 |
+| **`controller-imagination-test`** (*"컨트롤러 없이 게임 진행 가능?"* 상상 테스트) | 1 (#154) | ⭐⭐⭐ 신규 |
+| **`student-state-pattern-honest-doubt`** (상태 패턴 이해 어려움 솔직 인정) | 1 (#154) | ⭐⭐⭐ 신규 (누적 3 PR 학생 솔직 인정) |
+| **`subclass-tests-by-file`** (추상 함수 구현체 파일별 테스트) | 1 (#154) | ⭐⭐ 신규 |
+| **`reviewer-kotlin-tip-vocabulary`** (*"코틀린 Tip:"* 메타 어휘) | 1 (#154) | ⭐⭐ 신규 |
+| **`minimum-required-data-passing`** (함수 인자 = 객체 vs 상태 최소 데이터) | 1 (#154) | ⭐⭐ 신규 |
+| **`tell-dont-ask-message-vocabulary`** (Tell-Don't-Ask 메시지 어휘 *"내 X 넘겨줄테니 Y 알려줘"*) | 1 (#38) | ⭐⭐⭐ 신규 정점 |
+| **`predictable-vs-unpredictable-error-distinction`** (`toIntOrNull` = 예측 가능 / `0/0` = 예측 불가) | 1 (#38) | ⭐⭐⭐ 신규 |
+| **`recursive-input-validation-bug`** (입력 검증 재귀 호출 시 영원 종료 안 됨) | 1 (#38) | ⭐⭐⭐ 신규 |
+| **`mutable-member-var-state-dependent-result`** (멤버 변수 상태 의존 = 호출 순서 강요) | 1 (#38) | ⭐⭐⭐ 신규 |
+| **`function-call-order-dependency-violation`** (호출 순서 강요 = 잘못된 설계) | 1 (#38) | ⭐⭐⭐ 신규 |
+| **`primitive-fn-conversion-as-temporary-fix`** (멤버 변수 → 함수 = 임시 방편 vs 본질) | 1 (#38) | ⭐⭐⭐ 신규 |
+| **`dot-2-or-fewer-rule`** (디미터 점(.) 2개 이하 + `a.b` = `a.getB()` 동일성) | 1 (#38) | ⭐⭐⭐ 신규 |
+| **`lateinit-initialization-checking-burden`** (`lateinit` 초기화 미인지 위험) | 2 (#38·#115) | ⭐⭐⭐ 신규 (누적 2 PR) |
+| **`pair-vs-data-class-naming-clarity`** (Pair = first/second 의미 모호) | 1 (#38) | ⭐⭐ 신규 |
+| **`exception-handling-location-no-right-answer`** (예외 처리 위치 정답 없음 — 단일 답 거부) | 1 (#38) | ⭐⭐⭐ MCP 핵심 가치 |
+| **`view-as-domain-validator-pattern`** (뷰에서 검증 완료한 도메인 객체 리턴) | 1 (#38) | ⭐⭐ 신규 |
+| **`method-reference-as-functional-vocabulary`** (메서드 참조 = 데이터 훼손 X + 함수형 매커니즘) | 1 (#47) | ⭐⭐⭐ 신규 정점 |
+| **`coverage-100-vs-test-meaning`** (커버리지 100 강박 vs 의미 — 학생 자가 자각) | 1 (#47) | ⭐⭐⭐ 신규 정점 |
+| **`always-passing-test-anti-pattern`** (*"반드시 성공하는 테스트 = 의미 없음 + 차라리 안 쓰는 게 낫다"*) | 1 (#47) | ⭐⭐⭐ 신규 |
+| **`test-with-logic-anti-pattern`** (테스트 코드에 로직 포함 X) | 1 (#47) | ⭐⭐ 신규 |
+| **`controller-as-bridge-metaphor`** (컨트롤러 = view↔domain 브릿지 메타포 — 학생 자가) | 1 (#47) | ⭐⭐ 신규 |
+| **`test-name-positive-vs-negative-vocabulary`** (부정형 → 긍정형 변환) | 1 (#47) | ⭐⭐ 신규 |
+| **`kotlin-named-parameter-readability`** (≥3 파라미터 = argument name) | 2 (#144·#47) | ⭐⭐⭐ (누적 2 PR) |
+| **`lambda-it-vs-named-param`** (`it` vs 명시적 변수 = 역할 정의) | 1 (#47) | ⭐⭐ 신규 |
+| **`underscore-prefix-backing-property-only`** (`_` = backing property 전용) | 2 (#12·#47) | ⭐⭐⭐ (누적 2 PR + Kotlin 공식 컨벤션 ref) |
+| **`init-name-implies-no-return`** (`init` = 초기화 어휘, 리턴 X 예상) | 1 (#12) | ⭐ 신규 |
+| **`validate-fn-name-implies-boolean`** (`isXX`/`checkXX` 함수명 = Boolean 기대) | 1 (#12) | ⭐⭐ 신규 |
+| **`package-by-type-anti-pattern`** (enum/data class 타입 종류 패키지 분리 X) | 1 (#115) | ⭐⭐ 신규 |
+| **`builder-required-property-as-constructor`** (Builder = 선택적 / 필수 = 생성자) | 1 (#115) | ⭐⭐ 신규 |
+| **`mutable-collection-direct-access-scenario`** (외부 mutable 직접 접근 시나리오) | 1 (#115) | ⭐⭐ 신규 |
+| **`test-narrative-incremental-build`** (점진적 테스트 묘사 = 기본 → 조건 → 경계) | 1 (#115) | ⭐⭐ 신규 |
+| **`rule-uniqueness-assumption-question`** (*"왜 규칙이 유일하다고 보시는지"*) | 1 (#115) | ⭐⭐ 신규 |
+| **`state-as-domain-calculator`** (상태 객체 = 수익금 계산 책임) | 1 (#154) | ⭐⭐ 신규 |
+| **`student-self-correction-request-vocabulary`** (학생 자가 *"맞는지/놓친 부분 궁금"*) | 1 (#47) | ⭐⭐ 신규 |
+| **`class-constructor-same-line-convention`** (생성자 줄바꿈 = private 함수 오해) | 1 (#47) | ⭐ 신규 |
+| **`function-order-by-call-flow`** (함수 호출 순서 = 위→아래 정렬) | 1 (#154) | ⭐ 신규 |
+| **`construction-time-vs-mutation-time-invariant`** (생성 시 받기 = 전체 불변성) | 1 (#154) | ⭐⭐ 신규 |
+| **`factory-with-test-only-variant`** (팩토리 + 테스트용 별도 팩토리) | 1 (#154) | ⭐⭐ 신규 |
+| **`pr-self-checklist-vocabulary`** + **`pr-focused-review-request`** (셀프 체크 + 집중 리뷰 요청) | 1 (#115) | ⭐⭐ (PR #144 결 누적) |
+| **`pr-body-prior-mission-feedback-recall`** (로또 미션 피드백 자가 회상) | 1 (#154) | ⭐⭐ 신규 |
+| **`reviewer-hint-vocabulary`** (*"힌트는 X"* — reviewer 답변 유도) | 1 (#115) | ⭐ 신규 |
+
+### batch 25 메타 어휘 (MCP `oh-my-oop` 핵심 가치 정점)
+
+- **`pr-body-self-learning-book-citation`** (tobae-time #154) — *"객체지향의 역할, 책임, 협력에 대한 이해도가 낮아서 **객체지향의 사실과 오해라는 도서를 읽고 코드를 다시 작성**해보았으나 아직도 잘 모르겠습니다."* **MCP `oh-my-oop` 도구 영감 도서 학생 자가 인용 — 도구 가치 검증 정점**.
+- **`exception-handling-location-no-right-answer`** (BeokBeok #38) — *"예외처리를 어디에서 하는지에 대한 여부는 개발자마다 의견이 다르기에 정답이 없습니다. 말씀하신대로 뷰에서 도메인 객체를 리턴하는 방식도 문제가 없습니다."* — *MCP 단일 답 거부 + 학생 대안 존중* 어휘.
+- **`tell-dont-ask-message-vocabulary`** (BeokBeok #38) — *"내 카드들의 정보를 넘겨줄테니 블랙잭인지 아닌지 알려줘"* — Tell-Don't-Ask 메시지 어휘 정점.
+- **`getter-setter-naming-as-missed-object`** (tobae-time #154) — *"적절한 네이밍을 생각하지 못해서 두었습니다. **알아차리지 못한 객체로 분리하라는 신호였던 것 같습니다.**"* — 학생 측 *어색함 → 객체 분리 신호* 자각 어휘.
+- **`coverage-100-vs-test-meaning`** (sujin9 #47) — *"테스트 커버리지를 100 만드는 것만 생각하기 보다는, 테스트의 의미에 더 집중해야겠어요"* — 학생 자가 강박 자각.
+- **`always-passing-test-anti-pattern`** (BeokBeok #47) — *"반드시 성공하는 테스트를 작성하는 것은 의미가 없습니다. 저라면, 이런 경우라면 차라리 테스트 코드를 작성하지 않습니다."* — reviewer 단호 어휘.
+- **`reviewer-difficulty-acknowledgment-vocabulary`** (laco-dev #154) — *"상태 패턴은 아직 개념이 잘 안잡히셨을 부분이라 너무 어렵다면 모두 수정하지 않아도 됩니다. 나중에라도 내 코드를 돌아봤을 때 이해가 되기만 하면 충분합니다."* — PR #115 *"쎄게 양해"* → PR #154 *어려움 인정 + 후일 격려* 진화.
+- **`controller-imagination-test`** (laco-dev #154) — *"컨트롤러가 없더라도 블랙잭 게임을 진행할 수 있을까??"* — 상상 테스트 어휘 정점.
+- **`current-realm-vs-OOP-realm-metaphor-clash`** (laco-dev #115) — *"현실세계라면 블랙잭 게임에서의 규칙이지만, 객체지향 세계에서 객체는 모두 스스로 일을 합니다."* — 현실 vs OOP 메타포 충돌 어휘.
+
+### batch 25 누적 정점 안티패턴 (⭐⭐⭐ 강한 신규 후보)
+
+batch 7-25 합계 MCP 룰 후보가 **400종+**을 넘어섰다. ⭐⭐⭐ 강한 후보 (batch 25 강화):
+- `tell-dont-ask-message-vocabulary` (Tell-Don't-Ask 메시지 어휘 *"내 X 넘겨줄테니 Y 알려줘"*) — MCP 핵심 가치 정점
+- `state-pattern-external-mutation-risk` + `state-pattern-no-if-type-check` (상태 패턴 외부 변경 위험 + if 타입 검사 회피)
+- `getter-setter-naming-as-missed-object` (어색 명명 → 객체 분리 신호 학생 자가 자각)
+- `coverage-100-vs-test-meaning` + `always-passing-test-anti-pattern` (커버리지 100 강박 vs 테스트 의미)
+- `controller-imagination-test` (컨트롤러 없이 진행 가능 상상 테스트)
+- `pr-body-self-learning-book-citation` (조영호 도서 학생 자가 인용 — MCP 도구 가치 검증)
+- `rule-as-god-object-anti-pattern` (Rule god-object 학생 자가 시도 → 4 thread 반복 비판)
+- `reviewer-strong-feedback-apology-meta` + `reviewer-difficulty-acknowledgment-vocabulary` (양 PR 어휘 진화)
+- `method-reference-as-functional-vocabulary` (메서드 참조 = 함수형 매커니즘)
+- `predictable-vs-unpredictable-error-distinction` + `recursive-input-validation-bug` (예측 가능/불가 오류 + 재귀 입력 검증)
+- `dot-2-or-fewer-rule` (디미터 점(.) 2개 이하 + `a.b` = `a.getB()` 동일성)
+- `mutable-member-var-state-dependent-result` + `function-call-order-dependency-violation` + `primitive-fn-conversion-as-temporary-fix` (멤버 변수 상태 의존 + 임시 방편 vs 본질)
+- `lateinit-initialization-checking-burden` (`lateinit` 초기화 미인지 위험, 누적 2 PR)
+- `underscore-prefix-backing-property-only` + `kotlin-named-parameter-readability` (누적 2 PR + Kotlin 컨벤션)
+
+### 최종 정리 진입 시점 — batch 25 완료
+
+| 지표 | batch 24 | batch 25 (현재) |
+|---|---|---|
+| 양 단계 완성 | 48명 | **51명** (+3) |
+| reviewee 디렉토리 | 68 | **70** (+2) |
+| 누적 PR | 116 | **121** (+5) |
+| 메타 학습 케이스 | 6 | **8** (+2: EmilyCh0 단방향→양방향 / tobae-time Rule→상태 + 도서 + 어휘 진화 3중) |
+| 누적 MCP 룰 후보 | 350+ | **400+** |
+| 2025 코호트 PR | 12 | **14** (+2: tobae-time #115·#154) |
+| 누적 reviewer | 14 | 14 (BeokBeok·laco-dev 재등장) |
 
 ### §22 신규 안티패턴 (batch 22, 5 PR)
 
