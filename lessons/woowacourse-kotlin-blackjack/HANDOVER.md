@@ -30,15 +30,17 @@
 | 16 | `6dd65c5` | #145, #11, #13, #76, #82 | junseo511 2단계 완성 (양 단계 30명) + 새 1단계 reviewees 4명 (ki960213/hyunji1203/Yunseok-Nam/Hevton). **2023년 3월 코호트 6 PR + 2024 코호트 풍부** |
 | 17 | `cce33fd` | #86, #100, #22, #72, #80 | Yunseok-Nam + Hevton 2단계 완성 (양 단계 32명) + 새 1단계 reviewees 3명 (RightHennessy/kimhm0728/Junyoung-WON). **신규 reviewer 2명 (galcyurio, ghojeong) → 누적 11명** |
 | 18 | `93758d1` | #48, #14, #18, #73, #106 | RightHennessy 2단계 완성 (양 단계 33명) + 새 1단계 reviewees 4명 (DYGames/boogi-woogi/jaeyeongjo/giovannijunseokim). **신규 reviewer 1명 (woowahan-leah) → 누적 12명** |
-| 19 | (commit pending) | #36, #87, #21, #117, #129 | boogi-woogi #36 + jaeyeongjo #87 양 단계 완성 (2명 추가, **양 단계 35명**) + 새 1단계 reviewees 3명 (hyemdooly/parkjiminnnn/rosemin928). **신규 reviewer 1명 (woowahan-dino) → 누적 13명**. **2025년 코호트 신규 합류 (2 PR: parkjiminnnn/rosemin928) — 셀프 체크리스트 PR 본문 + 모든 스레드 학생 자가 답변 + 커밋 SHA 첨부** |
+| 19 | `2bd2c8f` | #36, #87, #21, #117, #129 | boogi-woogi #36 + jaeyeongjo #87 양 단계 완성 (2명 추가, **양 단계 35명**) + 새 1단계 reviewees 3명 (hyemdooly/parkjiminnnn/rosemin928). **신규 reviewer 1명 (woowahan-dino) → 누적 13명**. **2025년 코호트 신규 합류 (2 PR: parkjiminnnn/rosemin928) — 셀프 체크리스트 PR 본문 + 모든 스레드 학생 자가 답변 + 커밋 SHA 첨부** |
+| 20 | (commit pending) | #138, #139, #35, #126, #130 | rosemin928 #138 + parkjiminnnn #139 + hyemdooly #35 양 단계 완성 (3명 추가, **양 단계 38명**) + 새 1단계 reviewees 2명 (doabletuple/medAndro). **신규 reviewer 1명 (hyemdooly) → 누적 14명**. **2025년 코호트 5 PR 코퍼스 형성 (parkjiminnnn/rosemin928/doabletuple/medAndro = 4 reviewees)**. **메타 케이스 2번째: hyemdooly = 2023 학생 (#21·#35) → 2025 reviewer (#130) 2년 진화 (krrong 1년 진화에 이어)** |
 
-reviewee 디렉토리 56개 (양 단계 완성 35명 + 1단계만 21명) + HANDOVER. **양 단계 모두 분석된 reviewees (35명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282, chaehyuns, songpink, s6m1n, rhthrhrl0, chws0508, krrong, SeongHoonC, murjune, junseo511, Yunseok-Nam, Hevton, RightHennessy, **boogi-woogi (batch 19), jaeyeongjo (batch 19)**.
+reviewee 디렉토리 58개 (양 단계 완성 38명 + 1단계만 20명) + HANDOVER. **양 단계 모두 분석된 reviewees (38명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282, chaehyuns, songpink, s6m1n, rhthrhrl0, chws0508, krrong, SeongHoonC, murjune, junseo511, Yunseok-Nam, Hevton, RightHennessy, boogi-woogi, jaeyeongjo, **hyemdooly (batch 20), rosemin928 (batch 20), parkjiminnnn (batch 20)**.
 
-**reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95, @KwonDae, @BeokBeok, @galcyurio, @ghojeong, @woowahan-leah, **@woowahan-dino (디노, batch 19 신규)** — *총 13 reviewer*.
+**reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95, @KwonDae, @BeokBeok, @galcyurio, @ghojeong, @woowahan-leah, @woowahan-dino, **@hyemdooly (둘리, batch 20 신규 = 학생 → reviewer 진화)** — *총 14 reviewer*.
 
-**메타 학습 케이스:**
-- 학생 krrong (PR #32) = PR #148·#151 의 reviewer 본인 — 학생/reviewer 동시 등장.
-- **2025년 코호트 진입 (batch 19)**: parkjiminnnn #117 + rosemin928 #129 = *모바일 안드로이드 7기* + *셀프 체크리스트 PR 본문 스타일* + *모든 스레드 학생 자가 답변 + 커밋 SHA 첨부 모범*. **3 시기 코호트 합류** (2023년 3월 / 2024 / 2025).
+**메타 학습 케이스 (2건):**
+- 학생 krrong (PR #32) = PR #148·#151 의 reviewer 본인 (2023 → 2024 1년 진화).
+- **학생 hyemdooly (PR #21·#35) = PR #130 의 reviewer 본인 (2023 → 2025 2년 진화, batch 20 신규)**.
+- **2025년 코호트 5 PR 코퍼스 형성** (batch 19: parkjiminnnn #117 + rosemin928 #129 + batch 20: doabletuple #126 + medAndro #130 + rosemin928 #138 + parkjiminnnn #139) = *모바일 안드로이드 7기* + *셀프 체크리스트 PR 본문 스타일* + *모든 스레드 학생 자가 답변 + 커밋 SHA 첨부 모범*. **3 시기 코호트 합류** (2023년 3월 / 2024 / 2025).
 
 ### 남은 작업
 
@@ -597,6 +599,135 @@ batch 13 (#98, #95, #99, #23, #26) 에서 새로 발견된 패턴:
   - 2024 코호트: #71 Hogu59 (10), #126 doabletuple (18), #130 medAndro (25), #118 gahyunkim (18), #121 devfeijoa (24), #109 cucumber99 (25), #113 jiyuneel (22)
   - 2023 코호트: #19 briandr97 (14)
 - **최종 정리 진입 매우 강력 권장** — *batch 19 까지 양 단계 35명 + 1단계 21명 = **91 PR + 13 reviewer + 160+ 룰 후보***. **3 시기 코호트 합류 (2023·2024·2025) + 메타 어휘 완전 정점**. **추가 batch 한계 효용 매우 작음**. 
+
+### batch 21 후보 (다음 세션)
+
+- **양 단계 완성 우선** — 1단계만 분석 reviewees 의 2단계 PR 후보 (≥10 thread):
+  - doabletuple #142 (디랙 2단계, 20 thread) — **가치 있음**
+  - medAndro #143 (메다 2단계, 19 thread) — **가치 있음**
+  - Hogu59 #96 (악어 2단계, 28 thread) — **가치 있음** (1단계 #71 = 10 thread 적음, 2단계 우선)
+  - gahyunkim #141 (조이 2단계, 21 thread) — **가치 있음**
+  - jiyuneel #140 (포르 2단계, 16 thread) — **가치 있음**
+- **신규 1단계** (≥10 thread, 미분석):
+  - 2024 코호트: #109 cucumber99 (25), #113 jiyuneel (22), #118 gahyunkim (18), #121 devfeijoa (24)
+  - 2023 코호트: #19 briandr97 (14)
+- **권장 batch 21**: doabletuple #142 + medAndro #143 (2025 코호트 양 단계 완성 2개) + 새 1단계 3개 (예: #109 cucumber99 + #113 jiyuneel + #118 gahyunkim)
+
+### §20 신규 안티패턴 (batch 20, 5 PR)
+
+batch 20 (#138, #139, #35, #126, #130) 에서 신규/강화 안티패턴:
+
+| 패턴 | 등장 PR 수 | MCP 룰 후보 |
+|---|---|---|
+| **PR 본문 자가 의문 + reviewer 라인 인용 + 답변** | 3+ (#35·#126·#138) | ⭐⭐⭐ — `pr-body-question-explicit-reviewer-quote` 강화 |
+| **학생 → reviewer 진화 메타 케이스 2번째 (hyemdooly 2년)** | 2+ (krrong + hyemdooly) | ⭐⭐⭐ — `student-to-reviewer-evolution-meta` 강화 |
+| **2025 코호트 5 PR 코퍼스 형성 (셀프 체크리스트 + 모든 스레드 commit SHA + 학생 자가 의문 풍부)** | 5 (#117·#129·#138·#126·#130) | ⭐⭐⭐ — 코호트 형성 |
+| **reviewer 자가 한계 강한 어휘 인정 + 사과** | 1 (#130) | ⭐⭐ — `reviewer-self-limitation-explicit-apology` 신규 |
+| **value class + @JvmInline = Kotlin 어휘 자가 학습** | 1 (#138) | ⭐⭐ — `value-class-application-and-rationale` 신규 |
+| **require 예외 vs runCatching 재입력 (graceful retry)** | 2+ (#129·#138) | ⭐⭐ — `require-exception-vs-graceful-retry` 신규 |
+| **super 키워드 = 공통 로직 + 자식 확장 (4 스레드 학습)** | 1 (#138) | ⭐⭐ — `super-keyword-for-shared-logic` 신규 |
+| **재귀 함수 + tailrec = 명령형 → 함수형** | 2+ (#138·#117) | ⭐⭐ — `recursive-vs-while-functional` 신규 |
+| **객체 소유 vs 매개변수 전달 구분** | 1 (#138) | ⭐⭐ — `object-ownership-vs-parameter-passing` 신규 |
+| **형식 규칙 부산물 인공 객체 자가 비판 (BlackJackTable 자가 제거)** | 1 (#138) | ⭐⭐ — `form-rule-artificial-grouping-self-critique` 신규 |
+| **인스턴스 변수 제약 부산물 묶음** | 7+ (#133·#88·#132·#136·#93·#87·#138) | ⭐⭐ — `instance-variable-limit-artificial-grouping` 강화 |
+| **lazy init companion vs instance pool** | 1 (#138) | ⭐ — `lazy-init-companion-vs-instance-pool` 신규 |
+| **현실 메타포 (외부 장치 X = 참가자 자가 판단)** | 10+ | ⭐⭐⭐ — `metaphor-fidelity-locator` 강화 |
+| **시그니처 차이 = 추상화 불가 + 학생/reviewer 자가 한계 인정** | 1 (#126) | ⭐⭐ — `abstract-method-blocked-by-signature-divergence` 신규 |
+| **변수명 = 타입 이름 회피 + 도메인 어휘 (학생 자가 4 안 분석)** | 2+ (#117·#126) | ⭐ — `variable-name-by-type-vs-meaning` 신규 |
+| **비즈니스 로직 vs Controller 로직 구분 (카드 N장 공개)** | 3+ (#129·#138·#126) | ⭐⭐ — `business-logic-vs-controller-logic` 강화 |
+| **변경 가능성 = View 책임 지표** | 1 (#126) | ⭐⭐ — `change-impact-as-locus-criteria` 신규 |
+| **InputView 입력 안내 출력 = OK (분리 엄격성 트레이드오프)** | 1 (#126) | ⭐ — `input-view-output-strict-separation` 신규 |
+| **객체 위치 = 변경 영향 범위 (Choice 도메인 vs View)** | 1 (#126) | ⭐ — `object-locus-by-change-impact` 신규 |
+| **상태 플래그 vs 도메인 상태 판단 (initialHandShown)** | 1 (#126) | ⭐ — `state-flag-vs-domain-state-judgement` 신규 |
+| **부생성자 (vararg cards) = 테스트 fixture 의도** | 2+ (#126·#130) | ⭐ — `test-fixture-secondary-constructor` 신규 |
+| **enum reverse() vs operator fun not()** | 2+ (#36·#126) | ⭐ — `enum-reverse-method-vs-operator-not` 신규 |
+| **Kotlin stdlib 확장 함수 활용 (filterIsInstance, getOrNull)** | 4+ (#117·#138·#126·#139) | ⭐⭐ — `kotlin-stdlib-extension-application` 신규 |
+| **컴파일 시 invariant 강제 (생성자 타입 분리)** | 5+ (#129·#79·#92·#48·#126) | ⭐⭐ — `compile-time-singleton-vs-runtime-filter` 강화 |
+| **결과 통계 위치 (Dealer vs Players vs 외부)** | 1 (#126) | ⭐ — `result-aggregation-locator` 신규 |
+| **블랙잭 룰 정확성 정점 (`<` vs `<=` 양가성)** | 15+ ⭐⭐⭐ | `blackjack-rule-fidelity-comparison` 강화 |
+| **Singleton Deck 안티패턴 4 가지 자가 인지** | 19+ (#130 누적 정점) | ⭐⭐⭐ — `singleton-deck-via-companion` 강화 |
+| **테스트 = 동작 명세 + 부작용 검증** | 1 (#130) | ⭐ — `test-side-effect-verification` 신규 |
+| **YAGNI 위반 자가 인지 vs 제거 비용 (Translator)** | 2+ (#146·#130) | ⭐ — `yagni-violation-removal-cost` 신규 |
+| **도메인 룰 상수 위치 = 도메인** | 1 (#130) | ⭐ — `domain-constant-locator` 신규 |
+| **enum.ordinal vs 커스텀 orderNumber** | 1 (#130) | ⭐ — `enum-ordinal-vs-custom-property` 신규 |
+| **Card 인덱스 기반 생성 vs 도메인 의미 누수** | 1 (#130) | ⭐ — `card-index-vs-card-identity` 신규 |
+| **Boolean 메서드 의미 반전 (isDrawFinish 16 이하 종료)** | 3+ (#117·#139·#130) | ⭐⭐ — `boolean-method-semantic-inversion` 신규 |
+| **클래스 명 vs 표준 라이브러리 충돌 (Number)** | 1 (#130) | ⭐ — `class-name-vs-stdlib-collision` 신규 |
+| **상태 계산 위치 (enum companion 정적 vs HandCards 자가)** | 1 (#130) | ⭐ — `state-calculation-locator` 신규 |
+| **DSL 활용 시점 (여러 번 + 테스트 fixture)** | 1 (#35) | ⭐ — `dsl-applicability-criteria` 신규 |
+| **Kotlin 예외 처리 4 원칙 + 외부글 (Elizarov)** | 3+ (#129·#138·#35) | ⭐⭐ — `kotlin-exception-handling-strategy` 신규 |
+| **Dealer 수익 = Players 합 부호 반전** | 6+ | ⭐⭐ — `dealer-profit-as-negated-player-sum` 강화 |
+| **Domain layer = 가장 테스트 쉬움 = 로직 우선 위치** | 3+ (#35·#87·#129) | ⭐⭐ — `domain-layer-testability-priority` 신규 |
+| **UI 재입력 + Domain 검증 = MVC 의존 방향 정공** | 2+ (#35·#129) | ⭐ — `retry-loop-locator-ui-vs-domain` 신규 |
+| **블랙잭 0.5 vs 1.5 모델 (순수익 vs 총 받음)** | 1 (#35) | ⭐ — `blackjack-payout-vs-profit-model` 신규 |
+| **PUSH vs DRAW 도메인 어휘** | 1 (#35) | ⭐ — `domain-vocabulary-fidelity` 신규 |
+| **HIT_STANDARD_POINT = 17 명명 정확성** | 1 (#35) | ⭐ — `dealer-stand-threshold-naming` 신규 |
+| **private constructor + companion object factory** | 1 (#35) | ⭐ — `private-constructor-with-static-factory` 신규 |
+| **set prefix vs create prefix** | 1 (#35) | ⭐ — `set-prefix-vs-create-prefix` 신규 |
+| **information-locator-as-responsibility** | 1 (#35) | ⭐ — `information-locator-as-responsibility` 신규 |
+| **indent 깊이 = 함수/지역 변수 분리** | 1 (#35) | ⭐ — `indent-depth-reduction` 신규 |
+| **boolean 메서드 N개 분리 = when 분기 중복** | 1 (#35) | ⭐ — `boolean-method-decomposition-redundancy` 신규 |
+| **이름 부연설명 회피 (current/total)** | 2+ (#117·#139) | ⭐ — `name-redundant-qualifier` 신규 |
+| **이전 단계 코드 잔재 정리 (abs 자가 정정)** | 1 (#139) | ⭐ — `dead-logic-from-previous-stage` 신규 |
+| **함수 합성 동치 = 추상화 의도 X** | 1 (#117) | ⭐ — `function-decomposition-creates-identity` 신규 |
+| **컬렉션 이름 vs 람다 인자 이름 일관성** | 1 (#139) | ⭐ — `collection-name-vs-lambda-element-naming` 신규 |
+| **학생 자가 한계 4 종 명시 (시간 부족 인정)** | 2+ (#130·#36·#129·#138) | ⭐⭐ — `student-self-limitations-explicit` 신규 |
+| **페어 학습 + 외부 PR 인용** | 1 (#130) | ⭐ — `peer-learning-cross-pr-reference` 신규 |
+| **이전 미션 리뷰 재발 (학습 시간성 한계)** | 1 (#130) | ⭐ — `repeated-feedback-across-missions` 신규 |
+| **production vs test 코드 분리** | 1 (#130) | ⭐ — `production-vs-test-code-separation` 신규 |
+| **abstract class + abstract 메서드 유무 = open class 동치** | 5+ | ⭐⭐ — `abstract-without-abstract-method` 강화 |
+| **PR 본문 자가 의문 답변 가능성 낮음 (PR #139)** | 1 (#139) | ⭐ — `pr-body-question-visibility-low` 신규 |
+| **반환 타입 도메인화 (List<X> → X일급컬렉션)** | 8+ | ⭐⭐ — `return-type-domain-object` 신규 |
+| **Float vs Double 도메인 정확성** | 1 (#139) | ⭐ — `float-vs-double-domain-precision` 신규 |
+| **학생 오해 + reviewer 재명시** | 2+ (#117·#139) | ⭐⭐ — `student-misunderstanding-reviewer-restatement` 신규 |
+| **2 reviewer 의 반대 시점 (ProfitCalculator)** | 2 (#129·#139) | ⭐⭐⭐ — `result-decider-external-object-vs-participant-method` 신규 |
+| **추상화 활용 점검 + 학습 의도 회수** | 2+ (#129·#139) | ⭐⭐ — `abstraction-purpose-revisit` 신규 |
+| **CQS 위반 재발 (drawCount)** | 2+ (#117·#139) | ⭐ — `command-query-separation` 강화 |
+| **부모 추상 메서드 반환 의미 역방향 재발** | 2+ (#117·#139) | ⭐ — `method-return-semantic-asymmetry-between-subclasses` 강화 |
+| **var betAmount + betting() 호출 강제 X** | 9+ | ⭐⭐ — `lateinit-var-call-order-invariant` 강화 |
+| **stateless 클래스 매 호출 시 신규 인스턴스** | 2+ (#117·#139) | ⭐ — `stateless-class-vs-companion-object` 강화 |
+
+### batch 20 신규 reviewer
+
+- **@hyemdooly (둘리) — PR #130 — *14번째 reviewer + 학생 → reviewer 진화 (2년)*** — *krrong 결과 같은 메타 케이스 2번째*. **MCP `oh-my-oop` *학습 = 시간 두고 반복* 정점**.
+
+### batch 20 학생/reviewer 메타 케이스
+
+- **2025 코호트 5 PR 코퍼스 형성 (모바일 안드로이드 7기)** — *셀프 체크리스트 + 모든 스레드 commit SHA + 학생 자가 의문 풍부* 일관 패턴 (#117·#129·#138·#126·#130).
+- **hyemdooly 2년 학생 → reviewer 진화** — *2023 PR #21·#35 학생* → *2025 PR #130 reviewer*. *krrong 1년 진화 + hyemdooly 2년 진화 = 메타 케이스 2건*. **MCP `oh-my-oop` *학습 = 시간 두고 반복* 어휘 정점**.
+- **reviewer 자가 한계 강한 어휘 인정** — hyemdooly PR #130 *"정말정말 미안해요!!"* + KwonDae PR #126 *"저도 공통로직에만 집중하다보니 외부 입력을 받아야 한다는 것을 놓쳤네요 🫠"*.
+- **rosemin928 양 단계 완성 (#129 + #138)** — *PR 본문 자가 의문 2개 → 자가 책임 이동 + reviewer 권유 전 선제 적용* + *8 덱 도메인 룰 자가 학습*.
+- **parkjiminnnn 양 단계 완성 (#117 + #139)** — *진흙탕 코드 자가 인정 + 학생 자가 거절 + 대안 제시*.
+- **hyemdooly 양 단계 완성 (#21 + #35)** — *PR 본문 자가 의문 3개 + reviewer 라인 인용 답변 (PR #35) → 2년 후 reviewer 진화 (PR #130)*.
+
+### 누적 MCP 룰 후보 200+종 (batch 7-20)
+
+batch 7-20 합계 MCP 룰 후보가 **200종**을 넘어섰다. ⭐⭐⭐ 강한 후보 (batch 20 강화):
+
+- **`metaphor-fidelity-locator`** (10+ PR) — *현실 메타포 정합*. 핵심 어휘.
+- **`model-view-dependency-direction`** (11+ PR) — *MVC 절대 원칙*.
+- **`blackjack-rule-fidelity-comparison`** (15+ PR) — *블랙잭 룰 정확성*.
+- **`singleton-deck-via-companion`** (19+ PR) — *Singleton 안티패턴*. 정점.
+- **`student-to-reviewer-evolution-meta`** (2 사례) — *학생 → reviewer 진화* (krrong + hyemdooly).
+- **`pr-body-question-explicit-reviewer-quote`** (3+ PR) — *PR 본문 자가 의문 + reviewer 라인 인용 답변*.
+- **`virtual-object-vs-real-domain`** (6+ PR) — *Picker/Manager 가상 객체 회피*.
+- **`test-as-design-spec`** (3+ PR) — *Wirfs-Brock RDD 정점*.
+- **`enum-with-ui-value`** (17+ PR) — *enum UI 어휘 누수*.
+- **`is-operator-polymorphism-avoidance`** (6+ PR) — *SOLID OCP*.
+
+### 최종 정리 진입 시점 — batch 20 완료 후 **여전히 추가 가치 있음**
+
+| 지표 | batch 18 | batch 19 | batch 20 (현재) |
+|---|---|---|---|
+| 총 PR | 86 | 91 | **96** |
+| reviewer | 12 | 13 | **14** (hyemdooly 합류) |
+| 양 단계 완성 reviewees | 33 | 35 | **38** |
+| 1단계만 reviewees | 20 | 21 | **20** (hyemdooly/rosemin928/parkjiminnnn 양 단계 완성으로 이동) |
+| 코호트 시기 | 2023·2024 | 2023·2024·2025 (2 PR) | **2023·2024·2025 (5 PR)** |
+| 메타 케이스 | 1 (krrong 1년) | 1 (krrong 1년) | **2 (krrong + hyemdooly 2년)** |
+| MCP 룰 후보 | 130+ | 160+ | **200+** |
+
+→ **2025 코호트 5 PR 코퍼스 형성 + 학생 → reviewer 진화 메타 케이스 2건 + 200+ MCP 룰 후보**. *사용자 피드백: 적절한 데이터 1개라도 의미 있음 → 계속 진행 권장*.
 
 ### §18 신규 안티패턴 (batch 19, 5 PR)
 
