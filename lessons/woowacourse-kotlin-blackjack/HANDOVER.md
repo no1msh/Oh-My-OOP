@@ -37,13 +37,15 @@
 | 23 | `a8d6ba3` | #149, #153, #71, #68, #69 | cucumber99 #149 + devfeijoa #153 + Hogu59 #71 양 단계 완성 (3명 추가, **양 단계 45명**) + 새 1단계 reviewees 2명 (kkosang/gaeun5744 = 2024 코호트). **PR #71 ↔ #96 메타 케이스: 1년 늦은 2단계 학생 자가 학습 시간성** |
 | 24 | `00ab0b9` | #94, #102, #122, #144, #15 | kkosang #94 + gaeun5744 #102 + m6z1 양 단계 동시 (#122+#144) 완성 (3명 추가, **양 단계 48명**) + 새 1단계 sujin9 #15 (2023 코호트). **학생 자가 *셀프 코드 리뷰* (m6z1 PR #144) + 학생 자가 *컴파일 상수* / *open vs abstract* / *type-safe* 메타 어휘 정점** |
 | 25 | `0cd59b9` | #12, #38, #115, #154, #47 | EmilyCh0 #12+#38 양 단계 동시 (2023 코호트) + tobae-time #115+#154 양 단계 동시 (2025 모바일 안드로이드 7기) + sujin9 #47 2단계 완성 (#15 1단계 batch 24) — 3명 추가, **양 단계 51명**. **메타 케이스 정점**: tobae-time PR #154 본문 *조영호 「객체지향의 사실과 오해」 도서 자가 학습 인용* + *Rule god-object → 상태 패턴 학습 방향 전환* + reviewer laco-dev 양 PR 어휘 진화 (#115 *쎄게 양해* → #154 *성장 격려*) + sujin9 *커버리지 100 강박 자가 자각 + 메서드 참조 함수형 매커니즘 어휘* + EmilyCh0 *Tell-Don't-Ask 메시지 어휘 \"내 X 넘겨줄테니 Y 알려줘\" + 디미터 점(.) 2개 이하 + 입력 검증 재귀 호출 위험* |
-| 26 | (commit pending) | #30, #42, #62, #89, #54 | ippnsj #30+#42 양 단계 동시 (2023 코호트) + haeum808 #62+#89 양 단계 동시 (안드로이드 6기) + SeongHoonC #54 2단계 완성 (#16 1단계 batch 14) — 3명 추가, **양 단계 54명**. **메타 케이스 정점**: ghojeong reviewer 자가 반성 어휘 양 PR 연속 (#62 *forEach 강요 X 자가 수정* → #89 *미션 본 목표 복귀 + 갈아엎기 사과*) + haeum808 PR 본문 *flux 상태 아키텍쳐 자가 학습 + Slack DM 학습* + 함수형 프로그래밍 어휘 정점 (LISP single linked list + Lazy Evaluation + map·filter·reduce 3종 + HOF) + galcyurio *controller = presentation logic 4-layer 분류* + ippnsj *콜백 명명 도메인 입장* + SeongHoonC *프로퍼티 vs 함수 = 상태 vs 행동 + 불필요 위임 = 분석 부담 PR #72 반대 어휘* |
+| 26 | `4488d04` | #30, #42, #62, #89, #54 | ippnsj #30+#42 양 단계 동시 (2023 코호트) + haeum808 #62+#89 양 단계 동시 (안드로이드 6기) + SeongHoonC #54 2단계 완성 (#16 1단계 batch 14) — 3명 추가, **양 단계 54명**. **메타 케이스 정점**: ghojeong reviewer 자가 반성 어휘 양 PR 연속 (#62 *forEach 강요 X 자가 수정* → #89 *미션 본 목표 복귀 + 갈아엎기 사과*) + haeum808 PR 본문 *flux 상태 아키텍쳐 자가 학습 + Slack DM 학습* + 함수형 프로그래밍 어휘 정점 (LISP single linked list + Lazy Evaluation + map·filter·reduce 3종 + HOF) + galcyurio *controller = presentation logic 4-layer 분류* + ippnsj *콜백 명명 도메인 입장* + SeongHoonC *프로퍼티 vs 함수 = 상태 vs 행동 + 불필요 위임 = 분석 부담 PR #72 반대 어휘* |
 
-reviewee 디렉토리 72개 (양 단계 완성 54명 + 1단계만 18명) + HANDOVER. **batch 26 새 reviewees 2명 (ippnsj, haeum808) + SeongHoonC 양 단계 완성**. **양 단계 모두 분석된 reviewees (45명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282, chaehyuns, songpink, s6m1n, rhthrhrl0, chws0508, krrong, SeongHoonC, murjune, junseo511, Yunseok-Nam, Hevton, RightHennessy, boogi-woogi, jaeyeongjo, hyemdooly, rosemin928, parkjiminnnn, doabletuple, medAndro, jiyuneel, gahyunkim, **EmilyCh0 (batch 25), tobae-time (batch 25), sujin9 (batch 25)**. **2단계만 분석 (Hogu59 = 1단계 적음으로 단독, batch 22 추가)**.
+| 27 | (commit pending) | #37, #134, #101, #97, #150 | DYGames #37 + giovannijunseokim #134 + Junyoung-WON #101 + kimhm0728 #97 + chanho0908 #150 2단계 완성 — 5명 양 단계 완성, **양 단계 59명**. **메타 케이스 정점**: ghojeong reviewer 3 PR 어휘 누적 최정점 (#62 함수형 → #89 미션 본 목표 복귀 → #97 유지보수/성능/협력/메시지/판단 기준) + kimhm0728 PR 본문 *처음부터 다시 구현 고려* 학생 자가 의문 + DM 학습 + 학생 자가 *마음에 걸린다* 사전 자각 + chanho0908 학생 자가 *DIP/OCP/SRP 동시 위반 자가 자각 + 로버트 마틴 우발적 중복 인용 + 못난이 코드 자조* 정점 + giovannijunseokim *클라이언트 입장 어휘 + 학생 자가 트레이드오프 도표화* + Junyoung-WON *Tell-Don't-Ask 학생 자가 자각 + 메시지 어휘 narrate* + DYGames *원칙 = 가이드 / 절대 X* |
+
+reviewee 디렉토리 77개 (양 단계 완성 59명 + 1단계만 13명) + HANDOVER. **batch 27 5명 양 단계 완성** (DYGames + giovannijunseokim + Junyoung-WON + kimhm0728 + chanho0908). **batch 26 새 reviewees 2명 (ippnsj, haeum808) + SeongHoonC 양 단계 완성**. **양 단계 모두 분석된 reviewees (45명):** ijh1298, jinuemong, re4rk, tmdgh1592, wondroid-world, Leeyerin0210, moondev03, hwannow, oungsi2000, dpcks0509, ii2001, kmkim2689, junjange, hxeyexn, pingu244, inseonyun, whk06061, otter66, HamBeomJoon, yrsel, donghyun81, etama123, jerry8282, chaehyuns, songpink, s6m1n, rhthrhrl0, chws0508, krrong, SeongHoonC, murjune, junseo511, Yunseok-Nam, Hevton, RightHennessy, boogi-woogi, jaeyeongjo, hyemdooly, rosemin928, parkjiminnnn, doabletuple, medAndro, jiyuneel, gahyunkim, **EmilyCh0 (batch 25), tobae-time (batch 25), sujin9 (batch 25)**. **2단계만 분석 (Hogu59 = 1단계 적음으로 단독, batch 22 추가)**.
 
 **reviewer 다양성:** @laco-dev (페로로), @malibinYun (말리빈), @Gyuil-Hwnag (두루), @namjackson (잭슨), @lee-ji-hoon (지훈), @krrong (크롱), @vagabond95, @KwonDae, @BeokBeok, @galcyurio, @ghojeong, @woowahan-leah, @woowahan-dino, **@hyemdooly (둘리, batch 20 신규 = 학생 → reviewer 진화)** — *총 14 reviewer*.
 
-**메타 학습 케이스 (9건, batch 26 누적):**
+**메타 학습 케이스 (13건, batch 27 누적):**
 - 학생 krrong (PR #32) = PR #148·#151 의 reviewer 본인 (2023 → 2024 1년 진화).
 - 학생 hyemdooly (PR #21·#35) = PR #130 의 reviewer 본인 (2023 → 2025 2년 진화).
 - reviewer 다년 활동 1: malibinYun (말리빈) = 2024 PR 들의 reviewer (PR #95 등) + 2025 PR #118·#141 reviewer.
@@ -53,6 +55,10 @@ reviewee 디렉토리 72개 (양 단계 완성 54명 + 1단계만 18명) + HANDO
 - **EmilyCh0 (batch 25, PR #12 → #38)** = 1단계 단방향 가이드 (학생 자가 답변 0) → 2단계 학생 자가 답변 9 thread + PR 본문 자가 학습 진화 명시 — **학습 가시화 진화 메타**.
 - **tobae-time (batch 25, PR #115 → #154) 정점** = *Rule god-object 학생 자가 시도* → reviewer 4 thread 반복 비판 + *"쎄게 피드백 양해"* → 학생 자가 **조영호 「객체지향의 사실과 오해」 도서 자가 학습 인용** → 2단계 상태 패턴 도입 (불완전 인정) → reviewer laco-dev 어휘 진화 *"성장 과정 격려 + 어려움 인정"*. **학습 방향 전환 + 도서 자가 학습 + reviewer 어휘 진화 3중 메타** — *MCP `oh-my-oop` 도구 영감 도서 학생 자가 인용으로 도구 가치 검증*.
 - **haeum808 (batch 26, PR #62 → #89) 정점** = 1단계 ghojeong reviewer *index loop = LISP 절차지향 + 함수형 3 도구 (map·filter·reduce) + HOF* 어휘 → reviewer *forEach 강요 X 자가 수정* → 2단계 학생 자가 *reviewer 추천 flux 상태 아키텍쳐 자가 학습 + Slack DM 학습 자가 어휘* → reviewer *반응형 덕후 자가 반성 + 미션 본 목표 복귀 + 갈아엎기 사과* → 학생 자가 도전 → reviewer 감사 + 함수형 어휘 진화 (map 능숙). **reviewer 자가 반성 어휘 양 PR 연속 + 학생 자가 학습 + reviewer 갈아엎기 사과 + 학생 도전 4중 메타 정점**.
+- **giovannijunseokim (batch 27, PR #106 → #134)** = 1단계 *언제 관점 깨는가 학생 자가 의문 (PR #106 메타)* → 2단계 *클라이언트 입장 어휘 학생 자가 정착 + 학생 자가 트레이드오프 도표화 (val mutableList vs var list 결론 명시) + abstract vs interface 자가 분류*. **학생 측 메타 어휘 학습 정점**.
+- **Junyoung-WON (batch 27, PR #80 → #101)** = 1단계 *콜백 명명 View 동사* → 2단계 *Tell-Don't-Ask 학생 자가 자각 정점 (객체 자유 + 메시지 요청) + 디미터 후 역할/책임 명확화 자가 자각 + 학생 자가 메시지 narrate*. **메시지 어휘 학생 측 자가 자각 정점**.
+- **kimhm0728 (batch 27, PR #72 → #97) 정점** = 1단계 *controller-classification-criteria* + 풍부 메타 → 2단계 PR 본문 *처음부터 다시 구현 고려 학생 자가 의문* + ghojeong reviewer 3 PR 어휘 누적 최정점 (유지보수/성능/협력/메시지/판단 기준) + Slack DM 활발 + 6개 자가 학습 진화 명시 + 학생 자가 *마음에 걸린다* 사전 자각. **학생 자가 *처음부터 다시* + DM 학습 + ghojeong 어휘 최정점 결합**.
+- **chanho0908 (batch 27, PR #123 → #150) 정점** = 2단계 학생 자가 *DIP/OCP/SRP 동시 위반 자가 자각 + 로버트 마틴 우발적 중복 인용 + 못난이 코드 자조* + reviewer 학생 열정 인정 어휘. **학생 자가 SOLID 인용 + 외부 권위 인용 누적 4 PR (조영호·로버트 마틴·객체 지향 생활 체조·엘레강트 오브젝트) 정점**.
 - **2025년 코호트 12 PR 코퍼스 정점** (batch 19-25 누적 + tobae-time #115·#154 추가) = *모바일 안드로이드 7기 9 reviewees* + *셀프 체크리스트 PR 본문 스타일* + *모든 스레드 학생 자가 답변 + 커밋 SHA 첨부 모범*. **3 시기 코호트 합류** (2023년 3월 / 2024 / 2025).
 
 ### 남은 작업
@@ -647,6 +653,101 @@ batch 13 (#98, #95, #99, #23, #26) 에서 새로 발견된 패턴:
 - **5~9 그룹 짧은 분석** (14 PR, 400-600줄/PR):
   - 가장 풍부한 thread 7-9 PR 부터 시도
 - **최종 정리** 또는 **5~9 진입** 결정 시점.
+
+### §27 신규 안티패턴 (batch 27, 5 PR)
+
+batch 27 (#37, #134, #101, #97, #150) 에서 신규/강화 안티패턴:
+
+| 패턴 | 등장 PR 수 | MCP 룰 후보 |
+|---|---|---|
+| **`process-in-controller-vs-main-testability`** (`process()` Controller vs main = 테스트 가능성) | 1 (#37) | ⭐⭐⭐ 신규 |
+| **`principle-as-guide-not-absolute`** (3 인스턴스 변수 원칙 = 가이드 / 절대 X) | 4 (#37·#38·#62·#43) | ⭐⭐⭐ 정점 (누적 4 PR 단일 답 거부) |
+| **`forced-class-division-without-role`** (역할 없는 클래스 분리 거부) | 2 (#37·#42) | ⭐⭐⭐ (누적 2 PR) |
+| **`operator-overload-times-domain`** (`times()` 도메인 어휘) | 3 (#37·#47·#150) | ⭐⭐ (누적 3 PR) |
+| **`output-fake-with-print-callback`** (Fake 출력 = `onPrint()` 고차함수) | 1 (#37) | ⭐⭐⭐ 신규 |
+| **`unnecessary-let-as-readability-loss`** (`let()` = 가독성 손실) | 2 (#37·#42) | ⭐⭐ (누적 2 PR) |
+| **`student-self-pros-cons-tabulation`** (학생 자가 트레이드오프 도표화 + 결론 명시) | 1 (#134) | ⭐⭐⭐ 신규 정점 |
+| **`client-perspective-vocabulary`** (클라이언트 입장 vs 구현자 입장 학생 자가 자각) | 1 (#134) | ⭐⭐⭐ 신규 정점 |
+| **`abstract-vs-interface-criteria`** (interface = 다형성/역할 / abstract = 코드 중복+강력 도구) | 1 (#134) | ⭐⭐⭐ 신규 |
+| **`state-pattern-no-type-casting-hidden-requirement`** (블랙잭 = 타입 캐스팅 X 숨겨진 요구사항) | 4 (#134·#154·#42·#73) | ⭐⭐⭐ 정점 (누적 4 PR) |
+| **`score-vs-blackjack-score-locus`** (Score = 일반 / 블랙잭 룰 = ParticipantState) | 1 (#134) | ⭐⭐⭐ 신규 |
+| **`responsibility-shift-side-effect-discovery`** (책임 이전 시 다른 클래스 캡슐화 부작용 자가 발견) | 1 (#134) | ⭐⭐⭐ 신규 |
+| **`reviewer-mission-time-bound-conclusion-vocabulary`** (학습 시간 한계 → 미션 마무리 + 재구현 권유) | 2 (#134·#115) | ⭐⭐⭐ (누적 2 PR) |
+| **`pr-body-prior-feedback-applied-list`** (1단계 영감 자가 적용 리스트) | 1 (#134) | ⭐⭐ |
+| **`state-hierarchy-inverted-relationship`** (상태 계층 관계 역전 시그널) | 1 (#134) | ⭐⭐ |
+| **`tell-dont-ask-student-self-realization-vocabulary`** (학생 자가 *객체 자유 + 메시지 요청*) | 3 (#101·#38·#154) | ⭐⭐⭐ 정점 (누적 3 PR) |
+| **`responsibility-clarity-via-demeter`** (학생 자가 *디미터 후 역할/책임 명확화* 자가 자각) | 1 (#101) | ⭐⭐⭐ 신규 |
+| **`message-vocabulary-student-self-narration`** (학생 자가 *메시지를 날린다* narrate) | 1 (#101) | ⭐⭐⭐ 신규 — MCP 핵심 가치 |
+| **`comment-removal-as-refactoring-feedback`** (학생 자가 *리팩터링 후 주석 불필요* 자가 자각) | 1 (#101) | ⭐⭐⭐ 신규 |
+| **`single-traversal-for-mutual-result`** (한 번의 순회로 양측 승패+수익) | 1 (#101) | ⭐⭐⭐ 신규 |
+| **`naming-from-self-perspective-consistency`** (본인 중심 명명 일관) | 1 (#101) | ⭐⭐⭐ 신규 |
+| **`companion-object-fn-for-reuse-instead-of-instantiation`** (companion object function = 인스턴스화 불필요) | 3 (#101·#154·#18) | ⭐⭐⭐ (누적 3 PR) |
+| **`init-fn-reusable-vs-init-only`** (init 함수 = 재사용 vs 최초만 + 흐름 정합) | 1 (#101) | ⭐⭐ |
+| **`factory-fn-for-named-state-reuse`** (win/push/defeat 생성자 함수 = 가독성 + 재사용) | 1 (#101) | ⭐⭐ |
+| **`maintainability-over-performance-priority`** (유지보수 > 성능 우선순위 + 개인 경험) | 1 (#97) | ⭐⭐⭐ 신규 정점 |
+| **`code-judgment-criteria-test-fn-clarity`** (판단 기준 = 테스트 가능 + 함수 명확) | 1 (#97) | ⭐⭐⭐ 신규 정점 |
+| **`public-fn-as-message-collaboration-vocabulary`** (public = 메시지 통로 + 협력 관계) | 3 (#97·#42·#101) | ⭐⭐⭐ 정점 (누적 3 PR) |
+| **`static-fn-as-misplaced-utility`** (static 함수 = 어느 객체에도 무관 유틸) | 2 (#97·#80) | ⭐⭐⭐ (누적 2 PR) |
+| **`branch-multiplication-as-test-burden-signal`** (분기 N×M = 테스트 부담 → 상태 패턴) | 5 (#97·#154·#42·#89·#134) | ⭐⭐⭐ 정점 (누적 5 PR) |
+| **`result-as-state-not-final-vocabulary`** (GameResult → GameState 진행 중 어휘) | 1 (#97) | ⭐⭐⭐ 신규 |
+| **`reviewer-feedback-prioritization-meta`** (reviewer 피드백 우선순위 메타) | 1 (#97) | ⭐⭐⭐ 신규 |
+| **`reviewer-mid-mission-direction-regret`** (reviewer 자가 *방향 안내 부족 아쉬움*) | 7 (#97·#62·#89·#115·#73·#106·#54) | ⭐⭐⭐ MCP 핵심 가치 최정점 (누적 7 PR) |
+| **`pr-body-restart-from-scratch-consideration`** (학생 자가 *처음부터 다시 구현 고려*) | 3 (#97·#154·#89) | ⭐⭐⭐ (누적 3 PR) |
+| **`time-bound-priority-package-vs-design`** (시간 한계 우선순위 어휘) | 3 (#97·#115·#134) | ⭐⭐ |
+| **`reviewer-personal-experience-vocabulary`** (reviewer 안드로이드 경험 어휘) | 2 (#97·#62) | ⭐⭐ |
+| **`student-SOLID-violation-self-realization`** (학생 자가 DIP/OCP/SRP 위반 동시 자가 자각) | 1 (#150) | ⭐⭐⭐ 신규 정점 |
+| **`abstract-class-knowing-concretes-anti-pattern`** (추상 클래스가 구현체 안다 = DIP 위반) | 1 (#150) | ⭐⭐⭐ 신규 |
+| **`accidental-vs-essential-duplication-distinction`** (우발적 중복 vs 진짜 중복 자가 자각) | 1 (#150) | ⭐⭐⭐ 신규 정점 |
+| **`student-cites-robert-martin`** (학생 자가 로버트 마틴 인용 — 외부 권위 누적 4 PR) | 4 (#150·#154·#151·#136) | ⭐⭐⭐ 정점 (누적 4 PR) |
+| **`interface-without-polymorphism-purpose-loss`** (인터페이스 분리 = 다형성 X = 의미 퇴색) | 3 (#150·#80·#134) | ⭐⭐⭐ (누적 3 PR) |
+| **`polymorphism-vs-when-branch-on-concrete`** (when 분기 = 구현체 의존 / 다형성 해결) | 6 (#150·#154·#97·#42·#73·#101) | ⭐⭐⭐ 정점 (누적 6 PR) |
+| **`feature-spec-before-impl-habit-vocabulary`** (기능 명세서 우선 습관) | 1 (#150) | ⭐⭐ |
+| **`reviewer-student-passion-acknowledgment`** (학생 열정 → reviewer 자가 깊은 질문) | 1 (#150) | ⭐⭐ |
+| **`pr-body-student-design-focus-explicit`** (학생 자가 설계 초점 PR 본문 명시) | 1 (#150) | ⭐⭐ |
+| **`student-bug-discovery-with-screenshot`** (학생 자가 버그 발견 + 스크린샷) | 1 (#150) | ⭐⭐ |
+| **`responsibility-of-judging-no-single-answer`** (승패 책임 위치 = 정답 없음) | 1 (#43) | ⭐⭐⭐ |
+| **`controller-runs-game-business-encapsulation`** (Controller 어휘 누적 9 PR) | 9 (#37·#42·#48·#47·#72·#43·#54·#134·#150·#97) | ⭐⭐⭐ 정점 |
+
+### batch 27 메타 어휘 (MCP `oh-my-oop` 핵심 가치 정점)
+
+- **`maintainability-over-performance-priority`** (ghojeong #97) — *"저는 쉬운 유지보수를 최우선 가치로 개발하고, 성능은 문제가 되었을 경우에만 최적화를 합니다. (...) 성능이 느려서 문제가 되는 경우보다 유지보수가 어려워서 추가 기능 개발이 느려지는 게 문제가 되는 경우가 훨씬 많았기 때문입니다."* — **유지보수 우선 어휘 정점**.
+- **`public-fn-as-message-collaboration-vocabulary`** (ghojeong #97) — *"public 하게 공개된 함수는 생성자를 포함하여, 다른 객체에게 소통의 통로가 되는 메시지 입니다."* — **메시지 어휘 정점**.
+- **`tell-dont-ask-student-self-realization-vocabulary`** (Junyoung-WON #101) — *"객체가 내부에서 무엇을 하고 어떻게 처리하는지는 객체의 자유에 맡기고, state에서는 한번의 메시지로 요청만 보내도록 하면 더욱 객체지향적이겠군요!"* — **학생 자가 Tell-Don't-Ask 자가 자각 정점**.
+- **`student-SOLID-violation-self-realization`** (chanho0908 #150) — *"이 경우 저는 추상화에 의존하는줄 알았지만 사실은 구현체에 의존하고 있었고 DIP를 위배하는 것 같습니다 (...) 그리고 이런 행위는 OCP도 위반하는 행위라고 생각합니다! (...) SRP를 준수할 수 있다고 생각해요! 나열하고 보니 아주 아주 못난이 코드였네요"* — **학생 자가 SOLID 3종 동시 위반 자가 자각 + 자조 어휘 정점**.
+- **`accidental-vs-essential-duplication-distinction`** (chanho0908 #150) — *"여기서 제가 생각하는 중복은 로버트 마틴이 주장한 \"우발적 중복\"에 해당한다고 생각합니다."* — **학생 자가 외부 권위 인용 + 우발적 중복 자가 자각 어휘**.
+- **`client-perspective-vocabulary`** (giovannijunseokim #134) — *"`Card`를 사용하는 클라이언트 입장에서는 생성자를 부르고 있는 것인지, `invoke` 함수를 부르고 있는 것인지 알아볼 필요가 없다고 생각해요."* — **학생 자가 관점 전환 어휘 정점**.
+- **`principle-as-guide-not-absolute`** (galcyurio #37) — *"원칙을 따르는 것은 좋지만 절대적으로 항상 올바른 원칙은 없기에 모든 경우에 적용시켜서는 안됩니다."* — **단일 답 거부 어휘 누적 4 PR 정점**.
+- **`reviewer-mid-mission-direction-regret`** (ghojeong #97) — *"제가 더 일찍 방향을 잡아주지 못해서 살짝 아쉬움이 남네요. 모든 내용을 학습하지 못한 것에 크게 마음 두지 마시고"* — **reviewer 자가 반성 어휘 누적 7 PR 최정점**.
+
+### batch 27 누적 정점 안티패턴 (⭐⭐⭐ 강한 신규 후보)
+
+batch 7-27 합계 MCP 룰 후보가 **500종+**을 넘어섰다. ⭐⭐⭐ 강한 후보 (batch 27 강화):
+- `reviewer-mid-mission-direction-regret` (reviewer 자가 반성 어휘 누적 7 PR 최정점)
+- `tell-dont-ask-student-self-realization-vocabulary` (Tell-Don't-Ask 학생 자가 자각 누적 3 PR)
+- `student-SOLID-violation-self-realization` (학생 자가 SOLID 3종 동시 위반 자가 자각)
+- `student-cites-robert-martin` + 학생 자가 외부 권위 인용 누적 4 PR (조영호·로버트 마틴·객체 지향 생활 체조·엘레강트 오브젝트)
+- `client-perspective-vocabulary` + `student-self-pros-cons-tabulation` (학생 자가 정점 어휘)
+- `branch-multiplication-as-test-burden-signal` (분기 N×M 누적 5 PR)
+- `state-pattern-no-type-casting-hidden-requirement` (블랙잭 숨겨진 요구사항 누적 4 PR)
+- `polymorphism-vs-when-branch-on-concrete` (다형성 누적 6 PR)
+- `principle-as-guide-not-absolute` (단일 답 거부 누적 4 PR)
+- `maintainability-over-performance-priority` + `code-judgment-criteria-test-fn-clarity` + `public-fn-as-message-collaboration-vocabulary` (ghojeong 어휘 정점 3개)
+- `accidental-vs-essential-duplication-distinction` + `abstract-class-knowing-concretes-anti-pattern`
+- `responsibility-clarity-via-demeter` + `message-vocabulary-student-self-narration` (메시지 어휘 학생 측 정점)
+- `controller-runs-game-business-encapsulation` (Controller 어휘 누적 9 PR 최정점)
+- `pr-body-restart-from-scratch-consideration` (학생 자가 갈아엎기 고민 누적 3 PR)
+
+### 최종 정리 진입 시점 — batch 27 완료
+
+| 지표 | batch 26 | batch 27 (현재) |
+|---|---|---|
+| 양 단계 완성 | 54명 | **59명** (+5) |
+| reviewee 디렉토리 | 72 | **77** (+5) |
+| 누적 PR | 126 | **131** (+5) |
+| 메타 학습 케이스 | 9 | **13** (+4: giovannijunseokim/Junyoung-WON/kimhm0728/chanho0908) |
+| 누적 MCP 룰 후보 | 450+ | **500+** |
+| 2025 코호트 PR | 14 | **16** (+2: chanho0908 #123 1단계 batch 분석 시점 + #150 2단계) |
+| 누적 reviewer | 14 | 14 (galcyurio/malibinYun/vagabond95/ghojeong/lee-ji-hoon 재등장) |
 
 ### §26 신규 안티패턴 (batch 26, 5 PR)
 
