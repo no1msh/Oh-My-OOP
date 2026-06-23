@@ -55,6 +55,7 @@ describe("MCP server stdio integration", () => {
       "oop_diagram_generate",
       "oop_design_compare",
       "oop_design_validate",
+      "oop_conformance_check",
       "oop_state_read",
     ]) {
       expect(names).toContain(expected);

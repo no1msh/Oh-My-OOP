@@ -8,6 +8,7 @@ import { registerAlternatives } from "./alternatives.js";
 import { registerDiagram } from "./diagram.js";
 import { registerCompare } from "./compare.js";
 import { registerValidate } from "./validate.js";
+import { registerConformance } from "./conformance.js";
 import { registerState } from "./state.js";
 
 export function registerAllTools(server: McpServer): void {
@@ -20,5 +21,6 @@ export function registerAllTools(server: McpServer): void {
   registerDiagram(server);
   registerCompare(server);
   registerValidate(server);
+  registerConformance(server);
   registerState(server);
 }

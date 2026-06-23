@@ -29,8 +29,10 @@ export function registerDiagram(server: McpServer): void {
           await atomicWriteFile(written, mermaid);
         }
         return jsonResult(
-          { mermaid, path: written },
-          "```mermaid\n" + mermaid + "```",
+          { mermaid, path: written, next_step: "구현을 마치면 oop_conformance_check로 설계 적합성을 검토하세요." },
+          "```mermaid\n" + mermaid + "```\n\n" +
+            "> **다음 단계:** 이 설계대로 구현을 마치면 `oop_conformance_check`를 호출해 " +
+            "구현이 설계(책임·stereotype)에 부합하는지 검토하세요.",
         );
       } catch (e) {
         return errorResult((e as Error).message);
