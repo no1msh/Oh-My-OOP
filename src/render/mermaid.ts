@@ -22,25 +22,26 @@ export interface AnnotatedRelation extends RelationEdge {
   annotation?: EdgeAnnotation;
 }
 
-const HEADER_LINES = [
-  "classDiagram",
-  "  classDef added   fill:#d4f4dd,stroke:#1a7f37,stroke-width:2px",
-  "  classDef removed fill:#ffd7d5,stroke:#cf222e,stroke-width:2px,stroke-dasharray:4 2",
-  "  classDef changed fill:#fff8c5,stroke:#9a6700,stroke-width:2px",
-  "  classDef kept    fill:#f6f8fa,stroke:#8c959f",
-];
+// Mermaid의 classDiagram은 classDef/:::를 v10+에서만 지원한다.
+// GitHub·Notion·다수 IDE 뷰어는 v9 이하라, classDef가 한 줄이라도 들어가면
+// 다이어그램 전체가 "Parse error"로 죽는다(실측: 9.4.0에서 line 2 파싱 실패).
+// → 보편 호환을 위해 classDef/:::를 쓰지 않고, 모든 버전이 지원하는
+//   <<annotation>> 블록(클래스)과 라벨 접미사(관계)로 diff 상태를 표기한다.
+const HEADER_LINES = ["classDiagram"];
 
 function classDeclLine(c: AnnotatedClass): string {
-  const ann = c.annotation && c.annotation !== "kept" ? `:::${c.annotation}` : "";
-  return `  class ${c.name}${ann}`;
+  if (c.annotation && c.annotation !== "kept") {
+    // <<...>> 주석은 모든 Mermaid 버전이 지원 (classDef 색상 대체)
+    return `  class ${c.name} {\n    <<${c.annotation}>>\n  }`;
+  }
+  return `  class ${c.name}`;
 }
 
 function relationLine(r: AnnotatedRelation): string {
-  const trail =
-    r.annotation === "added" || r.annotation === "removed" || r.annotation === "changed"
-      ? `    %% ${r.annotation}`
-      : "";
-  return `  ${r.from} --> ${r.to} : ${r.message}${trail}`;
+  // 줄 끝 %% 주석은 일부 뷰어에서 라벨로 오파싱된다 → 라벨 접미사로 상태 표기.
+  const suffix =
+    r.annotation && r.annotation !== "kept" ? ` [${r.annotation}]` : "";
+  return `  ${r.from} --> ${r.to} : ${r.message}${suffix}`;
 }
 
 export function buildRelations(input: DiagramInput): RelationEdge[] {

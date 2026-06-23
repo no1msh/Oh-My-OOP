@@ -33,13 +33,17 @@ describe("diff & side-by-side", () => {
     expect(d.changed_relations.some((r) => r.from === "RacingGame" && r.before === "moveAll()" && r.after === "moveAll(strategy)")).toBe(true);
   });
 
-  it("buildSideBySide annotates added with :::added in After and emits two mermaid blocks", () => {
+  it("annotates added class with <<added>>, emits two blocks, and stays v9-compatible", () => {
     const d = diffDiagrams(parseMermaid(before), parseMermaid(after));
     const res = buildSideBySide(before, after, d);
-    expect(res.after_mermaid).toContain("MoveStrategy:::added");
+    // 추가된 클래스는 v10 전용 :::가 아니라 모든 버전 지원 <<added>> 블록으로 표기
+    expect(res.after_mermaid).toContain("class MoveStrategy {");
+    expect(res.after_mermaid).toContain("<<added>>");
+    expect(res.after_mermaid).not.toContain("classDef");
+    expect(res.after_mermaid).not.toContain(":::");
+    expect(res.before_mermaid).not.toContain("classDef");
     expect(res.side_by_side_markdown.match(/```mermaid/g)?.length).toBe(2);
     expect(res.side_by_side_markdown).toContain("## Before");
     expect(res.side_by_side_markdown).toContain("## After");
-    expect(res.before_mermaid).toContain("classDef removed");
   });
 });

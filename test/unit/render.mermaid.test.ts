@@ -30,12 +30,12 @@ describe("renderClassDiagram", () => {
     expect(zoo).toBeGreaterThan(apple);
   });
 
-  it("emits classDef definitions in the header", () => {
+  it("omits classDef/::: for broad Mermaid (v9) compatibility", () => {
+    // classDef/:::는 Mermaid v10+ 전용 — v9 뷰어(GitHub·Notion 등)에서 전체 렌더가 깨진다.
     const m = renderClassDiagram({ classes: [], collaborations: [] });
-    expect(m).toContain("classDef added");
-    expect(m).toContain("classDef removed");
-    expect(m).toContain("classDef changed");
-    expect(m).toContain("classDef kept");
+    expect(m.startsWith("classDiagram")).toBe(true);
+    expect(m).not.toContain("classDef");
+    expect(m).not.toContain(":::");
   });
 
   it("renders relations from collaborations using class names", () => {

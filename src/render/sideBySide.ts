@@ -66,8 +66,8 @@ export function annotateAfter(mermaid: string, diff: DesignDiff): string {
   return renderAnnotated({ classes, relations });
 }
 
-const LEGEND = `**범례:** 🟢 추가 (added) · 🔴 제거 (removed) · 🟡 변경 (changed) · ⚪ 유지 (kept)\n` +
-  `Mermaid는 엣지 색상이 불가하여 화살표 옆 \`%% added / %% removed / %% changed\` 주석으로 표기합니다.\n`;
+const LEGEND = `**범례:** 추가 (added) · 제거 (removed) · 변경 (changed) · 유지 (kept)\n` +
+  `클래스는 \`<<added>>/<<removed>>/<<changed>>\` 주석으로, 관계는 화살표 라벨 뒤 \`[added]/[removed]/[changed]\`로 표기합니다. (구버전 Mermaid 호환을 위해 classDef 색상은 쓰지 않습니다.)\n`;
 
 export function buildSideBySide(
   beforeMermaid: string,

@@ -1,12 +1,13 @@
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { resolveConfig } from "../config.js";
-import { listClasses, upsertClass, readClass, classExists } from "../io/classStore.js";
+import { upsertClass, readClass, classExists } from "../io/classStore.js";
+import { loadDesign } from "../io/design.js";
 import { snapshotMermaid } from "../io/history.js";
 import { workspacePaths } from "../config.js";
 import { readUtf8, pathExists } from "../io/workspace.js";
 import { classIdFromName } from "../domain/ids.js";
-import { StereotypeSchema, CollaboratorRefSchema } from "../domain/schemas.js";
+import { StereotypeSchema } from "../domain/schemas.js";
 import { nowIso } from "../io/frontmatter.js";
 import { jsonResult, errorResult } from "../util/mcp.js";
 
@@ -16,7 +17,8 @@ export function registerClasses(server: McpServer): void {
     {
       title: "Add or update a CRC card",
       description:
-        "이름, Stereotype, 책임(knowing/doing), 협력자를 가진 CRC 카드를 생성/수정합니다.",
+        "이름, Stereotype, 책임(knowing/doing)을 가진 CRC 카드를 생성/수정합니다. " +
+        "협력자(collaborators)는 여기서 받지 않습니다 — oop_collaboration_define으로 정의하면 자동 파생됩니다 (단일 진실 출처).",
       inputSchema: {
         id: z.string().optional(),
         name: z.string().min(1),
@@ -27,7 +29,6 @@ export function registerClasses(server: McpServer): void {
             doing: z.array(z.string()).default([]),
           })
           .default({ knowing: [], doing: [] }),
-        collaborators: z.array(CollaboratorRefSchema).default([]),
         from_use_cases: z.array(z.string()).default([]),
         notes: z.string().optional(),
         snapshot_label: z.string().optional(),
@@ -54,7 +55,8 @@ export function registerClasses(server: McpServer): void {
           name: args.name,
           stereotype: args.stereotype,
           responsibilities: args.responsibilities,
-          collaborators: args.collaborators,
+          // collaborators는 저장하되 항상 collaborations에서 파생된다(loadDesign). 생성 시 빈 배열.
+          collaborators: prev?.collaborators ?? [],
           provenance: {
             derived_from_use_cases:
               args.from_use_cases.length > 0
@@ -82,7 +84,8 @@ export function registerClasses(server: McpServer): void {
     },
     async () => {
       const config = resolveConfig();
-      const cards = await listClasses(config);
+      // loadDesign을 거쳐 collaborator_count가 파생값(collaborations 기준)과 일치하게 한다.
+      const { classes: cards } = await loadDesign(config);
       return jsonResult({
         classes: cards.map((c) => ({
           id: c.id,

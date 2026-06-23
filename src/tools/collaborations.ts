@@ -2,7 +2,6 @@ import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { resolveConfig } from "../config.js";
 import { upsertCollaboration } from "../io/collaborationStore.js";
-import { readClass, upsertClass, classExists } from "../io/classStore.js";
 import { snapshotMermaid } from "../io/history.js";
 import { workspacePaths } from "../config.js";
 import { readUtf8, pathExists } from "../io/workspace.js";
@@ -15,7 +14,7 @@ export function registerCollaborations(server: McpServer): void {
     "oop_collaboration_define",
     {
       title: "Define a collaboration (message between classes)",
-      description: "두 클래스 사이의 메시지 협력을 정의합니다. 두 클래스 카드에도 collaborators 목록을 동기화합니다.",
+      description: "두 클래스 사이의 메시지 협력을 정의합니다. 의존 관계의 정본(collaborations)에 기록되며, 각 클래스의 collaborators는 여기서 자동 파생됩니다.",
       inputSchema: {
         from: z.string().min(1),
         to: z.string().min(1),
@@ -48,19 +47,8 @@ export function registerCollaborations(server: McpServer): void {
           rationale: args.rationale,
         };
         const res = await upsertCollaboration(config, collab);
-
-        if (await classExists(config, args.from) && await classExists(config, args.to)) {
-          const fromCard = await readClass(config, args.from);
-          const toCard = await readClass(config, args.to);
-          const ref = { name: toCard.name, message: args.message };
-          const already = fromCard.collaborators.some(
-            (c) => c.name === ref.name && c.message === ref.message,
-          );
-          if (!already) {
-            fromCard.collaborators.push(ref);
-            await upsertClass(config, fromCard);
-          }
-        }
+        // collaborators는 여기서 쓰지 않는다 — loadDesign이 collaborations에서 파생한다.
+        // (단일 진실 출처: 의존 관계의 정본은 collaborations)
         return jsonResult({ id, path: res.path, created: res.created });
       } catch (e) {
         return errorResult((e as Error).message);
