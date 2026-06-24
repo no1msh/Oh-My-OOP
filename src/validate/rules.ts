@@ -24,6 +24,9 @@ import { checkCollectionWrapperWithoutBehavior } from "./collectionWrapper.js";
 import { checkPrimitiveWrapperWithoutInvariant } from "./primitiveWrapper.js";
 import { checkStrategyAsymmetry } from "./strategyAsymmetry.js";
 import { checkFunctionDecompositionExcess } from "./functionDecompositionExcess.js";
+import { checkDualPurposeKnowing } from "./dualUseKnowing.js";
+import { checkSingletonStatefulHolder } from "./singletonStatefulHolder.js";
+import { checkPresentationInDomain } from "./presentationInDomain.js";
 
 export interface RuleThresholds {
   god_object_responsibilities: number;
@@ -64,6 +67,9 @@ export const ALL_RULE_IDS = [
   "primitive-wrapper-without-invariant",
   "strategy-default-param-pollution",
   "function-decomposition-excess",
+  "dual-purpose-knowing",
+  "singleton-stateful-holder",
+  "presentation-in-domain",
 ] as const;
 
 export type RuleId = (typeof ALL_RULE_IDS)[number];
@@ -140,7 +146,15 @@ function checkFeatureEnvy(design: Design): Finding[] {
             target: { kind: "class", id: card.id },
             message:
               `${card.name}의 "${doing}" 책임이 자신보다 ${bestOther.name}의 knowing을 더 많이 참조합니다.`,
-            evidence: { other: bestOther.name, otherScore: bestOther.score, ownScore },
+            evidence: {
+              other: bestOther.name,
+              otherScore: bestOther.score,
+              ownScore,
+              guideline:
+                "@laco-dev (woowacourse-kotlin-blackjack krrong/19): \"몇 개 일치하는지 요청해서 결과를 받아오도록 해보세요. 객체지향 프로그래밍에서는 이 개념을 메시지를 보낸다 라고 표현합니다.\" " +
+                "@BeokBeok (EmilyCh0/38): \"내 카드들의 정보를 넘겨줄테니 블랙잭인지 알려줘.\" — " +
+                "외부에서 객체 데이터를 *꺼내 처리*하는 코드는 거의 항상 *메시지로 다시 쓸 수 있다*. Judge.judge / Outcome.of 같은 외부 비교자는 잘못된 첫 답.",
+            },
             remedies: [
               {
                 label: `책임을 ${bestOther.name}로 이전 (Tell-Don't-Ask)`,
@@ -180,7 +194,12 @@ function checkOrphan(design: Design): Finding[] {
     referencedByCollab.add(c.to);
   }
   for (const card of design.classes) {
-    const hasCollab = card.collaborators.length > 0 || referencedByCollab.has(card.id);
+    // collaboration의 from/to는 id 또는 name으로 올 수 있다(모델이 이름으로 정의하기도 함).
+    // id만 비교하면 협력 대상(to)인 클래스가 false orphan으로 잡힌다 → id·name 둘 다 확인.
+    const hasCollab =
+      card.collaborators.length > 0 ||
+      referencedByCollab.has(card.id) ||
+      referencedByCollab.has(card.name);
     const hasUseCase = referencedByUseCase.has(card.id);
     if (hasCollab || hasUseCase) continue;
     out.push(
@@ -264,6 +283,12 @@ export function validateDesign(design: Design, opts: ValidateOptions = {}): Find
     findings.push(...checkStrategyAsymmetry(design));
   if (enabled.has("function-decomposition-excess"))
     findings.push(...checkFunctionDecompositionExcess(design));
+  if (enabled.has("dual-purpose-knowing"))
+    findings.push(...checkDualPurposeKnowing(design));
+  if (enabled.has("singleton-stateful-holder"))
+    findings.push(...checkSingletonStatefulHolder(design));
+  if (enabled.has("presentation-in-domain"))
+    findings.push(...checkPresentationInDomain(design));
 
   const sevMin = opts.severityMin ?? "info";
   return findings.filter((f) => severityAtLeast(f.severity, sevMin));
