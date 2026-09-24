@@ -3,8 +3,8 @@ dist/
 .DS_Store
 *.log
 .oop/
+.architecture/
 coverage/
 
 # Local smoke-test sample (has its own git repo)
 test/kotlin-racingcar/
-

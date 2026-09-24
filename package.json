@@ -1,17 +1,29 @@
 {
   "name": "oh-my-oop",
-  "version": "0.1.0",
-  "description": "RDD-based OOP design workshop MCP server (Mermaid class diagrams, trade-off engine)",
+  "version": "0.2.0",
+  "description": "OOP/RDD design toolkit: choose a portable Agent Skill with CLI or an MCP server",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/no1msh/Oh-My-OOP.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "bin": {
     "oh-my-oop": "dist/index.js"
   },
   "files": [
     "dist",
-    "lessons"
+    "skills",
+    "lessons",
+    "MCP_STRUCTURE.md",
+    "SCOPE.md"
   ],
   "scripts": {
     "build": "tsc -p .",
+    "prepack": "npm run build",
     "dev": "tsx src/index.ts",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -19,13 +31,14 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
     "gray-matter": "^4.0.3",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "3.25.2"
   },
   "devDependencies": {
+    "typescript": "^5.5.0",
     "@types/node": "^20.14.0",
     "tsx": "^4.19.0",
-    "typescript": "^5.5.0",
-    "vitest": "^2.0.0"
+    "vitest": "^4.1.11"
   },
   "engines": {
     "node": ">=18.17"

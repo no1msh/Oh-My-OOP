@@ -1,8 +1,8 @@
-# Oh-My-OOP — Claude 작업 가이드
+# Oh-My-OOP — 작업 가이드
 
-> 이 디렉토리는 **oh-my-oop MCP 서버** (TypeScript) 와 **PR 분석 데이터셋** (`lessons/`)이 함께 있는 monorepo입니다.
+이 저장소는 OOP/RDD 전용 TypeScript MCP/CLI와 `lessons/` 학습 자산을 유지합니다. 아키텍처 실행기·JEV·Kotlin 분석·벤치는 별도 인수인계 폴더로 이동했습니다. `SCOPE.md`에서 경계를 확인하세요. 새 아키텍처 하네스를 이 저장소에 다시 구현하지 마세요.
 
----
+배포는 Skill + CLI와 MCP 중 선택합니다. `skills/oh-my-oop/SKILL.md`는 호스트 공통 본문이며 Claude/Codex 전용 확장 문법을 넣지 않습니다. Skill 배포는 외부 `npx skills` CLI에 맡기며 자체 설치기/runtime.json은 제공하지 않습니다. OOP 실행 코어 준비는 별도입니다. 호스트 설정/전역 설치를 자동으로 변경하지 마세요. 코어 연산은 계속 `src/oop/commands.ts`에서 공유합니다.
 
 ## 작업 시작 전 반드시 읽을 것
 
@@ -33,9 +33,11 @@
 ### MCP 룰/도구 추가 시
 1. **모든 `Finding`은 ≥2개 `remedies` 필수** — `assertHasMultipleRemedies()`로 감싸기 (계약 위반 시 throw)
 2. **단일 권고 금지** — N개 대안 + 트레이드오프 (조영호 「객체지향의 사실과 오해」)
-3. **`pros`/`cons`는 추상 문장 X, 도메인 어휘로** 작성
+3. **`pros`/`cons`는 추상 문장 X, 도메인 어휘로** 작성 (evidence/remedy 인용 영역에 한함)
 4. **도구 description은 `[USE WHEN] ...`** 패턴 (validate.ts 참고)
 5. **빌드/테스트**: `npm run build`, `npm test` (vitest)
+6. **도메인 종속 룰/도구 금지** — 룰 이름·시그니처·판정 로직은 *어떤 도메인에도 적용 가능*해야 한다. 도메인 어휘는 evidence/remedy 인용으로만 등장. Stereotype 5종도 동결. 상세 + 판단 기준 + 금지/허용 예시: `MCP_STRUCTURE.md` §2-5.
+7. **룰 폭증 회피 동반** — 신규 룰 1개 추가 = *기존 룰 인용 보강 ≥2개* 동반. 흡수 가능한지 먼저 검토.
 
 ### lessons/ 파일 수정 시
 - 학생 반성 어휘/리뷰어 스타일 메타 분석/PR 간 학생 진화 비교는 **이미 제거됨** (2026-05-23 사족 정리 커밋). 새로 추가하지 말 것.

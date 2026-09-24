@@ -10,8 +10,10 @@ import { registerCompare } from "./compare.js";
 import { registerValidate } from "./validate.js";
 import { registerConformance } from "./conformance.js";
 import { registerState } from "./state.js";
+import { registerDiscovery } from "./discovery.js";
 
 export function registerAllTools(server: McpServer): void {
+  registerDiscovery(server);
   registerInit(server);
   registerUseCases(server);
   registerResponsibilities(server);
@@ -23,4 +25,5 @@ export function registerAllTools(server: McpServer): void {
   registerValidate(server);
   registerConformance(server);
   registerState(server);
+
 }

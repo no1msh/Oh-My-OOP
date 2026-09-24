@@ -7,7 +7,7 @@ export interface OopConfig {
 }
 
 export function resolveConfig(): OopConfig {
-  const envRoot = process.env.OOP_PROJECT_ROOT;
+  const envRoot = process.env.OOP_PROJECT_ROOT ?? process.env.ARCH_PROJECT_ROOT;
   const projectRoot = envRoot
     ? path.resolve(envRoot)
     : process.cwd();
@@ -34,7 +34,7 @@ export function workspacePaths(config: OopConfig) {
 export function ensureProjectRootExists(config: OopConfig): void {
   if (!fs.existsSync(config.projectRoot)) {
     throw new Error(
-      `OOP_PROJECT_ROOT does not exist: ${config.projectRoot}. ` +
+      `Project root does not exist: ${config.projectRoot}. ` +
         `Set OOP_PROJECT_ROOT or run from a real directory.`,
     );
   }

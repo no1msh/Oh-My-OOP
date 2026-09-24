@@ -1,288 +1,156 @@
 # Oh-My-OOP
 
-**RDD(Responsibility-Driven Design) 워크숍을 진행해주는 MCP 서버.**
+객체의 책임·역할·협력을 함께 설계하는 OOP/RDD 도구입니다. **Skill + CLI 또는 MCP 중 하나를 선택**하세요. 같은 코어와 같은 `.oop` 설계 데이터를 사용하며, 모델 API 키·JEV·JVM·Docker는 필요하지 않습니다.
 
-유스케이스 → 책임 → 협력 → 클래스 다이어그램 흐름을 안내하고, **모든 설계 결정마다 단일 답 대신 트레이드오프가 있는 N개의 대안**을 제시합니다. 조영호님의 *오브젝트* / *객체지향의 사실과 오해* 가르침을 바탕으로 합니다.
+## 사용 방식 선택
 
-- 대상 언어: **Kotlin** (코드 생성 X, 설계 모델링 O)
-- 저장소: 사용자 프로젝트 루트의 `.oop/*.md` (Markdown + YAML frontmatter + Mermaid)
-- 변경 시각화: Before/After Mermaid `classDiagram` 세로 스택 + 색상 강조
-- 검증: 책임 적절성 / 결합도 / 테스터빌리티 (모두 권고. 어떤 변경도 차단하지 않음)
-- 📚 **참고 자료:**
-  - [lessons/woowacourse-racingcar](lessons/woowacourse-racingcar/) — `woowacourse/kotlin-racingcar` 133개 PR 리뷰 ([SUMMARY](lessons/woowacourse-racingcar/SUMMARY.md))
-  - [lessons/woowacourse-kotlin-lotto](lessons/woowacourse-kotlin-lotto/) — `woowacourse/kotlin-lotto` 141개 PR 리뷰 (코드 스니펫 포함) ([SUMMARY](lessons/woowacourse-kotlin-lotto/SUMMARY.md))
+| | Skill + CLI | MCP |
+|---|---|---|
+| 실행 | 에이전트가 Skill을 읽고 CLI 호출 | 에이전트가 `oop_*` 도구 호출 |
+| 필요한 환경 | Agent Skills 지원, 파일 읽기·명령 실행 권한, Node.js | 로컬 stdio MCP 지원, Node.js |
+| 설치 | 호스트의 Skill 디렉터리에 설치 | 호스트에 MCP 서버 등록 |
+| 상대 방식 필요? | MCP 연결 불필요 | Skill 설치 불필요 |
 
----
+둘 다 설치할 수도 있지만 같은 변경을 두 번 실행하지 마세요. Skill과 MCP의 프롬프트/리소스 전달 방식은 다르며, 보장하는 공통 부분은 OOP 연산과 저장 형식입니다.
 
-## 빠른 설치 — AI 어시스턴트용 안내
+## 공통 준비
 
-> **AI에게:** 사용자가 "이 MCP를 설치해줘"라고 했다면 아래 절차를 그대로 따르세요. 모든 명령은 비대화형이며, `<...>` 표시는 실제 경로/이름으로 치환해야 합니다.
+배포 코어의 실행 최소 버전은 Node.js 18.17입니다. 소스 빌드·테스트에는 개발 의존성(Vitest/Vite)을 고려해 Node.js 22.12 이상인 22.x 또는 24 이상을 사용하세요. 아래는 로컬 소스 설치 기준이며 npm 레지스트리 배포를 전제하지 않습니다.
 
-### 0. 사전 요구사항
-
-- **Node.js 18.17 이상** (`node --version`)
-- **git** (`git --version`)
-
-둘 중 하나라도 없으면 사용자에게 알리고 멈추세요.
-
-### 1. 클론 & 빌드
-
-```bash
-git clone https://github.com/<OWNER>/Oh-My-OOP.git
+```sh
+git clone https://github.com/no1msh/Oh-My-OOP.git
 cd Oh-My-OOP
-npm install
+npm ci
 npm run build
-npm test
+node dist/index.js --help
 ```
 
-- `npm test`가 38개 테스트 모두 통과해야 정상입니다.
-- 빌드 산출물은 `dist/index.js`입니다. **이후 모든 설정에서 이 파일의 절대 경로**를 사용합니다.
+이미 저장소가 있다면 clone 없이 해당 디렉터리에서 빌드하세요.
 
-설치 후 절대 경로를 얻으려면:
+## A. Skill로 사용하기
 
-```bash
-# 클론한 디렉토리에서:
-echo "$(pwd)/dist/index.js"
+배포·에이전트 선택은 [Vercel Skills CLI](https://github.com/vercel-labs/skills)에 맡깁니다. `npx skills`는 Skill 안내 파일을 설치하고, **실제 검사는 별도로 준비한 `oh-my-oop` CLI가 실행**합니다. MCP 연결은 필요 없습니다.
+
+### 1. 실행 코어 준비
+
+위 공통 준비로 빌드한 뒤, 저장소 디렉터리에서 아래 명령으로 CLI를 PATH에 연결할 수 있습니다.
+
+```sh
+npm link
+oh-my-oop --version
 ```
 
-이 출력값을 아래 클라이언트별 설정의 `<ABSOLUTE_PATH_TO_dist/index.js>` 자리에 그대로 넣으세요.
+`npm link`는 로컬 소스를 npm의 전역 prefix에 연결합니다. 전역 연결을 원하지 않으면 건너뛰고 에이전트에 `node /absolute/Oh-My-OOP/dist/index.js`라는 실행 경로를 명시하세요. 새 에이전트 프로세스에서도 Node.js와 해당 CLI에 접근할 수 있어야 합니다. npm 레지스트리의 동명 패키지를 자동 다운로드하는 `npx oh-my-oop`는 안내하지 않습니다.
 
----
+### 2. Skill 설치 — 대상 프로젝트에서 실행
 
-## 클라이언트별 등록
+**현재 로컬 변경을 바로 사용하려면**, 대상 프로젝트로 이동한 후 로컬 저장소에서 설치하세요.
 
-### Claude Code (CLI) — User scope (모든 프로젝트에서 사용)
-
-```bash
-claude mcp add --scope user oh-my-oop -- node <ABSOLUTE_PATH_TO_dist/index.js>
+```sh
+cd /absolute/my-project
+npx skills add /absolute/Oh-My-OOP --skill oh-my-oop -a claude-code -a codex
 ```
 
-확인:
+Claude Code와 Codex 양쪽에 같은 Skill을 설치합니다. 하나만 사용하면 해당 `-a`만 남기세요. 다른 에이전트는 `-a`를 생략해 대화형으로 선택하거나 Skills CLI의 지원 에이전트 ID를 지정하세요.
 
-```bash
-claude mcp get oh-my-oop
-# Status: ✓ Connected 가 보이면 성공
+```sh
+npx skills add /absolute/Oh-My-OOP --skill oh-my-oop
 ```
 
-제거: `claude mcp remove oh-my-oop -s user`
+기본은 프로젝트 범위이고 개인 공용 설치는 `-g`를 추가합니다. 복사 설치를 원하면 `--copy`를 사용하세요. 로컬 저장소 없이 Skill만 설치하려면 GitHub 소스를 사용합니다. 코어 CLI 준비는 여전히 별도입니다.
 
-### Claude Desktop (Mac/Windows)
+```sh
+npx skills add no1msh/Oh-My-OOP --skill oh-my-oop -a claude-code -a codex
+```
 
-설정 파일 위치:
-- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+설치 목록/업데이트/삭제는 Skills CLI로 관리합니다.
 
-`mcpServers` 키에 다음 추가 (기존 항목은 보존):
+```sh
+npx skills list
+npx skills update oh-my-oop
+npx skills remove oh-my-oop
+```
+
+로컬 경로 설치의 갱신은 해당 Skills CLI 버전의 안내를 따르세요. 원본 변경이 자동 동기화된다고 가정하지 마세요. 원격 소스 업데이트 역시 **Skill만 갱신**하며 OOP 코어는 별도로 업데이트하고 빌드해야 합니다.
+
+### 3. 에이전트에서 사용
+
+“oh-my-oop Skill로 주문 객체의 책임 분배를 검토해줘. 대상 프로젝트는 /absolute/my-project야”라고 요청하세요. 호스트의 Skill 선택 UI/직접 호출 기능을 사용해도 됩니다.
+
+공통 Skill은 표준 name/description과 Markdown만 사용하며 호스트 전용 확장 문법이나 `runtime.json`에 의존하지 않습니다. 자동 설치 대상에 없는 에이전트도 표준 Skill 폴더를 읽고 CLI를 실행할 수 있다면 수동으로 연결할 수 있지만, 모든 에이전트에서의 동작을 보증하지는 않습니다.
+
+- Skill 설치만으로 CLI·의존성이 설치되거나 `.oop`가 초기화되지는 않습니다.
+- 셸 실행이 금지된 채팅 환경에서는 실행 코어를 사용할 수 없습니다. 원격/컨테이너 에이전트는 그 환경 안에 코어를 준비하세요.
+- 자체 `skill install --target` 명령은 제거했습니다. 예전에 자체 설치기로 설치했다면 **해당 oh-my-oop 폴더만** 백업한 뒤 Skills CLI로 다시 설치하세요. 기존 파일의 덮어쓰기/삭제 확인을 읽고 진행하세요.
+- 이전 `runtime.json` 경로는 새 Skill이 읽지 않습니다. PATH 또는 명시한 CLI 경로를 준비하세요.
+- 설치는 사용자의 선택입니다. 에이전트가 소프트웨어를 임의 설치하거나 권한을 우회하지 않도록 Skill에 명시했습니다.
+
+## B. MCP로 사용하기
+
+Skill 설치 없이 MCP 서버만 등록하면 됩니다. 다음은 `mcpServers` JSON 형식 예시입니다. 호스트별 설정 파일/형식은 해당 호스트 안내를 따르세요.
 
 ```json
 {
   "mcpServers": {
     "oh-my-oop": {
       "command": "node",
-      "args": ["<ABSOLUTE_PATH_TO_dist/index.js>"]
+      "args": ["/absolute/Oh-My-OOP/dist/index.js", "mcp"],
+      "env": { "OOP_PROJECT_ROOT": "/absolute/my-project" }
     }
   }
 }
 ```
 
-Claude Desktop을 완전히 종료 후 재시작하면 도구가 메뉴에 나타납니다.
+인자 없이 실행해도 stdio MCP가 시작됩니다. 서버 로그는 stderr로 나갑니다. `oop_capabilities`와 `oop_describe`에서 연산과 입력 스키마를 확인할 수 있습니다. 서버를 변경/재빌드했다면 MCP 연결을 재시작하세요.
 
-### Codex CLI (OpenAI)
+## 제공하는 기능과 한계
 
-`~/.codex/config.toml`에 다음 섹션을 추가:
+- 유스케이스, CRC 카드, 책임 배분, 객체 간 협력 저장
+- 여러 설계 대안·트레이드오프·재검토 질문
+- 저장된 설계 모델의 응집도·결합도·의존 방향 등 권고 검사
+- Mermaid 클래스 다이어그램, 이력과 Before/After 비교
+- 구현 검토에 사용할 설계 계약과 체크리스트
 
-```toml
-[mcp_servers.oh-my-oop]
-command = "node"
-args = ["<ABSOLUTE_PATH_TO_dist/index.js>"]
+`design_validate`는 **저장된 설계 모델**을 검사하지, 실제 Kotlin/Android 소스를 자동 분석하지 않습니다. `conformance_check`는 호스트 LLM이 허용된 실제 구현과 비교할 계약을 반환하며 자동 합격 판정이 아닙니다. Finding은 권고이고 둘 이상의 remedy를 제공합니다.
+
+동일한 프로젝트 루트라면 Skill/CLI와 MCP가 같은 `.oop`를 읽습니다. 대화·로그인은 이전하지 않으며 여러 에이전트의 동시 편집 잠금을 제공하지 않습니다.
+
+## CLI 직접 사용
+
+```sh
+node dist/index.js system capabilities
+node dist/index.js oop init --root /absolute/my-project
+node dist/index.js oop design_validate --root /absolute/my-project
+echo '{"command":"oop","operation":"class_upsert"}' | node dist/index.js system describe --input -
 ```
 
-Codex CLI를 재시작한 뒤 `/mcp`로 등록 확인.
+`oop <operation> --input FILE` 또는 `--input -`로 JSON 객체를 전달합니다. JSON에는 `action`을 넣지 않습니다. `--root`는 대상 프로젝트이며 생략 시 `OOP_PROJECT_ROOT`, 호환 별칭 `ARCH_PROJECT_ROOT`, 현재 디렉터리 순으로 결정합니다.
 
-### Cursor / 그 외 MCP 호스트
+## 개발과 제품 범위
 
-Claude Desktop과 같은 JSON 구조(`command` + `args`)를 지원합니다. 호스트의 MCP 서버 설정 위치에 동일한 항목을 추가하세요.
+새 디렉터리에 소스만 복사해 `npm ci` → 빌드 → 테스트 → tarball 설치를 검증할 수 있습니다. 설치된 패키지의 CLI/MCP와 Claude Code·Codex용 Skill 복사 설치도 확인합니다. npm 네트워크 접근이 필요하며 전역 설치·모델 호출·배포는 하지 않습니다. 새 폴더 검사이지 새 OS/VM 검사는 아닙니다.
 
----
-
-## 워크스페이스 위치 — `.oop/`이 어디에 생기는가
-
-서버는 다음 순서로 작업 루트를 결정합니다:
-
-1. 환경변수 `OOP_PROJECT_ROOT`가 있으면 그 경로
-2. 없으면 서버 프로세스의 cwd (호스트가 결정)
-
-**프로젝트 단위로 고정하고 싶다면** 클라이언트 설정에서 env로 지정:
-
-**Claude Desktop / Cursor (JSON):**
-```json
-{
-  "oh-my-oop": {
-    "command": "node",
-    "args": ["<ABSOLUTE_PATH_TO_dist/index.js>"],
-    "env": {
-      "OOP_PROJECT_ROOT": "<ABSOLUTE_PATH_TO_USER_PROJECT>"
-    }
-  }
-}
+```sh
+node scripts/check-package-install.mjs --execute
 ```
 
-**Codex (TOML):**
-```toml
-[mcp_servers.oh-my-oop]
-command = "node"
-args = ["<ABSOLUTE_PATH_TO_dist/index.js>"]
-env = { OOP_PROJECT_ROOT = "<ABSOLUTE_PATH_TO_USER_PROJECT>" }
+```sh
+npm run build
+npm test
 ```
 
-**Claude Code (CLI):**
-```bash
-claude mcp add --scope user oh-my-oop -e OOP_PROJECT_ROOT=<ABSOLUTE_PATH_TO_USER_PROJECT> -- node <ABSOLUTE_PATH_TO_dist/index.js>
+실제 외부 설치 CLI까지 확인하려면 다음 검사를 별도로 실행하세요. `skills@1.7.0`을 npm에서 가져올 수 있으며 임시 프로젝트에서 Claude Code/Codex의 복사·심볼릭 링크 설치와 MCP 없는 코어 실행을 검사합니다. 텔레메트리는 끄고 실행하며 테스트 산출물 경로를 출력합니다. 실제 에이전트 추론이나 UI의 Skill 선택 품질을 검증하는 것은 아닙니다.
+
+```sh
+node scripts/check-skills-distribution.mjs --execute
 ```
 
----
+실제 로그인된 Claude Code/Codex가 Skill을 읽고 CLI를 사용하는 테스트도 별도로 실행할 수 있습니다. 두 CLI가 설치·로그인되어 있어야 하며 **모델 사용량/비용이 발생할 수 있습니다**. 새 `Downloads/oh-my-oop-live-*` 프로젝트에서 Claude가 설계를 저장하고 Codex가 읽기·검증하며, 프롬프트/도구 로그/전후 상태를 그 폴더에 보존합니다. 기본 설정 일부를 테스트 세션에서 제외하므로 기존 MCP 연결이나 그래픽 UI 테스트와는 다릅니다. 재실행은 필요할 때만 하세요.
 
-## 워크숍 시작
-
-호스트에서 `rdd-workshop-intro` 프롬프트를 호출하면 안내가 시작됩니다.
-
-도구를 직접 부르는 흐름:
-
-```
-1. oop_init({ project: "<프로젝트명>" })
-2. oop_use_case_add({ title, actor, main_flow: [...] })
-3. oop_propose_responsibilities({ use_case_id, n: 3 })      # 3개 대안 + 트레이드오프
-4. oop_class_upsert({ name, stereotype, responsibilities, collaborators })
-5. oop_collaboration_define({ from, to, message })
-6. oop_diagram_generate({})                                  # 현재 Mermaid classDiagram
-7. oop_propose_alternatives({ question, context, n })        # 트레이드오프 엔진 (범용)
-8. oop_design_compare({ before, after })                     # Before/After 색상 강조
-9. oop_design_validate({})                                   # 항상 권고. remedies는 항상 ≥2개
+```sh
+node scripts/check-live-agents.mjs --execute
 ```
 
----
+이 제품은 OOP 전용입니다. 아키텍처 워커·Kotlin 분석·JEV 실험은 별도 하네스로 분리했으며 `arch_*`, project/task/review/semantic 명령은 제공하지 않습니다. Skill 배포는 외부 `npx skills`를 사용하며 자체 설치기는 제공하지 않습니다.
 
-## 노출하는 MCP 인터페이스
-
-### Tools (13개)
-
-| 도구 | 부수효과 | 단일 답 회피 |
-|---|---|---|
-| `oop_init` | `.oop/` 부트스트랩 | — |
-| `oop_use_case_add` | `.oop/use-cases/<id>.md` | — |
-| `oop_use_case_list` | 없음 | — |
-| `oop_propose_responsibilities` | 없음 | ✅ N개 대안 |
-| `oop_assign_responsibility` | CRC 갱신 | — |
-| `oop_class_upsert` | `.oop/classes/<id>.md` | — |
-| `oop_class_list` | 없음 | — |
-| `oop_collaboration_define` | `.oop/collaborations/...md` | — |
-| `oop_propose_alternatives` | 없음 | ✅ 트레이드오프 엔진 |
-| `oop_diagram_generate` | `.oop/diagrams/current.mmd` | — |
-| `oop_design_compare` | 없음 | — |
-| `oop_design_validate` | 없음 | ✅ remedies ≥ 2 |
-| `oop_state_read` | 없음 | — |
-
-### Resources
-
-- `oop://design/index`, `oop://design/diagram`
-- `oop://design/classes`, `oop://design/classes/{id}`
-- `oop://design/use-cases`, `oop://design/use-cases/{id}`
-- `oop://design/collaborations`
-- `oop://design/history`, `oop://design/history/{file}`
-
-### Prompts
-
-- `rdd-workshop-intro` — 워크숍 시작 + Stereotype 소개
-- `responsibility-discovery` — 유스케이스 → CRC 스케치 N안
-- `design-review-cho-younghos-lens` — 조영호 렌즈로 설계 리뷰
-
----
-
-## 검증 룰 (15개, 모두 remedies ≥ 2 보장)
-
-**기본 10개:** `god-object`, `mixed-stereotype`, `low-cohesion`, `too-many-collaborators`, `feature-envy`, `non-newable`, `side-effect-in-holder`, `mocking-pressure`, `cycle`, `orphan-class`.
-
-**5개 추가** (우아한테크코스 racingcar 133 PR 분석으로 추출):
-- `vague-class-name` — Manager/Helper/Util/Validator 같은 모호한 일반 어휘 검출
-- `validation-misplacement` — UI/Coordinator/Domain 사이의 검증 책임 분산
-- `dependency-direction` — Domain→Interfacer 역방향 의존 (Coordinator만 허용)
-- `data-source-duplication` — 두 카드가 같은 도메인 정보를 양쪽에서 knowing (진실의 출처 분산)
-- `function-not-object` — 멤버 없이 행위 1개만 있는 클래스는 사실상 함수
-
-임계값은 `.oop/design.md` frontmatter의 `thresholds`로 오버라이드 가능:
-
-```yaml
-thresholds:
-  god_object_responsibilities: 7
-  god_object_collaborators: 6
-  cohesion_min_overlap: 0.2
-  too_many_collaborators: 4
-  mocking_pressure_max: 2
-  data_duplication_overlap: 0.5
-```
-
-자세한 설계 원칙은 [lessons/STYLE_GUIDE.md](lessons/STYLE_GUIDE.md) 참고.
-
----
-
-## 핵심 철학 (조영호님 강의에서)
-
-도구의 동작 자체에 박혀 있는 원칙들:
-
-- **"설계는 정답을 찾는 게 아니라 제약 아래 답을 찾는 행위"**
-  → 모든 `propose_*` 도구가 단일 답 대신 N개 대안 + 트레이드오프 + 조영호 렌즈(cohesion/coupling/testability) 반환.
-- **"코드 통제권은 개발자에게"**
-  → `oop_design_validate`는 항상 권고. 어떤 변경도 차단하지 않음.
-- **"테스터블한가가 좋은 코드의 기준"**
-  → `non-newable`, `side-effect-in-holder`, `mocking-pressure` 룰로 측정.
-- **"모킹이 많다면 나쁜 코드"**
-  → `mocking-pressure` 룰로 감지하고 seam 도입 대안 제시.
-- **"Tell-Don't-Ask"**
-  → `collaboration_shape` 시드의 첫 번째 옵션이자, 협력 정의 시 권장 모드.
-
----
-
-## 디렉토리 구조 (생성되는 `.oop/`)
-
-```
-<project-root>/.oop/
-├── design.md                            # 인덱스 (frontmatter cross-ref)
-├── use-cases/<id>.md
-├── classes/<id>.md                      # CRC 카드 (knowing/doing + collaborators)
-├── collaborations/<from>__<verb>__<to>.md
-├── diagrams/current.mmd                 # 현재 Mermaid classDiagram
-└── history/<ISO>__<label>.mmd           # 변경 전 스냅샷
-```
-
-각 파일은 Markdown + YAML frontmatter로, **사람이 직접 PR 리뷰 가능**합니다. `.oop/`를 git에 커밋하면 설계 진화가 그대로 히스토리에 남습니다.
-
----
-
-## 문제 해결
-
-| 증상 | 원인 / 조치 |
-|---|---|
-| `Status: ✗ Failed to connect` | `node <path>`가 직접 실행되는지 확인. `dist/index.js`가 존재하는지(빌드 했는지) 확인. |
-| `OOP_PROJECT_ROOT does not exist` | 환경변수로 지정한 경로가 실제로 존재해야 함. 절대 경로를 사용. |
-| 도구 호출 시 "Design index not found" | 먼저 `oop_init`을 호출해 `.oop/`를 만들어야 함. |
-| Mermaid 다이어그램이 비어 보임 | 클래스를 추가한 뒤에는 `oop_diagram_generate`를 호출해야 `current.mmd`가 갱신됨. |
-| 한글 ID가 깨짐 | macOS의 NFC/NFD 차이일 수 있음. 도구 입력은 NFC로 통일됨. 파일명을 직접 만지지 말고 도구로만 수정. |
-
----
-
-## 개발
-
-```bash
-npm run dev          # tsx로 ts 직접 실행 (개발 중)
-npm run build        # tsc -> dist/
-npm test             # vitest run
-npm run test:watch   # vitest watch
-```
-
-기여 시 모든 `propose_*` / `validate` 변경은 **"단일 답을 내지 않는다"는 계약**을 깨지 않도록 주의하세요 (`assertHasMultipleRemedies`로 강제됨, 테스트로 검증됨).
-
----
-
-## 라이선스
-
-MIT.
+[제품 경계](SCOPE.md) · [코어/MCP 구조](MCP_STRUCTURE.md) · [개발 가이드](CLAUDE.md) · [공통 Skill](skills/oh-my-oop/SKILL.md)
