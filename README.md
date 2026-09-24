@@ -15,7 +15,16 @@
 
 ## 공통 준비
 
-배포 코어의 실행 최소 버전은 Node.js 18.17입니다. 소스 빌드·테스트에는 개발 의존성(Vitest/Vite)을 고려해 Node.js 22.12 이상인 22.x 또는 24 이상을 사용하세요. 아래는 로컬 소스 설치 기준이며 npm 레지스트리 배포를 전제하지 않습니다.
+배포 코어의 실행 최소 버전은 Node.js 18.17입니다. 신규 설치는 유지보수 중인 Node.js 버전을 권장합니다. npm에서 코어를 설치하면 소스를 직접 빌드할 필요가 없습니다.
+
+```sh
+npm install -g oh-my-oop@0.2.0
+oh-my-oop --version
+```
+
+전역 설치를 원하지 않으면 대상 프로젝트에서 `npm install --save-dev oh-my-oop@0.2.0`으로 설치하고 에이전트에 `node /absolute/my-project/node_modules/oh-my-oop/dist/index.js` 경로를 명시하세요.
+
+소스 수정·개발을 하려면 다음 방법을 사용합니다. 개발 의존성(Vitest/Vite) 때문에 Node.js 22.12 이상인 22.x 또는 24 이상이 필요합니다.
 
 ```sh
 git clone https://github.com/no1msh/Oh-My-OOP.git
@@ -33,7 +42,7 @@ node dist/index.js --help
 
 ### 1. 실행 코어 준비
 
-위 공통 준비로 빌드한 뒤, 저장소 디렉터리에서 아래 명령으로 CLI를 PATH에 연결할 수 있습니다.
+공통 준비에서 npm으로 설치했다면 완료입니다. 소스로 빌드했다면 저장소 디렉터리에서 아래 명령으로 CLI를 PATH에 연결할 수 있습니다.
 
 ```sh
 npm link
@@ -71,7 +80,7 @@ npx skills update oh-my-oop
 npx skills remove oh-my-oop
 ```
 
-로컬 경로 설치의 갱신은 해당 Skills CLI 버전의 안내를 따르세요. 원본 변경이 자동 동기화된다고 가정하지 마세요. 원격 소스 업데이트 역시 **Skill만 갱신**하며 OOP 코어는 별도로 업데이트하고 빌드해야 합니다.
+로컬 경로 설치의 갱신은 해당 Skills CLI 버전의 안내를 따르세요. 원본 변경이 자동 동기화된다고 가정하지 마세요. 원격 소스 업데이트 역시 **Skill만 갱신**합니다. npm으로 설치한 코어는 `npm install -g oh-my-oop@latest`로 별도 갱신하고, 소스 설치는 저장소 갱신 후 다시 빌드하세요.
 
 ### 3. 에이전트에서 사용
 
@@ -87,19 +96,21 @@ npx skills remove oh-my-oop
 
 ## B. MCP로 사용하기
 
-Skill 설치 없이 MCP 서버만 등록하면 됩니다. 다음은 `mcpServers` JSON 형식 예시입니다. 호스트별 설정 파일/형식은 해당 호스트 안내를 따르세요.
+Skill 설치 없이 MCP 서버만 등록하면 됩니다. 다음은 npm 전역 설치 후 사용하는 `mcpServers` JSON 형식 예시입니다. 호스트별 설정 파일/형식은 해당 호스트 안내를 따르세요.
 
 ```json
 {
   "mcpServers": {
     "oh-my-oop": {
-      "command": "node",
-      "args": ["/absolute/Oh-My-OOP/dist/index.js", "mcp"],
+      "command": "oh-my-oop",
+      "args": ["mcp"],
       "env": { "OOP_PROJECT_ROOT": "/absolute/my-project" }
     }
   }
 }
 ```
+
+호스트가 PATH에서 CLI를 찾지 못하거나 소스로 설치했다면 `command`를 `node`, `args`를 `["/absolute/Oh-My-OOP/dist/index.js", "mcp"]`로 지정하세요. 프로젝트 로컬 npm 설치라면 위의 `node_modules` 경로를 사용합니다.
 
 인자 없이 실행해도 stdio MCP가 시작됩니다. 서버 로그는 stderr로 나갑니다. `oop_capabilities`와 `oop_describe`에서 연산과 입력 스키마를 확인할 수 있습니다. 서버를 변경/재빌드했다면 MCP 연결을 재시작하세요.
 
