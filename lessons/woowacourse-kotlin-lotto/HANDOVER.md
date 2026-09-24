@@ -1,15 +1,14 @@
-# 다음 세션을 위한 인계 (kotlin-lotto OOP 교훈 보강)
+# kotlin-lotto 레슨 인덱스 및 작업 메모
 
-## 현재 상태 — 솔직한 보고
+## 현재 상태
 
-이전 세션에서 `woowacourse/kotlin-lotto` 141개 PR을 분석한다고 시작했지만, **후반부로 갈수록 코멘트를 압축해서 읽어 부실한 파일이 다수 생겼다.**
+`woowacourse/kotlin-lotto`에서 라인 코멘트가 5개 이상인 PR 141건의 분석 자료를 정리했다.
 
 - **141개 PR 파일 작성됨** (`lessons/woowacourse-kotlin-lotto/<reviewee>/*-로또.md`)
 - **SUMMARY.md / README.md / PROGRESS.md** 작성됨
 - **MCP resources** 등록됨 (`oop://lessons/lotto/...`)
 - **메인 README** 링크 추가됨
-- 그러나 **약 51개 파일이 부실**: 실제 코멘트의 일부만 반영, 나머지는 *일반적 OOP 패턴*으로 채워짐
-- 양호한 파일은 racingcar 수준의 깊이 (kkosang/85, hyunji1203/15, krrong/19 등 초반 20-25개)
+- 개별 PR 문서에는 설계 근거, 원본 코드와 리뷰 인용, 출처 링크를 기록한다.
 
 ## 구체적 부실도
 
@@ -81,7 +80,7 @@ PR #21  | rhthrhrl0       | 15 코멘트 | 24줄
 ### 🟢 양호 (그대로 유지) — 90개
 
 코멘트 15개 미만 또는 파일이 충분히 길음.  
-양호 PR의 quality bar 참고: `kkosang/85-2단계-로또.md` (145줄), `hyunji1203/15-1단계-로또.md` (171줄), `krrong/19-1단계-로또.md` (161줄), `EmilyCh0/40-2단계-로또.md`는 부실하지만 racingcar에 있는 같은 학생의 `EmilyCh0/40-1단계-자동차-경주.md`는 양호 — 그 수준이 목표.
+참고 문서 형식과 코드 예시는 개별 PR 분석 파일에서 확인한다.
 
 ## 캐시 위치
 
@@ -99,9 +98,7 @@ for N in $(jq -r '.[].number' /tmp/oop-lessons-cache-lotto/prs.json); do
 done
 ```
 
-## 다음 세션이 해야 할 일
-
-### 1. 부실 파일 보강 (또는 재작성)
+## 분석 문서를 갱신할 때
 
 각 PR마다:
 
@@ -176,20 +173,9 @@ jq -r '.[] | "@\(.user.login) on `\(.path):\(.line // "?")`:\n```kotlin\n\(.diff
 - WinningLotto vs Lotto 분리
 - 거스름돈 UX
 
-### 5. 작업 흐름 권장
-
-1. 심각 18개 먼저 (각 60-90줄, 약 5-7개씩 batch + commit + push)
-2. 그 다음 중간 33개 (각 40-70줄, 약 8-10개씩)
-3. 최종 SUMMARY.md / README.md는 *내용 추가/수정 가능*하지만 기존 구조 유지
-4. 각 batch마다 `git commit && git push origin main`
-5. 작업 후 PROGRESS.md의 "완료" 섹션 업데이트
-
-### 6. 검증 (마지막 단계)
+### 5. 문서 확인
 
 ```bash
-# 파일 줄 수 분포 — 양호 PR과 비교
-find lessons/woowacourse-kotlin-lotto -name "*-로또.md" | xargs wc -l | sort -n | head -20
-# 부실 재발 점검 (코멘트 ≥30 + 파일 ≤35줄)
 # Kotlin 관용구 누수
 grep -r -E "scope function|apply *\{|let *\{|smart cast" lessons/woowacourse-kotlin-lotto/
 # 무작위 3개 PR과 GitHub 원본 대조
@@ -198,20 +184,3 @@ grep -r -E "scope function|apply *\{|let *\{|smart cast" lessons/woowacourse-kot
 ## 빌드/테스트는 영향 없음
 
 `src/` 코드 변경은 없으므로 빌드/테스트 (38개) 그대로 유지됨.
-
-## 양호한 PR 예시 (벤치마크)
-
-각 파일 형식과 깊이의 *목표*:
-
-- `lessons/woowacourse-kotlin-lotto/kkosang/85-2단계-로또.md` (145줄, 132 코멘트)
-- `lessons/woowacourse-kotlin-lotto/hyunji1203/15-1단계-로또.md` (171줄, 85 코멘트)
-- `lessons/woowacourse-kotlin-lotto/krrong/19-1단계-로또.md` (161줄, 79 코멘트)
-- `lessons/woowacourse-racingcar/sh1mj1/115-2단계-자동차-경주.md` — racingcar의 잘된 사례
-
-이들 PR은:
-- 잘한 점 5-7개 항목
-- 못한 점 6-8개 항목 (각각 코드 스니펫 포함)
-- 리뷰어 의견 요지 3-5개 (각각 대표 인용)
-- 얻은 교훈 5-7개
-
-부실 파일은 이런 형식이 아닌 *2-3줄짜리 일반 원칙*만 적힘.

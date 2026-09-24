@@ -4,9 +4,9 @@
 
 ## 📖 시작하기
 
-- **[SUMMARY.md](SUMMARY.md)** — 전체 정리 (자주 하는 실수 TOP 10, 리뷰어 명언, 조영호 강의 토픽 매핑, 단계별 학습 곡선, **racingcar vs lotto 비교**)
+- **[SUMMARY.md](SUMMARY.md)** — 반복되는 설계 문제, 설계 원칙과 코드 사례, 조영호 강의 토픽 매핑, **racingcar vs lotto 비교**
 - **개별 PR 분석** — 각 reviewee 폴더 안에 `<PR번호>-<단계>-로또.md` 형태로 정리
-- **이전 미션**: [racingcar lessons](../woowacourse-racingcar/) — 같은 학생들의 이전 학습 흐름
+- **관련 미션**: [racingcar lessons](../woowacourse-racingcar/)
 
 ## 🎯 분석 범위
 
@@ -57,13 +57,6 @@ racingcar와 다른 lotto만의 패턴:
 원시값 그대로 노출 또는 wrapping만 (행위 부재)
 
 자세한 내용: [SUMMARY.md의 "자주 하는 설계 실수 TOP 10"](SUMMARY.md#자주-하는-설계-실수-top-10-lotto-도메인-특화)
-
-## 🎓 단계별 학습 곡선
-
-**1단계** = LottoNumber 추출, Rank enum 설계, Validator 위치, Statistics god-object
-**2단계** = 수동/자동 통합, Strategy 패턴, Map<Rank, Int> wrapping, flyweight 캐싱, 거스름돈 UX
-
-자세한 분석은 [SUMMARY.md의 "단계별 학습 곡선"](SUMMARY.md#단계별-학습-곡선-lotto) 참고.
 
 ## 🔗 관련 리소스
 

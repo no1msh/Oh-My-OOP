@@ -139,7 +139,7 @@ lotto PR: [#85](kkosang/85-2단계-로또.md), [#118](wondroid-world/118-1단계
 
 ---
 
-## 리뷰어들이 반복적으로 하는 말 (lotto 특화)
+## 반복되는 설계 검토 주제 (lotto 특화)
 
 ### 🎯 "객체에게 메시지를 던져라" (Tell Don't Ask)
 
@@ -185,9 +185,7 @@ lotto PR: [#85](kkosang/85-2단계-로또.md), [#118](wondroid-world/118-1단계
 
 → Map은 *임시 자료구조*. 도메인 의미가 있으면 객체로.
 
-### 🎯 "이전 미션 (racingcar) 학습 적용"
-
-> 로또에서 랜덤 테스트를 구성하지 못한다는 의미는, 자동차 경주에서의 랜덤 테스트를 가능하게 하는 방법에 대해... — @malibinYun ([PR #149](oungsi2000/149-2단계-로또.md))
+### 🎯 랜덤 생성 전략을 분리해 테스트하기
 
 **출현 PR:** [#62](ii2001/62-1단계-로또.md), [#13](otter66/13-1단계-로또.md), [#149](oungsi2000/149-2단계-로또.md), [#127](Junyoung-WON/127-2단계-로또.md)
 
@@ -245,42 +243,6 @@ lotto PR: [#85](kkosang/85-2단계-로또.md), [#118](wondroid-world/118-1단계
 
 ---
 
-## 단계별 학습 곡선 (lotto)
-
-### 1단계 흔한 실수
-
-- `Constants.kt` 한 파일에 모든 상수
-- `Validator`/`Util`/`Helper` 모호한 이름
-- Controller가 split + validation + 비교 직접
-- `Lotto`가 `List<Int>` 그대로 노출
-- `Rank` enum에 UI 표현 (`description`)
-- 검증을 어디서 할지 결정 못함
-- `Statistics`/`Analyzer` god-object로 모든 비교 수행
-- Random 직접 의존 → 테스트 불가
-- `Money.ZERO`가 Int 반환 (값 객체 의미 잃음)
-- 테스트 함수명이 "정상 동작한다" 류
-
-### 2단계에서 부각되는 이슈
-
-- **수동/자동 로또 통합** — Strategy 인터페이스 + 두 구현체
-- **`Map<Rank, Int>` wrapping** — 통계 객체로
-- **`LottoNumber` 캐싱 (flyweight)** — 1억 티켓 시뮬레이션
-- **1단계 피드백 *지속 검증*** — 검증 위치 재조정, 일급 컬렉션 의미
-- **거스름돈/예외 흐름** — UX + 도메인 명세
-- **자가 의문 PR 본문 명시** — 학생 사고의 가시화
-- **이전 라운드 코멘트 링크로 변경 의도 명시** — [#129](chanho0908/129-2단계-로또.md), [#151](m6z1/151-2단계-로또.md)
-
-### 가장 잘된 학습 곡선의 시그니처
-
-1. 1단계 피드백을 즉시 흡수
-2. 자가 검토로 다음 단계에서 재조정
-3. 결정 *이유*를 PR 본문에 명시 (`이전 PR의 코멘트 링크`)
-4. 더 깊은 자가 의문 던지기
-
-가장 좋은 사례 PR:
-- [#161](moondev03/...) ([racingcar 학습 곡선과 유사한 형태])
-- [#115](sh1mj1/115-2단계-로또.md) — racingcar에서 칭찬받은 학생이 lotto에서도 깊은 사고
-
 ---
 
 ## racingcar vs lotto — 도메인 비교
@@ -303,7 +265,7 @@ lotto PR: [#85](kkosang/85-2단계-로또.md), [#118](wondroid-world/118-1단계
 - **`Money`/`Profit`/`Yield` 금융 도메인** — racingcar에 없음
 - **`Rank.matchBonus` 필드 위치** — 2등이 특수 케이스인 enum 설계 문제
 
-### lotto에서 *처음으로* 학습되는 패턴
+### lotto 사례에서 다루는 패턴
 
 - **flyweight** (LottoNumber 캐싱)
 - **operator overloading** (Money + Money)
@@ -313,7 +275,7 @@ lotto PR: [#85](kkosang/85-2단계-로또.md), [#118](wondroid-world/118-1단계
 
 ---
 
-## 부록: 가장 강력한 리뷰어 명언 10선 (lotto)
+## 부록: 설계 검토에 참고할 인용 (lotto)
 
 1. *"로또에서 사용하는 숫자는 결국 Int 타입이라고 볼 수 있겠습니다. 그렇다면 외부에서 가져온 이 숫자들이 로또 번호라는 것을 어떻게 알 수 있을까요?"* — @laco-dev on [#19](krrong/19-1단계-로또.md)
 
@@ -329,7 +291,7 @@ lotto PR: [#85](kkosang/85-2단계-로또.md), [#118](wondroid-world/118-1단계
 
 7. *"이 객체는 단순히 값을 가지고있는 것 외에 별다른 역할을 가지고 있지 않고 있네요."* — @malibinYun on [#62](ii2001/62-1단계-로또.md)
 
-8. *"2단계 요구사항을 모두 컨트롤러에서 반영한 느낌이에요. 마치 자동차 경주와 1단계에서 배운 내용을 다 잊어버린 것처럼 보여요."* — @krrong on [#131](junseo511/131-2단계-로또.md)
+8. 요구사항 추가를 모두 Controller에서 처리하면 책임이 집중될 수 있다. — [PR #131의 검토 내용 요약](junseo511/131-2단계-로또.md)
 
 9. *"View는 멍청해야 한다. 근데 View가 어느정도까지 멍청해야 할까요?"* — @lee-ji-hoon on [#132](hwannow/132-2단계-로또.md)
 
@@ -340,12 +302,9 @@ lotto PR: [#85](kkosang/85-2단계-로또.md), [#118](wondroid-world/118-1단계
 ## 통계
 
 - **분석된 PR:** 141개
-- **분석된 reviewee:** 71명
-- **고유 reviewer:** ~20명 (laco-dev, Gyuil-Hwnag, KwonDae, malibinYun, vagabond95, hyemdooly, BeokBeok, krrong, ghojeong 등)
 - **단계별:** 1단계 ≈ 50 PR, 2단계 ≈ 90 PR (리팩토링 포함)
-- **수치 비교:** racingcar (133 PR, 77 reviewees) → lotto (141 PR, 71 reviewees). 도메인 깊이 +.
 
-이 코퍼스는 lotto 도메인 (금융 + 통계 + 등수)에서의 OOP 학습 곡선을 담는다. racingcar에서 배운 패턴을 lotto에서 *어떻게 재적용*하는지, *새 도메인 (Money, Rank)*에서 어떻게 *원시 강박을 탈출*하는지, *2단계 수동 로또*에서 *Strategy 패턴이 어떻게 자연스럽게 등장*하는지의 흐름이 보인다.
+이 코퍼스는 금융·통계·등수 도메인에서 반복되는 OOP 설계 문제를 다룬다. lotto 특화 사례로 `Money`와 `Rank` 값 모델링, 수동·자동 발급 전략, `LottoNumber` 캐싱이 포함된다.
 
 ---
 
