@@ -156,6 +156,229 @@ describe("validation contract: every finding has >= 2 remedies", () => {
     for (const f of findings) expect(f.remedies.length).toBeGreaterThanOrEqual(2);
   });
 
+  it("vague-class-name fires on virtual-object vocabulary (Judge/Picker/Distributor/Calculator/Rule) and respects domain prefixes", () => {
+    const d = design({
+      classes: [
+        {
+          id: "j",
+          name: "Judge",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: [], doing: ["judge"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        {
+          id: "p",
+          name: "Picker",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: [], doing: ["pick"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        {
+          id: "d",
+          name: "Distributor",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: [], doing: ["distribute"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        {
+          id: "c",
+          name: "Calculator",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: [], doing: ["calculate"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        {
+          id: "r",
+          name: "Rule",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: [], doing: ["enforce rule"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        // 도메인 prefix가 3자 이상이면 통과 (의도된 도메인 어휘).
+        {
+          id: "lp",
+          name: "LottoNumberPicker",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: [], doing: ["pick lotto number"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        {
+          id: "bc",
+          name: "BettingCalculator",
+          stereotype: "ServiceProvider",
+          responsibilities: { knowing: [], doing: ["calc bet"] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, { rules: ["vague-class-name"] });
+    expect(findings.length).toBe(5);
+    const names = findings.map((f) => (f.evidence as { name: string }).name).sort();
+    expect(names).toEqual([
+      "Calculator",
+      "Distributor",
+      "Judge",
+      "Picker",
+      "Rule",
+    ]);
+    for (const f of findings) expect(f.remedies.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("singleton-stateful-holder fires on singleton-marked holder with mutable state", () => {
+    const d = design({
+      classes: [
+        // notes 에 singleton 표식 + 가변 상태 knowing — fire
+        {
+          id: "deck",
+          name: "Deck",
+          stereotype: "Structurer",
+          responsibilities: {
+            knowing: ["mutableListOf cards"],
+            doing: ["draw card"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+          notes: "Kotlin object 키워드로 선언된 Singleton",
+        },
+        // name 에 Singleton + 가변 상태 — fire
+        {
+          id: "gs",
+          name: "GlobalSession",
+          stereotype: "InformationHolder",
+          responsibilities: {
+            knowing: ["가변 사용자 목록"],
+            doing: ["add user"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        // 가변 상태 없음 (notes 만 singleton) — pass
+        {
+          id: "config",
+          name: "Config",
+          stereotype: "InformationHolder",
+          responsibilities: { knowing: ["api url"], doing: [] },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+          notes: "Singleton",
+        },
+        // 가변 상태 있지만 singleton 표식 없음 — pass (일반 일급 컬렉션)
+        {
+          id: "hand",
+          name: "Hand",
+          stereotype: "InformationHolder",
+          responsibilities: {
+            knowing: ["mutable cards"],
+            doing: ["add card"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        // ServiceProvider 이라 pass (stereotype 제한)
+        {
+          id: "svc",
+          name: "SingletonService",
+          stereotype: "ServiceProvider",
+          responsibilities: {
+            knowing: ["mutable cache"],
+            doing: ["lookup"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, {
+      rules: ["singleton-stateful-holder"],
+    });
+    expect(findings.length).toBe(2);
+    for (const f of findings) {
+      expect(f.remedies.length).toBeGreaterThanOrEqual(2);
+      const ev = f.evidence as {
+        singleton_signal: string;
+        mutable_knowing: string;
+        guideline: string;
+      };
+      expect(["name", "notes"]).toContain(ev.singleton_signal);
+      expect(ev.mutable_knowing.length).toBeGreaterThan(0);
+      expect(ev.guideline).toContain("malibinYun");
+    }
+  });
+
+  it("dual-purpose-knowing fires when a holder has both display and compare doings", () => {
+    const d = design({
+      classes: [
+        // 표현 + 비교 doing 둘 다 있는 InformationHolder — fire
+        {
+          id: "hand",
+          name: "Hand",
+          stereotype: "InformationHolder",
+          responsibilities: {
+            knowing: ["score"],
+            doing: ["display score", "compare strength with other hand"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        // 표현만 있음 — pass
+        {
+          id: "view",
+          name: "ScoreView",
+          stereotype: "InformationHolder",
+          responsibilities: {
+            knowing: ["score"],
+            doing: ["render score", "format text"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        // 비교만 있음 — pass
+        {
+          id: "judgeholder",
+          name: "ComparisonState",
+          stereotype: "InformationHolder",
+          responsibilities: {
+            knowing: ["a", "b"],
+            doing: ["compare a and b", "judge winner"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+        // ServiceProvider 이라 pass (stereotype 제한 — 표현·비교 모두 호출하는 Coordinator/Service 는 정상)
+        {
+          id: "svc",
+          name: "DisplayCompareService",
+          stereotype: "ServiceProvider",
+          responsibilities: {
+            knowing: [],
+            doing: ["render score", "compare scores"],
+          },
+          collaborators: [],
+          provenance: { derived_from_use_cases: [], created_at: "x" },
+        },
+      ],
+    });
+    const findings = validateDesign(d, { rules: ["dual-purpose-knowing"] });
+    expect(findings.length).toBe(1);
+    const f = findings[0]!;
+    const ev = f.evidence as {
+      display_doing: string;
+      compare_doing: string;
+      guideline: string;
+    };
+    expect(ev.display_doing).toContain("display");
+    expect(ev.compare_doing).toContain("compare");
+    expect(ev.guideline).toContain("laco-dev");
+    expect(f.remedies.length).toBeGreaterThanOrEqual(2);
+  });
+
   it("validation-misplacement fires when validation duplicated across stereotypes", () => {
     const d = design({
       classes: [

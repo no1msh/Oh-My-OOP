@@ -55,7 +55,10 @@ export function checkPrimitiveWrapperWithoutInvariant(design: Design): Finding[]
           guideline:
             "@junjange (lotto PR #58): \"init { require(lottoNumbers.distinct().size == LOTTO_SIZE) }\" — " +
             "*init 블록의 require는 도메인 invariant 강제 수단*. " +
-            "@hxeyexn 리뷰 (PR #77): \"init = 자기 invariant, factory = 입력 변환 + 생성 결정\".",
+            "@hxeyexn 리뷰 (lotto PR #77): \"init = 자기 invariant, factory = 입력 변환 + 생성 결정\". " +
+            "또한 invariant 를 추가했더라도 *산술 결과가 invariant 를 깰 수 있다* — " +
+            "@malibinYun (woowacourse-kotlin-blackjack krrong/46): \"BettingMoney에는 음수가 들어가서는 안 되니, 수익률은 BettingMoney로 취급하지 않겠다는 의미겠지요.\" " +
+            "산술 결과가 자기 invariant 를 벗어난다면 *결과 타입이 다른 객체* (예: BettingMoney → Profit) 로 분리하는 것이 답.",
         },
         remedies: [
           {

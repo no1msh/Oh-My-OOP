@@ -74,14 +74,14 @@ describe("generateAlternatives engine", () => {
     expect(labels).toContain("Tell-Don't-Ask");
   });
 
-  it("stereotype_choice returns 5 stereotype candidates", () => {
+  it("stereotype_choice returns 5 stereotype candidates (+ null option)", () => {
     const res = generateAlternatives(
       "stereotype_choice",
       { description: "What is Foo?" },
       EMPTY_DESIGN,
       5,
     );
-    expect(res.alternatives.length).toBe(5);
+    expect(res.alternatives.length).toBe(6); // 5 stereotypes + null option
   });
 
   it("value_object_shape returns value class / data class / class+init / primitive options", () => {
@@ -91,7 +91,7 @@ describe("generateAlternatives engine", () => {
       EMPTY_DESIGN,
       4,
     );
-    expect(res.alternatives.length).toBe(4);
+    expect(res.alternatives.length).toBe(5); // 4 + null option
     const labels = res.alternatives.map((a) => a.label);
     expect(labels).toContain("value class");
     expect(labels).toContain("data class");
@@ -120,7 +120,7 @@ describe("generateAlternatives engine", () => {
       EMPTY_DESIGN,
       4,
     );
-    expect(res.alternatives.length).toBe(4);
+    expect(res.alternatives.length).toBe(5); // 4 + null option
     const summaries = res.alternatives.map((a) => a.summary).join("|");
     expect(summaries).toContain("runCatching");
     expect(summaries).toContain("while");
@@ -133,9 +133,79 @@ describe("generateAlternatives engine", () => {
       EMPTY_DESIGN,
       4,
     );
-    expect(res.alternatives.length).toBe(4);
+    expect(res.alternatives.length).toBe(5); // 4 + null option
     const labels = res.alternatives.map((a) => a.label);
     expect(labels.some((l) => l.includes("일급 컬렉션"))).toBe(true);
     expect(labels.some((l) => l.includes("List<T>"))).toBe(true);
+  });
+
+  it("dual_subject_comparison contrasts external comparator vs one-way vs symmetric vs state-self-judging", () => {
+    const res = generateAlternatives(
+      "dual_subject_comparison",
+      {
+        description: "두 동등 주체의 승부 판정 책임 위치",
+        involved: ["Player", "Dealer"],
+      },
+      EMPTY_DESIGN,
+      4,
+    );
+    expect(res.alternatives.length).toBe(5); // 4 + null option
+    const labels = res.alternatives.map((a) => a.label);
+    expect(labels.some((l) => l.includes("외부 비교자"))).toBe(true);
+    expect(labels.some((l) => l.includes("일방향"))).toBe(true);
+    expect(labels.some((l) => l.includes("대칭"))).toBe(true);
+    expect(labels.some((l) => l.includes("State"))).toBe(true);
+    // 외부 비교자는 *잘못된 첫 답* — cohesion/coupling 가 hurts 로 표시되어야 한다.
+    const ext = res.alternatives.find((a) => a.id === "dsc-external-comparator");
+    expect(ext).toBeDefined();
+    expect(ext!.cho_younghos_lens.cohesion).toBe("hurts");
+    expect(ext!.cho_younghos_lens.coupling).toBe("hurts");
+    // 일방향 메시지는 Tell-Don't-Ask 충실 — testability 가 improves.
+    const oneWay = res.alternatives.find((a) => a.id === "dsc-one-way-message");
+    expect(oneWay).toBeDefined();
+    expect(oneWay!.cho_younghos_lens.testability).toBe("improves");
+    for (const a of res.alternatives) {
+      expect(a.tradeoffs.pros.length).toBeGreaterThan(0);
+      expect(a.tradeoffs.cons.length).toBeGreaterThan(0);
+      expect(a.reflection_questions).toBeDefined();
+    }
+  });
+
+  it("null option (이 객체/분리를 만들지 않는다) is prepended to all non-free-form questions", () => {
+    const questions = [
+      "class_split",
+      "collaboration_shape",
+      "stereotype_choice",
+      "responsibility_split",
+      "value_object_shape",
+      "strategy_or_policy",
+      "error_handling",
+      "collection_shape",
+      "dual_subject_comparison",
+    ] as const;
+    for (const q of questions) {
+      const res = generateAlternatives(
+        q,
+        { description: "테스트", involved: ["A", "B"] },
+        EMPTY_DESIGN,
+        4,
+      );
+      // null option 카드가 0번 슬롯에 prepend 되어야 한다.
+      expect(res.alternatives[0]!.id).toBe("null-option");
+      expect(res.alternatives[0]!.reflection_questions).toBeDefined();
+      // 그 cho_younghos_lens 의 notes 에 가상 객체 회피 어휘가 명시.
+      expect(res.alternatives[0]!.cho_younghos_lens.notes).toContain("스스로");
+    }
+
+    // free_form 은 free-keep 가 이미 null option 역할 — 별도 prepend 안 함.
+    const free = generateAlternatives(
+      "free_form",
+      { description: "free" },
+      EMPTY_DESIGN,
+      3,
+    );
+    expect(free.alternatives[0]!.id).toBe("free-keep");
+    // null-option id 가 free_form 에는 없어야 한다.
+    expect(free.alternatives.some((a) => a.id === "null-option")).toBe(false);
   });
 });

@@ -27,6 +27,10 @@ export function checkGodObject(
           responsibilities: total,
           collaborators: card.collaborators.length,
           thresholds,
+          guideline:
+            "@ghojeong (woowacourse-kotlin-blackjack kimhm0728/72): \"해당 역할을 컴퓨터가 아니라 사람에게 시키려고 했을 때, 사람이 한 명 더 필요한가 아니면 같은 사람에게 시킬 수 있을까를 고민해보세요.\" — " +
+            "한 객체가 *여러 역할*을 가지면 사람 시뮬레이션 결과로 분리 후보. " +
+            "변경 이유가 *둘 이상의 축*에 모이면 god-object 의 시작이다.",
         },
         remedies: [
           {

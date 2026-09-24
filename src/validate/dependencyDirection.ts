@@ -64,7 +64,10 @@ export function checkDependencyDirection(design: Design): Finding[] {
           })),
           allowed_stereotypes: STEREOTYPES_THAT_MAY_TOUCH_INTERFACER,
           guideline:
-            "@BeokBeok: \"Validator는 Controller가 아닙니다. View와 관련된 의존성을 가지면 안 됩니다.\"",
+            "@BeokBeok (woowacourse-racingcar): \"Validator는 Controller가 아닙니다. View와 관련된 의존성을 가지면 안 됩니다.\" " +
+            "@laco-dev (woowacourse-kotlin-blackjack 다수): \"Rank에 대한 출력 값은 UI의 관심사입니다. 도메인 모델에서 UI 로직을 제거하고.\" — " +
+            "도메인 enum 에 한글 표기/이모지/displayName 등 *표현 어휘*를 박으면 *디자이너 변경 = 도메인 수정*이 된다. " +
+            "@galcyurio (RightHennessy/22): \"domain에서 ui를 의존하는 반대의 경우는 문제예요.\"",
         },
         remedies: [
           {

@@ -80,6 +80,7 @@ export const TradeoffQuestionSchema = z.enum([
   "strategy_or_policy",
   "error_handling",
   "collection_shape",
+  "dual_subject_comparison",
   "free_form",
 ]);
 

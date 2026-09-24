@@ -8,6 +8,7 @@ import { valueObjectShapeSeeds } from "./heuristics/valueObjectShape.js";
 import { strategyOrPolicySeeds } from "./heuristics/strategyOrPolicy.js";
 import { errorHandlingSeeds } from "./heuristics/errorHandling.js";
 import { collectionShapeSeeds } from "./heuristics/collectionShape.js";
+import { dualSubjectComparisonSeeds } from "./heuristics/dualSubjectComparison.js";
 import { expansionPromptAlternatives } from "./templates.js";
 
 export interface DesignDelta {
@@ -97,15 +98,74 @@ export function generateAlternatives(
         findClass(design, context.class_id)?.name ?? "Items",
       );
       break;
+    case "dual_subject_comparison":
+      seeds = dualSubjectComparisonSeeds(context.involved ?? []);
+      break;
     case "free_form":
       seeds = freeFormSeeds(context);
       break;
   }
   const capped = seeds.slice(0, Math.max(2, Math.min(n, seeds.length)));
   const enriched = capped.map(attachReflectionQuestions);
+  // 모든 propose_alternatives 호출에 *"이 객체/분리를 만들지 않는다"* 카드를
+  // 0번 슬롯으로 자동 첨부. 가상 객체 회피의 학습 장치.
+  const nullOpt = nullOptionFor(question);
+  const withNull = nullOpt
+    ? [attachReflectionQuestions(nullOpt), ...enriched]
+    : enriched;
   return {
-    alternatives: enriched,
+    alternatives: withNull,
     expansion_prompt: expansionPromptAlternatives(question, context.description),
+  };
+}
+
+/**
+ * 모든 propose_alternatives 호출에 *"이 객체/분리를 만들지 않는다"* 카드를 0번 슬롯에 첨부.
+ * 학생이 *주어진 대안 중에서* 선택하는 게 아니라 *문제 자체를 거부*하는 카드를
+ * 항상 보도록 강제하는 학습 장치. 가상 객체 회피의 핵심.
+ *
+ * @laco-dev (woowacourse-kotlin-blackjack tobae-time/115):
+ *   "현실세계라면 블랙잭 게임의 규칙이지만, 객체지향 세계에서 객체는 모두 스스로 일을 합니다."
+ */
+function nullOptionFor(question: TradeoffQuestion): AlternativeSeed | null {
+  // free_form 은 freeFormSeeds 의 'free-keep' 카드가 이미 이 역할을 한다.
+  if (question === "free_form") return null;
+  const labelMap: Record<Exclude<TradeoffQuestion, "free_form">, string> = {
+    class_split: "분리하지 않는다 — 현 클래스 유지",
+    responsibility_split: "책임을 옮기지 않는다 — 현 위치 유지",
+    collaboration_shape: "이 협력 자체를 만들지 않는다",
+    stereotype_choice: "이 객체 자체를 재검토 — 어떤 stereotype 도 적절하지 않다",
+    value_object_shape: "원시 타입 유지 — 값 객체로 감싸지 않는다",
+    strategy_or_policy: "정책을 객체로 만들지 않는다 — 인라인 분기 유지",
+    error_handling: "오류를 명시 처리하지 않는다 — 호출처 결정에 위임",
+    collection_shape: "단순 List 유지 — 일급 컬렉션화 X",
+    dual_subject_comparison: "비교 자체를 미룬다 — 지금 비교가 필요한가?",
+  };
+  return {
+    id: "null-option",
+    label: labelMap[question],
+    summary:
+      `통증이 *추측에 기반한다면* 일단 변경하지 않고 관찰한다. 새 객체/분리에 ` +
+      `*자기 행동*과 *자기 데이터*가 있는지, 책임이 *기존 객체*에 이미 있는지 먼저 확인.`,
+    design_delta: {},
+    tradeoffs: {
+      pros: [
+        "*가상 객체* 회피 — 행동 없는 명사를 만들지 않는다",
+        "객체 수/협력 그래프 단순",
+        "*현실 메타포에 매몰*되지 않고 *책임이 있는가*를 먼저 묻는다",
+      ],
+      cons: [
+        "*통증이 누적*되면 변경 비용 증가",
+        "*책임이 정말 다른 곳에 있는가*를 입증해야 함",
+      ],
+    },
+    cho_younghos_lens: {
+      cohesion: "improves",
+      coupling: "improves",
+      testability: "neutral",
+      notes:
+        "@laco-dev: \"객체는 모두 스스로 일을 합니다.\" 새 객체에 *자기 행동* + *자기 데이터* 가 없다면 이 카드가 첫 답.",
+    },
   };
 }
 

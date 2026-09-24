@@ -15,6 +15,14 @@ const SUSPECT_SUFFIXES = [
   "Handler",
   "Processor",
   "Worker",
+  // 가상 객체 어휘 — 행동을 자기 객체가 아닌 *외부 명사*로 분리하려는 신호.
+  // 도메인 객체가 그 책임을 이미 가져야 하는 경우가 대부분.
+  "Calculator",
+  "Picker",
+  "Distributor",
+  "Decider",
+  "Information",
+  "Info",
 ];
 
 // 클래스명 단독으로도 모호한 어휘
@@ -31,6 +39,15 @@ const SUSPECT_STANDALONE = new Set([
   "Manager",
   "Service",
   "Handler",
+  // 가상 객체 어휘 (단독 사용 시 god-object 거의 확실)
+  "Calculator",
+  "Picker",
+  "Distributor",
+  "Judge",
+  "Decider",
+  "Information",
+  "Info",
+  "Rule",
 ]);
 
 interface Hit {
@@ -79,7 +96,9 @@ export function checkVagueClassName(design: Design): Finding[] {
           matched_pattern: hit.matched,
           stereotype: card.stereotype,
           guideline:
-            "@vagabond95 등 다수 리뷰어: \"네이밍이 모호하다는 것은 곧 해당 클래스/함수의 역할이 모호하거나 모호해질 수 있다는 신호\"",
+            "@vagabond95 (woowacourse-racingcar): \"네이밍이 모호하다는 것은 곧 해당 클래스/함수의 역할이 모호하거나 모호해질 수 있다는 신호\". " +
+            "@laco-dev (woowacourse-kotlin-blackjack tobae-time/115): \"현실세계라면 블랙잭 게임의 규칙이지만, 객체지향 세계에서 객체는 모두 스스로 일을 합니다\" — Picker/Distributor/Calculator/Judge 같은 *가상 객체*는 행동을 외부 명사로 분리하려는 신호이며, 도메인 객체가 그 책임을 이미 가져야 한다. " +
+            "@ghojeong (woowacourse-kotlin-blackjack kimhm0728/72): \"해당 역할을 컴퓨터가 아니라 사람에게 시키려고 했을 때, 사람이 한 명 더 필요한가\" — 같은 사람이 할 수 있다면 별도 객체로 분리하지 않는다.",
         },
         remedies: [
           {
